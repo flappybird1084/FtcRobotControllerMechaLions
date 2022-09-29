@@ -58,16 +58,16 @@ import com.qualcomm.robotcore.util.Range;
 public class RobotHardware {
 
     /* Declare OpMode members. */
-    private LinearOpMode myOpMode = null;   // gain access to methods in the calling OpMode.
+    //private LinearOpMode myOpMode = null;   // gain access to methods in the calling OpMode.
 
     // Define Motor and Servo objects  (Make them private so they can't be accessed externally)
-    private DcMotor leftFront  = null;
-    private DcMotor rightFront  = null;
-    private DcMotor leftBack = null;
-    private DcMotor rightBack = null;
-    private DcMotor ViperSlide = null;
-    private Servo servo1 = null;
-    private Servo servo2 = null;
+    public DcMotor leftFront  = null;
+    public DcMotor rightFront  = null;
+    public DcMotor leftBack = null;
+    public DcMotor rightBack = null;
+    public DcMotor ViperSlide = null;
+    public Servo servo1 = null;
+    public Servo servo2 = null;
 
     //use RobotHardware.<insert function> whatever to use these motors and all
     //RobotHardware.leftFront (as example)
@@ -87,17 +87,13 @@ public class RobotHardware {
     }
 
     // Define a constructor that allows the OpMode to pass a reference to itself.
-    public RobotHardware(LinearOpMode opmode) {
-        myOpMode = opmode;
-    }
+    //public RobotHardware(LinearOpMode opmode) {myOpMode = opmode;}
 
     // local Opmode members
 
-    HardwareMap hwMap = null;
+    HardwareMap hwMap;
 
-    public RobotHardware(){
-
-    }
+   //public RobotHardware(){}//
 
     /**
      * Initialize all the robot's hardware.
@@ -107,14 +103,12 @@ public class RobotHardware {
      */
     public void init(HardwareMap ahwMap)    {
 
-        hwMap = ahwMap;
-
         // Define and Initialize Motors (note: need to use reference to actual OpMode).
-        leftFront  = myOpMode.hardwareMap.get(DcMotor.class, "left_front");
-        rightFront = myOpMode.hardwareMap.get(DcMotor.class, "right_front");
-        leftBack = myOpMode.hardwareMap.get(DcMotor.class, "left_back");
-        rightBack = myOpMode.hardwareMap.get(DcMotor.class, "right_back");
-        ViperSlide = myOpMode.hardwareMap.get(DcMotor.class, "slide");
+        leftFront  = ahwMap.get(DcMotor.class, "left_front");
+        rightFront = ahwMap.get(DcMotor.class, "right_front");
+        leftBack = ahwMap.get(DcMotor.class, "left_back");
+        rightBack = ahwMap.get(DcMotor.class, "right_back");
+        ViperSlide = ahwMap.get(DcMotor.class, "slide");
         //armMotor = myOpMode.hardwareMap.get(DcMotor.class, "arm");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -131,14 +125,19 @@ public class RobotHardware {
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Define and initialize ALL installed servos.
-        servo1 = myOpMode.hardwareMap.get(Servo.class, "servo1");
-        servo2 = myOpMode.hardwareMap.get(Servo.class, "servo2");
+        servo1 = ahwMap.get(Servo.class, "servo1");
+        servo2 = ahwMap.get(Servo.class, "servo2");
         servo1.setPosition(MID_SERVO);
         servo2.setPosition(MID_SERVO);
 
