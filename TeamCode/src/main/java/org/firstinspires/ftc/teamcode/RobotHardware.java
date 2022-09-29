@@ -29,12 +29,9 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
 
 /**
  * This file works in conjunction with the External Hardware Class sample called: ConceptExternalHardwareClass.java
@@ -61,18 +58,17 @@ public class RobotHardware {
     //private LinearOpMode myOpMode = null;   // gain access to methods in the calling OpMode.
 
     // Define Motor and Servo objects  (Make them private so they can't be accessed externally)
-    public DcMotor leftFront  = null;
+    public DcMotor leftFront   = null;
     public DcMotor rightFront  = null;
     public DcMotor leftBack = null;
     public DcMotor rightBack = null;
     public DcMotor ViperSlide = null;
+
+    //RobotHardware.leftFront.setPower(0);
+    //RobotHardware.servo1.setposition(RobotHardware.MID_SERVO);
+
     public Servo servo1 = null;
     public Servo servo2 = null;
-
-    //use RobotHardware.<insert function> whatever to use these motors and all
-    //RobotHardware.leftFront (as example)
-    //RobotHardware.servo1.setPosition(69.42)
-
 
     // Define Drive constants.  Make them public so they CAN be used by the calling OpMode
     public static final double MID_SERVO       =  0.5 ;
@@ -86,14 +82,18 @@ public class RobotHardware {
         motor.setPower(0);
     }
 
-    // Define a constructor that allows the OpMode to pass a reference to itself.
-    //public RobotHardware(LinearOpMode opmode) {myOpMode = opmode;}
 
-    // local Opmode members
-
+    /* local OpMode members. */
     HardwareMap hwMap;
 
-   //public RobotHardware(){}//
+    // Define a constructor that allows the OpMode to pass a reference to itself.
+//    public RobotHardware() {
+//
+//    }
+
+
+
+
 
     /**
      * Initialize all the robot's hardware.
@@ -102,14 +102,12 @@ public class RobotHardware {
      * All of the hardware devices are accessed via the hardware map, and initialized.
      */
     public void init(HardwareMap ahwMap)    {
-
         // Define and Initialize Motors (note: need to use reference to actual OpMode).
-        leftFront  = ahwMap.get(DcMotor.class, "left_front");
-        rightFront = ahwMap.get(DcMotor.class, "right_front");
-        leftBack = ahwMap.get(DcMotor.class, "left_back");
-        rightBack = ahwMap.get(DcMotor.class, "right_back");
-        ViperSlide = ahwMap.get(DcMotor.class, "slide");
-        //armMotor = myOpMode.hardwareMap.get(DcMotor.class, "arm");
+        leftFront  = ahwMap.get(DcMotor.class, "leftFront");
+        rightFront = ahwMap.get(DcMotor.class, "rightFront");
+        leftBack  = ahwMap.get(DcMotor.class, "leftBack");
+        rightBack = ahwMap.get(DcMotor.class, "rightBack");
+        ViperSlide  = ahwMap.get(DcMotor.class, "ViperSlide");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -123,7 +121,7 @@ public class RobotHardware {
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -136,10 +134,12 @@ public class RobotHardware {
         // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Define and initialize ALL installed servos.
-        servo1 = ahwMap.get(Servo.class, "servo1");
-        servo2 = ahwMap.get(Servo.class, "servo2");
-        servo1.setPosition(MID_SERVO);
-        servo2.setPosition(MID_SERVO);
+        servo1 = ahwMap.get(Servo.class, "Servo1");
+        servo2 = ahwMap.get(Servo.class, "Servo2");
+        servo1.setPosition(0);
+        servo2.setPosition(0);
+
+
 
 //        myOpMode.telemetry.addData(">", "Hardware Initialized");
 //        myOpMode.telemetry.update();
@@ -153,22 +153,22 @@ public class RobotHardware {
      * @param Drive     Fwd/Rev driving power (-1.0 to 1.0) +ve is forward
      * @param Turn      Right/Left turning power (-1.0 to 1.0) +ve is CW
      */
-    public void driveRobot(double Drive, double Turn) {
-        // Combine drive and turn for blended motion.
-        double left  = Drive + Turn;
-        double right = Drive - Turn;
-
-        // Scale the values so neither exceed +/- 1.0
-        double max = Math.max(Math.abs(left), Math.abs(right));
-        if (max > 1.0)
-        {
-            left /= max;
-            right /= max;
-        }
-
-        // Use existing function to drive both wheels.
-        setDrivePower(left, right);
-    }
+//    public void driveRobot(double Drive, double Turn) {
+//        // Combine drive and turn for blended motion.
+//        double left  = Drive + Turn;
+//        double right = Drive - Turn;
+//
+//        // Scale the values so neither exceed +/- 1.0
+//        double max = Math.max(Math.abs(left), Math.abs(right));
+//        if (max > 1.0)
+//        {
+//            left /= max;
+//            right /= max;
+//        }
+//
+//        // Use existing function to drive both wheels.
+//        setDrivePower(left, right);
+//    }
 
     /**
      * Pass the requested wheel motor powers to the appropriate hardware drive motors.
@@ -176,29 +176,29 @@ public class RobotHardware {
      * @param leftWheel     Fwd/Rev driving power (-1.0 to 1.0) +ve is forward
      * @param rightWheel    Fwd/Rev driving power (-1.0 to 1.0) +ve is forward
      */
-    public void setDrivePower(double leftWheel, double rightWheel) {
-        // Output the values to the motor drives.
-        leftDrive.setPower(leftWheel);
-        rightDrive.setPower(rightWheel);
-    }
+//    public void setDrivePower(double leftWheel, double rightWheel) {
+//        // Output the values to the motor drives.
+//        leftDrive.setPower(leftWheel);
+//        rightDrive.setPower(rightWheel);
+//    }
 
     /**
      * Pass the requested arm power to the appropriate hardware drive motor
      *
      * @param power driving power (-1.0 to 1.0)
      */
-    public void setArmPower(double power) {
-        armMotor.setPower(power);
-    }
+//    public void setArmPower(double power) {
+//        armMotor.setPower(power);
+//    }
 
     /**
      * Send the two hand-servos to opposing (mirrored) positions, based on the passed offset.
      *
      * @param offset
      */
-    public void setHandPositions(double offset) {
-        offset = Range.clip(offset, -0.5, 0.5);
-        leftHand.setPosition(MID_SERVO + offset);
-        rightHand.setPosition(MID_SERVO - offset);
-    }
+//    public void setHandPositions(double offset) {
+//        offset = Range.clip(offset, -0.5, 0.5);
+//        leftHand.setPosition(MID_SERVO + offset);
+//        rightHand.setPosition(MID_SERVO - offset);
+//    }
 }

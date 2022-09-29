@@ -4,35 +4,37 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-
+//Stating whether Autonomous or TeleOp
 @TeleOp
 public class MyFIRSTJavaOpMode extends LinearOpMode {
-    private DcMotor leftFront  = null;
-    private DcMotor rightFront  = null;
-    private DcMotor leftBack = null;
-    private DcMotor rightBack = null;
-
+    //Declaring Motors
+    private DcMotor frontLeft;
+    private DcMotor frontRight;
+    private DcMotor backLeft;
+    private DcMotor backRight;
 
     @Override
     public void runOpMode() {
-        leftFront  = hardwareMap.get(DcMotor.class, "left_front");
-        rightFront = hardwareMap.get(DcMotor.class, "right_front");
-        leftBack = hardwareMap.get(DcMotor.class, "left_back");
-        rightBack = hardwareMap.get(DcMotor.class, "right_back");
+        //Mapping Motors
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
+        backRight = hardwareMap.get(DcMotor.class, "backRight");
 
-        telemetry.addData("Status: " , "Initialized");
+        //Data sent to the Driver Station
+        telemetry.addData("Status", "Initialized");
         telemetry.update();
-        //wait for the game to start(driver presses play)
+        //Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        //run until end of match(driver presses stop)
+        // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            telemetry.addData("Status: " , "Running");
+            telemetry.addData("Status", "Running");
             telemetry.update();
-            //values from -1 to 1
-            leftFront.setPower(0.5);
-            leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
+            //Values from -1 to 1
+            frontLeft.setPower(0.5);
+            frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
     }
+
 }
