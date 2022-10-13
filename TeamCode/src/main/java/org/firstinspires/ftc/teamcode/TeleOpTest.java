@@ -49,6 +49,17 @@ public class TeleOpTest  extends OpMode {
             robot.rightFront.setPower(-1);
             robot.rightBack.setPower(1);
         }
+        /*
+        rians possible future code
+
+        else if(gamepad1.left_stick_x < 0.1 && gamepad1.left_stick_x > 0.1) {
+            robot.leftFront.setPower(leftStick);
+            robot.leftBack.setPower(leftStick);
+            robot.rightFront.setPower(leftStick);
+            robot.rightBack.setPower(leftStick);
+        }
+
+         */
         else {
             robot.leftFront.setPower(leftStick);
             robot.leftBack.setPower(leftStick);
