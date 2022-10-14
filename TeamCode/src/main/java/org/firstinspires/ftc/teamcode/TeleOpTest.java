@@ -61,10 +61,10 @@ public class TeleOpTest  extends OpMode {
 
          */
         else {
-            robot.leftFront.setPower(leftStick);
-            robot.leftBack.setPower(leftStick);
-            robot.rightFront.setPower(rightStick);
-            robot.rightBack.setPower(rightStick);
+            robot.leftFront.setPower(-1*leftStick);
+            robot.leftBack.setPower(-1*leftStick);
+            robot.rightFront.setPower(-1*rightStick);
+            robot.rightBack.setPower(-1*rightStick);
         }
 
         if(gamepad1.a) {
