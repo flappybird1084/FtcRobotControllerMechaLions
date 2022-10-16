@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class MyFIRSTJavaOpMode extends LinearOpMode {
@@ -13,7 +12,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
     //BNO055IMU imu;
     //ElapsedTime runtime;
 
-    robot.init(HardwareMap);
+    //robot.init(HardwareMap);
 
     @Override
     public void runOpMode() {

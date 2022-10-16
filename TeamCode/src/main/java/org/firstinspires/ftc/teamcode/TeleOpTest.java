@@ -38,16 +38,16 @@ public class TeleOpTest  extends OpMode {
         double leftStick = gamepad1.right_stick_y;
 
         if(gamepad1.left_bumper) {
-            robot.leftFront.setPower(-1);
-            robot.leftBack.setPower(1);
-            robot.rightFront.setPower(1);
-            robot.rightBack.setPower(-1);
-        }
-        else if(gamepad1.right_bumper) {
             robot.leftFront.setPower(1);
             robot.leftBack.setPower(-1);
             robot.rightFront.setPower(-1);
             robot.rightBack.setPower(1);
+        }
+        else if(gamepad1.right_bumper) {
+            robot.leftFront.setPower(-1);
+            robot.leftBack.setPower(1);
+            robot.rightFront.setPower(1);
+            robot.rightBack.setPower(-1);
         }
         /*
         rians possible future code
