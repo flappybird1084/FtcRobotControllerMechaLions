@@ -34,8 +34,8 @@ public class TeleOpTest  extends OpMode {
 
     @Override
     public void loop() {
-        double leftStick = gamepad1.left_stick_y;
-        double rightStick = gamepad1.right_stick_y;
+        double leftStick = -gamepad1.left_stick_y;
+        double rightStick = -gamepad1.right_stick_y;
 
         if(gamepad1.left_bumper) {
             robot.leftFront.setPower(-1);
