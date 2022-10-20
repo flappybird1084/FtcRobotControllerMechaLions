@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-
 public class MyFIRSTJavaOpMode extends LinearOpMode {
     RobotHardware robot = new RobotHardware();
     //DcMotor robot.leftFront;
@@ -12,7 +11,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
     //BNO055IMU imu;
     //ElapsedTime runtime;
 
-    //robot.init(HardwareMap);
+    //robot.init(HardwareMap)
 
     @Override
     public void runOpMode() {
@@ -120,7 +119,7 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
         sleep(500);
         robot.leftFront.setPower(0);
         robot.rightFront.setPower(0);
-/*
+
         while (opModeIsActive()) {
             // Put loop blocks here
             //sleep(1000);
@@ -130,6 +129,6 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
             //sleep(1000);
             //robot.leftFront.setPower(0);
             //robot.rightFront.setPower(0);
-        } */
+        }
     }
 }

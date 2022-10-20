@@ -42,13 +42,25 @@ public class TeleOpTest  extends OpMode {
             robot.leftBack.setPower(-1);
             robot.rightFront.setPower(-1);
             robot.rightBack.setPower(1);
+            robot.ViperSlide.setPower(0);
         }
         else if(gamepad1.right_bumper) {
             robot.leftFront.setPower(-1);
             robot.leftBack.setPower(1);
             robot.rightFront.setPower(1);
             robot.rightBack.setPower(-1);
+            robot.ViperSlide.setPower(0);
         }
+
+        else if(gamepad1.dpad_up) {
+            robot.ViperSlide.setPower(1);
+        }
+
+        else if(gamepad1.dpad_down) {
+            robot.ViperSlide.setPower(-1);
+        }
+
+
         /*
         rians possible future code
 
@@ -65,6 +77,7 @@ public class TeleOpTest  extends OpMode {
             robot.leftBack.setPower(leftStick);
             robot.rightFront.setPower(rightStick);
             robot.rightBack.setPower(rightStick);
+            robot.ViperSlide.setPower(0);
         }
 
         if(gamepad1.a) {
