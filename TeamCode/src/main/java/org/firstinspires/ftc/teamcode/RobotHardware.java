@@ -58,8 +58,8 @@ public class RobotHardware {
     //private LinearOpMode myOpMode = null;   // gain access to methods in the calling OpMode.
 
     // Define Motor and Servo objects  (Make them private so they can't be accessed externally)
-    public DcMotor leftFront   = null;
-    public DcMotor rightFront  = null;
+    public DcMotor leftFront = null;
+    public DcMotor rightFront = null;
     public DcMotor leftBack = null;
     public DcMotor rightBack = null;
     public DcMotor ViperSlide = null;
@@ -71,12 +71,14 @@ public class RobotHardware {
     public Servo servo2 = null;
 
     // Define Drive constants.  Make them public so they CAN be used by the calling OpMode
-    public static final double MID_SERVO       =  0.5 ;
-    public static final double HAND_SPEED      =  0.02 ;  // sets rate to move servo
-    public static final double ARM_UP_POWER    =  0.45 ;
-    public static final double ARM_DOWN_POWER  = -0.45 ;
+    public static final double MID_SERVO = 0.5;
+    public static final double HAND_SPEED = 0.02;  // sets rate to move servo
+    public static final double ARM_UP_POWER = 0.45;
+    public static final double ARM_DOWN_POWER = -0.45;
     public static final double ARM_CLOSE = 0.0;
     public static final double ARM_OPEN = 1.0;
+    public static final double TICK_COUNT = 537.7;
+    public static final double CIRCUMFERENCE = 3.14 * 3.78;
 
     public void resetMotor(DcMotor motor) {
         motor.setPower(0);
@@ -92,22 +94,19 @@ public class RobotHardware {
 //    }
 
 
-
-
-
     /**
      * Initialize all the robot's hardware.
      * This method must be called ONCE when the OpMode is initialized.
-     *
+     * <p>
      * All of the hardware devices are accessed via the hardware map, and initialized.
      */
-    public void init(HardwareMap ahwMap)    {
+    public void init(HardwareMap ahwMap) {
         // Define and Initialize Motors (note: need to use reference to actual OpMode).
-        leftFront  = ahwMap.get(DcMotor.class, "leftFront");
+        leftFront = ahwMap.get(DcMotor.class, "leftFront");
         rightFront = ahwMap.get(DcMotor.class, "rightFront");
-        leftBack  = ahwMap.get(DcMotor.class, "leftBack");
+        leftBack = ahwMap.get(DcMotor.class, "leftBack");
         rightBack = ahwMap.get(DcMotor.class, "rightBack");
-        ViperSlide  = ahwMap.get(DcMotor.class, "ViperSlide");
+        ViperSlide = ahwMap.get(DcMotor.class, "ViperSlide");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -140,9 +139,37 @@ public class RobotHardware {
         servo2.setPosition(0);
 
 
-
 //        myOpMode.telemetry.addData(">", "Hardware Initialized");
 //        myOpMode.telemetry.update();
+    }
+
+    public void zero() {
+        leftFront.setPower(0);
+        leftBack.setPower(0);
+        rightFront.setPower(0);
+        rightBack.setPower(0);
+    }
+
+    public void encoderMovements(double distance, double power) {
+
+        double rotationsNeeded = distance / CIRCUMFERENCE;
+        int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
+        leftFront.setTargetPosition(encoderDrivingTarget);
+        leftBack.setTargetPosition(encoderDrivingTarget);
+        rightFront.setTargetPosition(encoderDrivingTarget);
+        rightBack.setTargetPosition(encoderDrivingTarget);
+
+        leftFront.setPower(power);
+        leftBack.setPower(power);
+        rightFront.setPower(power);
+        rightBack.setPower(power);
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        zero();
     }
 
     /**
