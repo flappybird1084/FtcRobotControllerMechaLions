@@ -40,7 +40,7 @@ public class EncoderTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.encoderMovements(18, 0.5);
+        robot.encoderMovements(11.8692, 0.5);
     }
 
     @Override
