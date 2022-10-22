@@ -52,6 +52,7 @@ public class TeleOpTest  extends OpMode {
             robot.ViperSlide.setPower(0);
         }
 
+        /*
         else if(gamepad1.dpad_up) {
             robot.ViperSlide.setPower(1);
         }
@@ -60,7 +61,7 @@ public class TeleOpTest  extends OpMode {
             robot.ViperSlide.setPower(-1);
         }
 
-
+        */
         /*
         rians possible future code
 
