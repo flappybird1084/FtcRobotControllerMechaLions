@@ -52,7 +52,7 @@ public class TeleOpTest  extends OpMode {
             robot.ViperSlide.setPower(0);
         }
 
-        /*
+
         else if(gamepad1.dpad_up) {
             robot.ViperSlide.setPower(1);
         }
@@ -61,7 +61,25 @@ public class TeleOpTest  extends OpMode {
             robot.ViperSlide.setPower(-1);
         }
 
-        */
+
+        // debug code because half the motors were unaliving
+        else if(gamepad1.dpad_left) {
+            robot.leftFront.setPower(1);
+        }
+
+        else if(gamepad1.dpad_right) {
+            robot.rightFront.setPower(-1);
+        }
+
+        else if(gamepad1.b) {
+            robot.leftBack.setPower(1);
+        }
+
+        else if(gamepad1.x) {
+            robot.rightBack.setPower(-1);
+        }
+
+
         /*
         rians possible future code
 
