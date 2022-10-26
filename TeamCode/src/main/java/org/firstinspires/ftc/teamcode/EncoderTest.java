@@ -42,8 +42,11 @@ public class EncoderTest extends OpMode {
     public void start(){
         MyFIRSTJavaOpMode myopmode = new MyFIRSTJavaOpMode();
         telemetry.addData("Status" , "Attempting one rotation of spin");
-        myopmode.encoderDrive(0.5,5,5,5);
+        myopmode.encoderDrive(1,5,5,5);
         //this.sleep(5000);
+
+        // we have problems with this
+        // check between linear op mode and op mode for this
     }
 
     @Override
@@ -53,6 +56,10 @@ public class EncoderTest extends OpMode {
 
     @Override
     public void stop() {
+
+    }
+
+    public static void main(String[] args) {
 
     }
 }
