@@ -40,8 +40,9 @@ public class EncoderTest extends OpMode {
 
     @Override
     public void start(){
+        MyFIRSTJavaOpMode myopmode = new MyFIRSTJavaOpMode();
         telemetry.addData("Status" , "Attempting one rotation of spin");
-        robot.encoderMovements(11.8692, 0.5);
+        myopmode.encoderDrive(0.5,5,5,5);
         //this.sleep(5000);
     }
 

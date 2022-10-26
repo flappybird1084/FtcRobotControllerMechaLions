@@ -24,9 +24,9 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
     //ElapsedTime runtime;
     static final double COUNTS_PER_MOTOR_REV  = 28.0;
     static final double DRIVE_GEAR_REDUCTION = 30.24;
-    static final double WHEEL_CIRCUMFERENCE_MM = 3.78 * 3.14;
+    static final double WHEEL_CIRCUMFERENCE_IN = 3.78 * 3.14;
     static final double COUNTS_PER_WHEEL_REV = COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION;
-    static final double COUNTS_PER_MM = COUNTS_PER_WHEEL_REV/WHEEL_CIRCUMFERENCE_MM;
+    static final double COUNTS_PER_IN = COUNTS_PER_WHEEL_REV/WHEEL_CIRCUMFERENCE_IN;
 
     //robot.init(hwMap);
     @Override
@@ -40,8 +40,8 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
         //imu = hardwareMap.get(BNO055IMU.class, "imu");
         leftFront.setDirection(DcMotor.Direction.REVERSE);
         leftBack.setDirection((DcMotorSimple.Direction.REVERSE));
-        int lefttarget = (int)(610 * COUNTS_PER_MM);
-        int righttarget = (int)(610 * COUNTS_PER_MM);
+        int lefttarget = (int)(610 * COUNTS_PER_IN);
+        int righttarget = (int)(610 * COUNTS_PER_IN);
         double ltps = (175.0/60) * COUNTS_PER_WHEEL_REV;
         double rtps = (175.0/60) * COUNTS_PER_WHEEL_REV;
         // Put initialization blocks here
@@ -74,8 +74,8 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        int leftTarget = (int)(300 * COUNTS_PER_MM);
-        int rightTarget = (int)( -300 * COUNTS_PER_MM);
+        int leftTarget = (int)(300 * COUNTS_PER_IN);
+        int rightTarget = (int)( -300 * COUNTS_PER_IN);
         double LTPS = (100.0/ 60) * COUNTS_PER_WHEEL_REV;
         double RTPS = (70.0/ 60) * COUNTS_PER_WHEEL_REV;
 
@@ -113,10 +113,10 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newLeftTarget1 = leftFront.getCurrentPosition() + (int)(leftInches * COUNTS_PER_MM);
-            newLeftTarget2 = leftBack.getCurrentPosition() + (int)(leftInches * COUNTS_PER_MM);
-            newRightTarget1 = rightFront.getCurrentPosition() + (int)(rightInches * COUNTS_PER_MM);
-            newRightTarget2 = rightBack.getCurrentPosition() + (int)(rightInches * COUNTS_PER_MM);
+            newLeftTarget1 = leftFront.getCurrentPosition() + (int)(leftInches * COUNTS_PER_IN);
+            newLeftTarget2 = leftBack.getCurrentPosition() + (int)(leftInches * COUNTS_PER_IN);
+            newRightTarget1 = rightFront.getCurrentPosition() + (int)(rightInches * COUNTS_PER_IN);
+            newRightTarget2 = rightBack.getCurrentPosition() + (int)(rightInches * COUNTS_PER_IN);
             leftBack.setTargetPosition(newLeftTarget2);
             rightFront.setTargetPosition(newRightTarget1);
             leftFront.setTargetPosition(newLeftTarget1);
@@ -168,5 +168,11 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
             rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //  sleep(250);   // optional pause after each move
         }
+
+
     }
+
+    // actual code running part
+
     }
+
