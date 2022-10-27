@@ -25,6 +25,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
             robot.rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.ViperSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         }
 
         @Override
@@ -34,12 +35,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
         @Override
         public void start(){
-
+            robot.all_full_power();
         }
 
         @Override
         public void loop() {
-            robot.encoderMovements(70, 1);
+
+            //robot.encoderMovements(70, 1);
         }
 
         @Override

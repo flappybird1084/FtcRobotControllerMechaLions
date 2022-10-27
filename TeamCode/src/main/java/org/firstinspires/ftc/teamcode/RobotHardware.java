@@ -150,6 +150,13 @@ public class RobotHardware {
         rightBack.setPower(0);
     }
 
+    public void all_full_power() {
+        leftFront.setPower(-1);
+        leftBack.setPower(1);
+        rightFront.setPower(1);
+        rightBack.setPower(-1);
+    }
+
     public void encoderMovements(double distance, double power) {
 
         double rotationsNeeded = distance / CIRCUMFERENCE;
