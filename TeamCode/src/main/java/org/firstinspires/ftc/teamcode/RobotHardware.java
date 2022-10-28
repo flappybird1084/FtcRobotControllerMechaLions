@@ -80,6 +80,8 @@ public class RobotHardware {
     public static final double TICK_COUNT = 537.7;
     public static final double CIRCUMFERENCE = 3.14 * 3.78;
 
+    // this is in inches
+
     public void resetMotor(DcMotor motor) {
         motor.setPower(0);
     }
