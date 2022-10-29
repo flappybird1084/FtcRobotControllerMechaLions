@@ -28,7 +28,7 @@ public class EncoderTestLinearOpMode extends LinearOpMode {
         robot.ViperSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         waitForStart();
-        robot.encoderMovements(11.8692, 0.5);
+        //robot.encoderMovements(11.8692, 0.5);
    //     this.sleep(5000);
     }
 

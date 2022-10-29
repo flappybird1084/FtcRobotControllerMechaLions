@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name = "EncoderTestOld", group = "Auton")
@@ -20,20 +19,17 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         public void runOpMode() {
             //Initialize hardwareMap
             robot.init(hardwareMap);
-            robot.leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             //        robot.ViperSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
             waitForStart();
 
             //robot.encoderMovements(encoderDist, 1);
             robot.moveDirectionBlocks(1, "right");
+            telemetry.addData("Step: ","Step #1"); telemetry.update();
             waitForEncoderComplete();
             robot.moveDirectionBlocks(1, "forward");
+            telemetry.addData("Step: ","Step #2"); telemetry.update();
             waitForEncoderComplete();
+            telemetry.addData("Step: ","Finished"); telemetry.update();
         }
 
         public void waitForEncoderComplete() {
@@ -47,14 +43,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             // onto the next step, use (isBusy() || isBusy()) in the loop test.
             while (opModeIsActive() && (runtime.seconds() < timeoutS) && robot.isAnyBusy()) {
                 // Display it for the driver.
-                telemetry.addData("Path1",  "Running to %7d :%7d", encoderDist,  encoderDist);
-                telemetry.addData("Path2",  "Running at %7d :%7d",
-                        robot.leftFront.getCurrentPosition(),
-                        robot.rightFront.getCurrentPosition());
-                telemetry.update();
+                //telemetry.addData("Path1",  "Running to %7d :%7d", encoderDist,  encoderDist);
+                //telemetry.addData("Path2",  "Running at %7d :%7d",
+                //        robot.leftFront.getCurrentPosition(),
+                //        robot.rightFront.getCurrentPosition());
+                //telemetry.update();
             }
-
-            robot.zero();
+            telemetry.addData("Step: ","Done"); telemetry.update();
+            sleep(500);
+            //robot.zero();
         }
     }
 

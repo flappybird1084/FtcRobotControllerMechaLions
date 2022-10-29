@@ -180,13 +180,16 @@ public class RobotHardware {
         // distance in inches
         // direction can be forward, backward, left, or right
 
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         power = Math.abs(power);
         double leftFrontPower = power;
         double rightFrontPower = power;
         double leftBackPower = power;
         double rightBackPower = power;
-
-
 
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -196,19 +199,20 @@ public class RobotHardware {
         direction = direction.toLowerCase();
 
         // no forward if statement cause it's already that
-        if (direction == "backward") {
+        if (direction.equals("backward")) {
             leftBackPower *= -1;
             leftFrontPower *= -1;
             rightBackPower *= -1;
             rightFrontPower *= -1;
         }
 
-        else if (direction == "right") {
+        else if (direction.equals("right")) {
             leftBackPower *= -1;
             rightFrontPower *= -1;
+
         }
 
-        else if (direction == "left") {
+        else if (direction.equals("left")) {
             leftFrontPower *= -1;
             rightBackPower *= -1;
         }
@@ -236,7 +240,7 @@ public class RobotHardware {
     }
 
     public void moveDirectionBlocks (double blocks, String direction) {
-        double inches = blocks *= 24;
+        double inches = blocks * 24;
 
         encoderMovements(inches, 0.5, direction);
     }
