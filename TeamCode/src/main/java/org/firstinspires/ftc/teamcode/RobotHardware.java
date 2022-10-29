@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * This file works in conjunction with the External Hardware Class sample called: ConceptExternalHardwareClass.java
@@ -51,6 +52,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Also add a new OpMode, drawing from the Sample ConceptExternalHardwareClass.java; select TeleOp.
  *
  */
+
 
 public class RobotHardware {
 
@@ -78,9 +80,9 @@ public class RobotHardware {
     public static final double ARM_CLOSE = 0.0;
     public static final double ARM_OPEN = 1.0;
     public static final double TICK_COUNT = 537.7;
-    public static final double CIRCUMFERENCE = 3.14 * 3.78;
+    public static final double CIRCUMFERENCE = 3.14 * 3.78; // this is in inches
 
-    // this is in inches
+    private ElapsedTime runtime = new ElapsedTime(); //trying to make the robot execute sleep();
 
     public void resetMotor(DcMotor motor) {
         motor.setPower(0);
@@ -88,6 +90,7 @@ public class RobotHardware {
 
 
     /* local OpMode members. */
+
     HardwareMap hwMap;
 
     // Define a constructor that allows the OpMode to pass a reference to itself.
@@ -113,16 +116,16 @@ public class RobotHardware {
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        leftFront.setDirection(DcMotor.Direction.FORWARD);
-        leftBack.setDirection(DcMotor.Direction.FORWARD);
-        rightFront.setDirection(DcMotor.Direction.REVERSE);
-        rightBack.setDirection(DcMotor.Direction.REVERSE);
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
+        leftBack.setDirection(DcMotor.Direction.REVERSE);
+        rightFront.setDirection(DcMotor.Direction.FORWARD);
+        rightBack.setDirection(DcMotor.Direction.FORWARD);
         ViperSlide.setDirection(DcMotor.Direction.FORWARD);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -159,26 +162,46 @@ public class RobotHardware {
         rightBack.setPower(-1);
     }
 
+    public boolean isAllBusy() {
+        if (leftBack.isBusy() && leftFront.isBusy() && rightBack.isBusy() && rightFront.isBusy()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isAnyBusy() {
+        if (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy()) {
+            return true;
+        }
+        return false;
+    }
+
     public void encoderMovements(double distance, double power) {
 
-        double rotationsNeeded = distance / CIRCUMFERENCE;
-        int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
-        leftFront.setTargetPosition(encoderDrivingTarget);
-        leftBack.setTargetPosition(encoderDrivingTarget);
-        rightFront.setTargetPosition(encoderDrivingTarget);
-        rightBack.setTargetPosition(encoderDrivingTarget);
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         leftFront.setPower(power);
         leftBack.setPower(power);
         rightFront.setPower(power);
         rightBack.setPower(power);
 
+        double rotationsNeeded = distance / CIRCUMFERENCE;
+        int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
+
+        leftFront.setTargetPosition(encoderDrivingTarget);
+        leftBack.setTargetPosition(encoderDrivingTarget);
+        rightFront.setTargetPosition(encoderDrivingTarget);
+        rightBack.setTargetPosition(encoderDrivingTarget);
+
         leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        zero();
+        //zero();
     }
 
     /**

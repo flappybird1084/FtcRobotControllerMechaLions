@@ -34,17 +34,17 @@ public class TeleOpTest  extends OpMode {
 
     @Override
     public void loop() {
-        double rightStick = gamepad1.right_stick_y;
-        double leftStick = gamepad1.left_stick_y;
+        double rightStick = -gamepad1.right_stick_y;
+        double leftStick = -gamepad1.left_stick_y;
 
-        if(gamepad1.left_bumper) {
+        if(gamepad1.right_bumper) {
             robot.leftFront.setPower(1);
             robot.leftBack.setPower(-1);
             robot.rightFront.setPower(-1);
             robot.rightBack.setPower(1);
             robot.ViperSlide.setPower(0);
         }
-        else if(gamepad1.right_bumper) {
+        else if(gamepad1.left_bumper) {
             robot.leftFront.setPower(-1);
             robot.leftBack.setPower(1);
             robot.rightFront.setPower(1);
@@ -68,7 +68,7 @@ public class TeleOpTest  extends OpMode {
         }
 
         else if(gamepad1.dpad_right) {
-            robot.rightFront.setPower(-1);
+            robot.rightFront.setPower(1);
         }
 
         else if(gamepad1.b) {
@@ -76,7 +76,7 @@ public class TeleOpTest  extends OpMode {
         }
 
         else if(gamepad1.x) {
-            robot.rightBack.setPower(-1);
+            robot.rightBack.setPower(1);
         }
 
 
