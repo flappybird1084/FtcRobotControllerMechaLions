@@ -17,19 +17,26 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         //@Override whenever you create a method
         //What happens when you initalize program
         @Override
-        public void runOpMode(){
+        public void runOpMode() {
             //Initialize hardwareMap
             robot.init(hardwareMap);
             robot.leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    //        robot.ViperSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //        robot.ViperSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
             waitForStart();
 
-            robot.encoderMovements(encoderDist, 1);
+            //robot.encoderMovements(encoderDist, 1);
+            robot.moveDirectionBlocks(1, "right");
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(1, "forward");
+            waitForEncoderComplete();
+        }
+
+        public void waitForEncoderComplete() {
             //sleep(10000);
 
             // keep looping while we are still active, and there is time left, and both motors are running.
@@ -49,6 +56,5 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
             robot.zero();
         }
-
     }
 

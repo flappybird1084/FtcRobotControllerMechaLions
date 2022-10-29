@@ -176,17 +176,48 @@ public class RobotHardware {
         return false;
     }
 
-    public void encoderMovements(double distance, double power) {
+    public void encoderMovements(double distance, double power, String direction) {
+        // distance in inches
+        // direction can be forward, backward, left, or right
+
+        power = Math.abs(power);
+        double leftFrontPower = power;
+        double rightFrontPower = power;
+        double leftBackPower = power;
+        double rightBackPower = power;
+
+
 
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        leftFront.setPower(power);
-        leftBack.setPower(power);
-        rightFront.setPower(power);
-        rightBack.setPower(power);
+        direction = direction.toLowerCase();
+
+        // no forward if statement cause it's already that
+        if (direction == "backward") {
+            leftBackPower *= -1;
+            leftFrontPower *= -1;
+            rightBackPower *= -1;
+            rightFrontPower *= -1;
+        }
+
+        else if (direction == "right") {
+            leftBackPower *= -1;
+            rightFrontPower *= -1;
+        }
+
+        else if (direction == "left") {
+            leftFrontPower *= -1;
+            rightBackPower *= -1;
+        }
+
+        leftFront.setPower(leftFrontPower);
+        leftBack.setPower(leftBackPower);
+        rightFront.setPower(rightFrontPower);
+        rightBack.setPower(rightBackPower);
+
 
         double rotationsNeeded = distance / CIRCUMFERENCE;
         int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
@@ -203,6 +234,14 @@ public class RobotHardware {
 
         //zero();
     }
+
+    public void moveDirectionBlocks (double blocks, String direction) {
+        double inches = blocks *= 24;
+
+        encoderMovements(inches, 0.5, direction);
+    }
+
+
 
     /**
      * Calculates the left/right motor powers required to achieve the requested
