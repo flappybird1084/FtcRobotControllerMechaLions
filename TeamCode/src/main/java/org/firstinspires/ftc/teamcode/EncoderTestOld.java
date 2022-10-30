@@ -23,10 +23,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             waitForStart();
 
             //robot.encoderMovements(encoderDist, 1);
-            robot.moveDirectionBlocks(1, "right");
+            robot.moveDirectionBlocks(telemetry, 1, "right");
             telemetry.addData("Step: ","Step #1"); telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(1, "forward");
+            robot.moveDirectionBlocks(telemetry,1, "forward");
             telemetry.addData("Step: ","Step #2"); telemetry.update();
             waitForEncoderComplete();
             telemetry.addData("Step: ","Finished"); telemetry.update();

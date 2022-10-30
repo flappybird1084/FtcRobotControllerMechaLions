@@ -14,7 +14,7 @@ public class TeleOpTest  extends OpMode {
 
     //@Override whenever you create a method
     @Override
-    //What happens when you initalize program
+    //What happens when you initialize program
     public void init(){
         //Initialize hardwareMap
         robot.init(hardwareMap);
@@ -24,12 +24,10 @@ public class TeleOpTest  extends OpMode {
 
     @Override
     public void init_loop(){
-
     }
 
     @Override
     public void start(){
-
     }
 
     @Override
@@ -38,18 +36,20 @@ public class TeleOpTest  extends OpMode {
         double leftStick = -gamepad1.left_stick_y;
 
         if(gamepad1.right_bumper) {
+            // Move Right
             robot.leftFront.setPower(1);
             robot.leftBack.setPower(-1);
             robot.rightFront.setPower(-1);
             robot.rightBack.setPower(1);
-            robot.ViperSlide.setPower(0);
+            //robot.ViperSlide.setPower(0);
         }
         else if(gamepad1.left_bumper) {
+            // Move Left
             robot.leftFront.setPower(-1);
             robot.leftBack.setPower(1);
             robot.rightFront.setPower(1);
             robot.rightBack.setPower(-1);
-            robot.ViperSlide.setPower(0);
+            //robot.ViperSlide.setPower(0);
         }
 
 
@@ -96,7 +96,7 @@ public class TeleOpTest  extends OpMode {
             robot.leftBack.setPower(leftStick);
             robot.rightFront.setPower(rightStick);
             robot.rightBack.setPower(rightStick);
-            robot.ViperSlide.setPower(0);
+            //robot.ViperSlide.setPower(0);
         }
 
         if(gamepad1.a) {
@@ -113,6 +113,5 @@ public class TeleOpTest  extends OpMode {
 
     @Override
     public void stop() {
-
     }
 }

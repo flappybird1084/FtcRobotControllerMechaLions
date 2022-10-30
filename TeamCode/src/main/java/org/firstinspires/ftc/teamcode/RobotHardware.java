@@ -34,6 +34,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 /**
  * This file works in conjunction with the External Hardware Class sample called: ConceptExternalHardwareClass.java
  * Please read the explanations in that Sample about how to use this class definition.
@@ -156,10 +158,10 @@ public class RobotHardware {
     }
 
     public void all_full_power() {
-        leftFront.setPower(-1);
+        leftFront.setPower(1);
         leftBack.setPower(1);
         rightFront.setPower(1);
-        rightBack.setPower(-1);
+        rightBack.setPower(1);
     }
 
     public boolean isAllBusy() {
@@ -176,9 +178,16 @@ public class RobotHardware {
         return false;
     }
 
-    public void encoderMovements(double distance, double power, String direction) {
+    public void encoderMovements(Telemetry telemetry, double distance, double power, String direction) {
+        // broken because power is only taken as a positive value and we should've made target position negative.
+        // fixed it now by replacing leftfrontpower with leftfronttarget and so on
         // distance in inches
         // direction can be forward, backward, left, or right
+
+
+        double rotationsNeeded = distance / CIRCUMFERENCE;
+        int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
+
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -186,10 +195,10 @@ public class RobotHardware {
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         power = Math.abs(power);
-        double leftFrontPower = power;
-        double rightFrontPower = power;
-        double leftBackPower = power;
-        double rightBackPower = power;
+        int leftFrontTarget = encoderDrivingTarget;
+        int rightFrontTarget = encoderDrivingTarget;
+        int leftBackTarget = encoderDrivingTarget;
+        int rightBackTarget = encoderDrivingTarget;
 
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -200,49 +209,49 @@ public class RobotHardware {
 
         // no forward if statement cause it's already that
         if (direction.equals("backward")) {
-            leftBackPower *= -1;
-            leftFrontPower *= -1;
-            rightBackPower *= -1;
-            rightFrontPower *= -1;
+            telemetry.addData("Moving ", "Backwards"); telemetry.update();
+            leftBackTarget *= -1;
+            leftFrontTarget *= -1;
+            rightBackTarget *= -1;
+            rightFrontTarget *= -1;
         }
-
         else if (direction.equals("right")) {
-            leftBackPower *= -1;
-            rightFrontPower *= -1;
-
+            telemetry.addData("Moving ", "Right"); telemetry.update();
+            leftBackTarget *= -1;
+            rightFrontTarget *= -1;
         }
-
         else if (direction.equals("left")) {
-            leftFrontPower *= -1;
-            rightBackPower *= -1;
+            telemetry.addData("Moving ", "Left"); telemetry.update();
+            leftFrontTarget *= -1;
+            rightBackTarget *= -1;
+        }
+        else{
+            telemetry.addData("Moving ", "Forward"); telemetry.update();
         }
 
-        leftFront.setPower(leftFrontPower);
-        leftBack.setPower(leftBackPower);
-        rightFront.setPower(rightFrontPower);
-        rightBack.setPower(rightBackPower);
+        leftFront.setPower(power);
+        leftBack.setPower(power);
+        rightFront.setPower(power);
+        rightBack.setPower(power);
 
+        leftFront.setTargetPosition(leftFrontTarget);
+        leftBack.setTargetPosition(leftBackTarget);
+        rightFront.setTargetPosition(rightFrontTarget);
+        rightBack.setTargetPosition(rightBackTarget);
 
-        double rotationsNeeded = distance / CIRCUMFERENCE;
-        int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
-
-        leftFront.setTargetPosition(encoderDrivingTarget);
-        leftBack.setTargetPosition(encoderDrivingTarget);
-        rightFront.setTargetPosition(encoderDrivingTarget);
-        rightBack.setTargetPosition(encoderDrivingTarget);
 
         leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        //zero();
+        //zero(); //Don't do this here as it prevents motors from running to completion.
     }
 
-    public void moveDirectionBlocks (double blocks, String direction) {
+    public void moveDirectionBlocks (Telemetry telemetry, double blocks, String direction) {
         double inches = blocks * 24;
 
-        encoderMovements(inches, 0.5, direction);
+        encoderMovements(telemetry, inches, 0.5, direction);
     }
 
 
