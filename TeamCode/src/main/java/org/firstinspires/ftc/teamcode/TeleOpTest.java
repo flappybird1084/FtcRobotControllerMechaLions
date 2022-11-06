@@ -37,18 +37,18 @@ public class TeleOpTest  extends OpMode {
 
         if(gamepad1.right_bumper) {
             // Move Right
-            robot.leftFront.setPower(1);
-            robot.leftBack.setPower(-1);
-            robot.rightFront.setPower(-1);
-            robot.rightBack.setPower(1);
+            robot.leftFront.setPower(0.4);
+            robot.leftBack.setPower(-0.4);
+            robot.rightFront.setPower(-0.4);
+            robot.rightBack.setPower(0.4);
             robot.ViperSlide.setPower(0);
         }
         else if(gamepad1.left_bumper) {
             // Move Left
-            robot.leftFront.setPower(-1);
-            robot.leftBack.setPower(1);
-            robot.rightFront.setPower(1);
-            robot.rightBack.setPower(-1);
+            robot.leftFront.setPower(-0.4);
+            robot.leftBack.setPower(0.4);
+            robot.rightFront.setPower(0.4);
+            robot.rightBack.setPower(-0.4);
             robot.ViperSlide.setPower(0);
         }
 
@@ -61,7 +61,7 @@ public class TeleOpTest  extends OpMode {
             robot.ViperSlide.setPower(-0.5);
         }
 
-        /*
+/*
         // debug code because half the motors were unaliving
         else if(gamepad1.dpad_left) {
             robot.leftFront.setPower(1);
@@ -78,8 +78,8 @@ public class TeleOpTest  extends OpMode {
         else if(gamepad1.x) {
             robot.rightBack.setPower(1);
         }
-        */
 
+*/
         /*
         rians possible future code
 
@@ -92,23 +92,19 @@ public class TeleOpTest  extends OpMode {
 
          */
         else {
-            robot.leftFront.setPower(leftStick);
-            robot.leftBack.setPower(leftStick);
-            robot.rightFront.setPower(rightStick);
-            robot.rightBack.setPower(rightStick);
+            robot.leftFront.setPower(leftStick * 0.4);
+            robot.leftBack.setPower(leftStick * 0.4);
+            robot.rightFront.setPower(rightStick * 0.4);
+            robot.rightBack.setPower(rightStick * 0.4);
             robot.ViperSlide.setPower(0);
         }
         double servoPos = robot.servo1.getPosition();
-        boolean servoTrig = false;
-        if(gamepad1.a) {
-            servoTrig = !servoTrig;
-        }
 
-        if (servoTrig) {
+        if(gamepad1.a) {
             robot.servo1.setPosition(100);
         }
 
-        else {
+        else if (gamepad1.b) {
             robot.servo1.setPosition(0);
         }
 

@@ -17,19 +17,57 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         //What happens when you initalize program
         @Override
         public void runOpMode() {
+            int position = 3;
+            // position can be 1, 2, or 3: 1 is left, 2 is center, and 3 is right.
+            // second position makes the robot move in front of the cone instead.
             //Initialize hardwareMap
             robot.init(hardwareMap);
             //        robot.ViperSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             waitForStart();
 
             //robot.encoderMovements(encoderDist, 1);
-            robot.moveDirectionBlocks(telemetry, 1, "right");
-            telemetry.addData("Step: ","Step #1"); telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry,1, "forward");
-            telemetry.addData("Step: ","Step #2"); telemetry.update();
-            waitForEncoderComplete();
-            telemetry.addData("Step: ","Finished"); telemetry.update();
+            if (position == 1) {
+                robot.moveDirectionBlocks(telemetry, 1, "left");
+                telemetry.addData("Step: ", "Step #1");
+                telemetry.update();
+                waitForEncoderComplete();
+                robot.moveDirectionBlocks(telemetry, 1, "forward");
+                telemetry.addData("Step: ", "Step #2");
+                telemetry.update();
+                waitForEncoderComplete();
+                telemetry.addData("Step: ", "Finished");
+                telemetry.update();
+            }
+            else if (position == 2) {
+                robot.moveDirectionBlocks(telemetry, 1, "right");
+                telemetry.addData("Step: ", "Step #1");
+                telemetry.update();
+                waitForEncoderComplete();
+                robot.moveDirectionBlocks(telemetry, 1, "forward");
+                telemetry.addData("Step: ", "Step #2");
+                telemetry.update();
+                robot.moveDirectionBlocks(telemetry, 1, "forward");
+                telemetry.addData("Step: ", "Step #3");
+                telemetry.update();
+                robot.moveDirectionBlocks(telemetry, 1, "left");
+                telemetry.addData("Step: ", "Step #4");
+                telemetry.update();
+                waitForEncoderComplete();
+                telemetry.addData("Step: ", "Finished");
+                telemetry.update();
+            }
+            else if (position == 3) {
+                robot.moveDirectionBlocks(telemetry, 1, "right");
+                telemetry.addData("Step: ", "Step #1");
+                telemetry.update();
+                waitForEncoderComplete();
+                robot.moveDirectionBlocks(telemetry, 1, "forward");
+                telemetry.addData("Step: ", "Step #2");
+                telemetry.update();
+                waitForEncoderComplete();
+                telemetry.addData("Step: ", "Finished");
+                telemetry.update();
+            }
         }
 
         public void waitForEncoderComplete() {
