@@ -247,12 +247,52 @@ public class RobotHardware {
 
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
+/*
+    public void viperSlideEncoderMovements(Telemetry telemetry, double distance, double power, String direction) {
+        // broken because power is only taken as a positive value and we should've made target position negative.
+        // fixed it now by replacing leftfrontpower with leftfronttarget and so on
+        // distance in inches
+        // direction can be forward, backward, left, or right
 
+
+        //double rotationsNeeded = distance / CIRCUMFERENCE;
+        //int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
+
+        ViperSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        power = Math.abs(power);
+        int viperSlideTarget = encoderDrivingTarget;
+        ViperSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        direction = direction.toLowerCase();
+
+        // no forward if statement cause it's already that
+        if (direction.equals("backward")) {
+            telemetry.addData("Moving ", "Backwards"); telemetry.update();
+            viperSlideTarget *= -1
+        }
+
+        else{
+            telemetry.addData("Moving ", "Forward"); telemetry.update();
+        }
+
+        ViperSlide.setPower(power);
+        ViperSlide.setTargetPosition(viperSlideTarget);
+
+        ViperSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+        //zero(); //Don't do this here as it prevents motors from running to completion.
+    }
+*/
     public void moveDirectionBlocks (Telemetry telemetry, double blocks, String direction) {
         double inches = blocks * 24;
 
         encoderMovements(telemetry, inches, 0.5, direction);
     }
+
+
+
+
 
 
 

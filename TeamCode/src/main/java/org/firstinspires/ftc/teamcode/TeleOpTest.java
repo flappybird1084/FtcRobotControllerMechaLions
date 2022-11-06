@@ -99,13 +99,19 @@ public class TeleOpTest  extends OpMode {
             robot.ViperSlide.setPower(0);
         }
         double servoPos = robot.servo1.getPosition();
-
+        boolean servoTrig = false;
         if(gamepad1.a) {
+            servoTrig = !servoTrig;
+        }
+
+        if (servoTrig) {
+            robot.servo1.setPosition(100);
+        }
+
+        else {
             robot.servo1.setPosition(0);
         }
-        else {
-            robot.servo1.setPosition(100+servoPos);
-        }
+
 
         telemetry.addData("LeftFront Power", robot.leftFront.getPower());
         telemetry.addData("LeftBack Power", robot.leftBack.getPower());
