@@ -11,6 +11,10 @@ public class TeleOpTest  extends OpMode {
     RobotHardware robot = new RobotHardware();
 
     private String readyMessage = "READY!";
+    private double servo0pos;
+    //got the min position
+    private double servo100pos;
+
 
     //@Override whenever you create a method
     @Override
@@ -20,6 +24,15 @@ public class TeleOpTest  extends OpMode {
         robot.init(hardwareMap);
         telemetry.addData("Status", readyMessage);
         telemetry.update();
+        servo0pos =  robot.servo1.getPosition();
+        // min position, hopefully putting it in the loop helps.
+        robot.servo1.setPosition(servo0pos);
+        robot.servo1.setPosition(servo0pos+100);
+        servo100pos = robot.servo1.getPosition();
+        // got the max position
+        robot.servo1.setPosition(servo0pos);
+
+
     }
 
     @Override
@@ -54,11 +67,11 @@ public class TeleOpTest  extends OpMode {
 
 
         else if(gamepad1.dpad_up) {
-            robot.ViperSlide.setPower(0.5);
+            robot.ViperSlide.setPower(0.4);
         }
 
         else if(gamepad1.dpad_down) {
-            robot.ViperSlide.setPower(-0.5);
+            robot.ViperSlide.setPower(-0.25);
         }
 
 /*
@@ -101,11 +114,14 @@ public class TeleOpTest  extends OpMode {
         double servoPos = robot.servo1.getPosition();
 
         if(gamepad1.a) {
-            robot.servo1.setPosition(100);
+
+            robot.servo1.setPosition(servo100pos);
+            //retracted
         }
 
         else if (gamepad1.b) {
-            robot.servo1.setPosition(0);
+            robot.servo1.setPosition(servo0pos);
+            //extended
         }
 
 
