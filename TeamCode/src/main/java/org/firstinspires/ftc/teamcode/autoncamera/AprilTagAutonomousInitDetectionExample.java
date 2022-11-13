@@ -188,14 +188,19 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
 
         /* Actually do something useful */
 
-        if (tagOfInterest == null || tagOfInterest.id == LEFT) {
+
+        // if tagofinterest.id == null
+        if (tagOfInterest.id == LEFT) {
             //left trajectory
+            telemetry.addData("Direction: ", "left");
             position = 1;
         } else if (tagOfInterest.id == RIGHT) {
             //right trajectory
+            telemetry.addData("Direction: ", "right");
             position = 3;
         } else if (tagOfInterest.id == MIDDLE) {
             // middle trajectory
+            telemetry.addData("Direction: ", "middle");
             position = 2;
         }
 
@@ -207,6 +212,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
 
         //robot.encoderMovements(encoderDist, 1);
         if (position == 1) {
+            telemetry.addData("Direction: ", "left");
             robot.moveDirectionBlocks(telemetry, 1, "left");
             telemetry.addData("Step: ", "Step #1");
             telemetry.update();
@@ -218,6 +224,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
         } else if (position == 2) {
+            telemetry.addData("Direction: ", "middle");
             robot.moveDirectionBlocks(telemetry, 1, "right");
             telemetry.addData("Step: ", "Step #1");
             telemetry.update();
@@ -235,6 +242,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
         } else if (position == 3) {
+            telemetry.addData("Direction: ", "right");
             robot.moveDirectionBlocks(telemetry, 1, "right");
             telemetry.addData("Step: ", "Step #1");
             telemetry.update();
