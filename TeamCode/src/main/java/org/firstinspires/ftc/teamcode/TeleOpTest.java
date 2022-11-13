@@ -14,6 +14,8 @@ public class TeleOpTest  extends OpMode {
     private double servo0pos;
     //got the min position
     private double servo100pos;
+    private boolean viperUp = false;
+    private boolean viperDown = false;
 
 
     //@Override whenever you create a method
@@ -66,13 +68,43 @@ public class TeleOpTest  extends OpMode {
         }
 
 
+
         else if(gamepad1.dpad_up) {
-            robot.ViperSlide.setPower(0.4);
+            viperUp = true;
+            viperDown = false;
         }
 
         else if(gamepad1.dpad_down) {
-            robot.ViperSlide.setPower(-0.25);
+            viperDown = true;
+            viperUp = false;
         }
+
+        else if (gamepad1.dpad_left) {
+            viperDown = false;
+            viperUp = false;
+        }
+        // move slide up if no prev. movement
+
+        else if(viperUp) {
+            robot.ViperSlide.setPower(0.5);
+            robot.leftFront.setPower(leftStick * 0.4);
+            robot.leftBack.setPower(leftStick * 0.4);
+            robot.rightFront.setPower(rightStick * 0.4);
+            robot.rightBack.setPower(rightStick * 0.4);
+
+        }
+
+        else if (viperDown) {
+            robot.ViperSlide.setPower(-0.35);
+
+            robot.leftFront.setPower(leftStick * 0.4);
+            robot.leftBack.setPower(leftStick * 0.4);
+            robot.rightFront.setPower(rightStick * 0.4);
+            robot.rightBack.setPower(rightStick * 0.4);
+
+        }
+
+
 
 /*
         // debug code because half the motors were unaliving
