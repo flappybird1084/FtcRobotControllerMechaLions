@@ -82,8 +82,10 @@ public class RobotHardware {
     public static final double ARM_DOWN_POWER = -0.45;
     public static final double ARM_CLOSE = 0.0;
     public static final double ARM_OPEN = 1.0;
-    public static final double TICK_COUNT = 537.7;
+    public static final double TICK_COUNT = 537.7; // strafer chassis kit v5, same motor as the viper slide
     public static final double CIRCUMFERENCE = 3.14 * 3.78; // this is in inches
+    public static final double VS_DIA = 4.41; // sku: 5203-2402-0019
+    public static final double VS_CIRCUMFERENCE = VS_DIA * 3.14;
 
     private ElapsedTime runtime = new ElapsedTime(); //trying to make the robot execute sleep();
 
@@ -173,7 +175,7 @@ public class RobotHardware {
     }
 
     public boolean isAnyBusy() {
-        if (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy()) {
+        if (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy() || ViperSlide.isBusy()) {
             return true;
         }
         return false;
@@ -248,16 +250,14 @@ public class RobotHardware {
 
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
-/*
+
     public void viperSlideEncoderMovements(Telemetry telemetry, double distance, double power, String direction) {
-        // broken because power is only taken as a positive value and we should've made target position negative.
-        // fixed it now by replacing leftfrontpower with leftfronttarget and so on
         // distance in inches
-        // direction can be forward, backward, left, or right
+        // direction can be forward or backward
 
 
-        //double rotationsNeeded = distance / CIRCUMFERENCE;
-        //int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
+        double rotationsNeeded = distance / VS_CIRCUMFERENCE;
+        int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
 
         ViperSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
@@ -269,7 +269,7 @@ public class RobotHardware {
         // no forward if statement cause it's already that
         if (direction.equals("backward")) {
             telemetry.addData("Moving ", "Backwards"); telemetry.update();
-            viperSlideTarget *= -1
+            viperSlideTarget *= -1;
         }
 
         else{
@@ -284,7 +284,7 @@ public class RobotHardware {
 
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
-*/
+
     public void moveDirectionBlocks (Telemetry telemetry, double blocks, String direction) {
         double inches = blocks * 24;
 

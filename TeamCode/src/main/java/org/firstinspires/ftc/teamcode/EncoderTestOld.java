@@ -70,6 +70,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                 telemetry.addData("Step: ", "Finished");
                 telemetry.update();
             }
+
+            else if (position == 4) {
+                robot.viperSlideEncoderMovements(telemetry, 45, 0.25, "forward");
+                telemetry.addData("Viper slide status: ", "moving");
+                telemetry.update();
+                waitForEncoderComplete();
+                telemetry.addData("Viper slide status: ", "finished");
+            }
         }
 
         public void waitForEncoderComplete() {
