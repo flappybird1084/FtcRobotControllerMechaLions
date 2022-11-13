@@ -232,15 +232,18 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             robot.moveDirectionBlocks(telemetry, 1, "forward");
             telemetry.addData("Step: ", "Step #2");
             telemetry.update();
+            waitForEncoderComplete();
             robot.moveDirectionBlocks(telemetry, 1, "forward");
             telemetry.addData("Step: ", "Step #3");
             telemetry.update();
+            waitForEncoderComplete();
             robot.moveDirectionBlocks(telemetry, 1, "left");
             telemetry.addData("Step: ", "Step #4");
             telemetry.update();
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
+
         } else if (position == 3) {
             telemetry.addData("Direction: ", "right");
             robot.moveDirectionBlocks(telemetry, 1, "right");
