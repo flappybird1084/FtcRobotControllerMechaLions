@@ -209,6 +209,26 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             sleep(20);
         } */
         waitForStart();
+        // left, fwd, right but half, then score on mid pole
+        robot.servo1.setPosition(100);
+        robot.moveDirectionBlocks(telemetry,1,"left");
+        robot.moveDirectionBlocks(telemetry,1,"forward");
+        robot.moveDirectionBlocks(telemetry,0.5,"right");
+        robot.moveDirectionBlocks(telemetry, 0.25, "forward");
+        //robot.viperSlideEncoderMovements(telemetry,25,0.25, "forward");
+        robot.ViperSlide.setPower(0.25);
+        sleep(5000);
+        robot.ViperSlide.setPower(0);
+        robot.servo1.setPosition(0);
+
+        robot.ViperSlide.setPower(-0.25);
+        sleep(5500);
+        robot.ViperSlide.setPower(0);
+        robot.moveDirectionBlocks(telemetry,0.25, "backward");
+        robot.moveDirectionBlocks(telemetry, 1,"left");
+        robot.moveDirectionBlocks(telemetry, 1, "backward", 3);
+        robot.moveDirectionBlocks(telemetry,1,"right", 1);
+
 
         //robot.encoderMovements(encoderDist, 1);
         if (position == 1) {
