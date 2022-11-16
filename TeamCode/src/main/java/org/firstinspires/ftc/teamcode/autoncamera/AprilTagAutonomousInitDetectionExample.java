@@ -211,23 +211,32 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         waitForStart();
         // left, fwd, right but half, then score on mid pole
         robot.servo1.setPosition(100);
-        robot.moveDirectionBlocks(telemetry,1,"left");
-        robot.moveDirectionBlocks(telemetry,1,"forward");
+        robot.moveDirectionBlocks(telemetry,1,"left",2);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry,1,"forward",3);
+        waitForEncoderComplete();
         robot.moveDirectionBlocks(telemetry,0.5,"right");
-        robot.moveDirectionBlocks(telemetry, 0.25, "forward");
+        waitForEncoderComplete();
+        //robot.moveDirectionBlocks(telemetry, 0.25, "forward");
+        waitForEncoderComplete();
         //robot.viperSlideEncoderMovements(telemetry,25,0.25, "forward");
-        robot.ViperSlide.setPower(0.25);
-        sleep(5000);
+        robot.ViperSlide.setPower(1);
+        sleep(3000);
         robot.ViperSlide.setPower(0);
+        sleep(1000);
         robot.servo1.setPosition(0);
 
-        robot.ViperSlide.setPower(-0.25);
-        sleep(5500);
+        robot.ViperSlide.setPower(-1);
+        sleep(3500);
         robot.ViperSlide.setPower(0);
-        robot.moveDirectionBlocks(telemetry,0.25, "backward");
-        robot.moveDirectionBlocks(telemetry, 1,"left");
-        robot.moveDirectionBlocks(telemetry, 1, "backward", 3);
-        robot.moveDirectionBlocks(telemetry,1,"right", 1);
+        //robot.moveDirectionBlocks(telemetry,0.25, "backward");
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry, 1,"left", -3);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry, 1, "backward", 6);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry,1,"right", 3);
+        waitForEncoderComplete();
 
 
         //robot.encoderMovements(encoderDist, 1);
