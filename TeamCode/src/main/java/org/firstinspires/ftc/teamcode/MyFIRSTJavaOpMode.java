@@ -173,6 +173,6 @@ public class MyFIRSTJavaOpMode extends LinearOpMode {
     }
 
     // actual code running part
-
+    robot.encoderDrive(5.0, 3.0, 3.0, 1.0);
     }
 

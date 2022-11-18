@@ -46,11 +46,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                 robot.moveDirectionBlocks(telemetry, 1, "forward");
                 telemetry.addData("Step: ", "Step #2");
                 telemetry.update();
-                waitForEncoderComplete();
                 robot.moveDirectionBlocks(telemetry, 1, "forward");
                 telemetry.addData("Step: ", "Step #3");
                 telemetry.update();
-                waitForEncoderComplete();
                 robot.moveDirectionBlocks(telemetry, 1, "left");
                 telemetry.addData("Step: ", "Step #4");
                 telemetry.update();
@@ -69,14 +67,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
                 waitForEncoderComplete();
                 telemetry.addData("Step: ", "Finished");
                 telemetry.update();
-            }
-
-            else if (position == 4) {
-                robot.viperSlideEncoderMovements(telemetry, 45, 0.25, "forward");
-                telemetry.addData("Viper slide status: ", "moving");
-                telemetry.update();
-                waitForEncoderComplete();
-                telemetry.addData("Viper slide status: ", "finished");
             }
         }
 
