@@ -221,13 +221,13 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         waitForEncoderComplete();
         //robot.viperSlideEncoderMovements(telemetry,25,0.25, "forward");
         robot.ViperSlide.setPower(1);
-        sleep(3000);
+        sleep(2000);
         robot.ViperSlide.setPower(0);
         sleep(1000);
         robot.servo1.setPosition(0);
 
-        robot.ViperSlide.setPower(-1);
-        sleep(3500);
+        robot.ViperSlide.setPower(-0.25);
+        sleep(2500);
         robot.ViperSlide.setPower(0);
         //robot.moveDirectionBlocks(telemetry,0.25, "backward");
         waitForEncoderComplete();
