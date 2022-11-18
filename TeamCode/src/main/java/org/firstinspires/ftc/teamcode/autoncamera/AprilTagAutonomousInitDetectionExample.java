@@ -220,7 +220,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         //robot.moveDirectionBlocks(telemetry, 0.25, "forward");
         waitForEncoderComplete();
         //robot.viperSlideEncoderMovements(telemetry,25,0.25, "forward");
-        robot.ViperSlide.setPower(1);
+        robot.ViperSlide.setPower(0.25);
         sleep(2000);
         robot.ViperSlide.setPower(0);
         sleep(1000);
@@ -252,7 +252,8 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
-        } else if (position == 2) {
+        }
+        else if (position == 2) {
             telemetry.addData("Direction: ", "middle");
             robot.moveDirectionBlocks(telemetry, 1, "right",2);
             telemetry.addData("Step: ", "Step #1 w/offset");
@@ -273,7 +274,8 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
 
-        } else if (position == 3) {
+        }
+        else if (position == 3) {
             telemetry.addData("Direction: ", "right");
             robot.moveDirectionBlocks(telemetry, 1, "right",2);
             telemetry.addData("Step: ", "Step #1 w/offset");
