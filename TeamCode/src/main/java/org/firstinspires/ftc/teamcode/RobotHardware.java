@@ -300,6 +300,14 @@ public class RobotHardware {
         encoderMovements(telemetry, inches, 0.5, direction);
     }
 
+    public void moveDirectionBlocksMAX (Telemetry telemetry, double blocks, String direction, double offsetInches, double power) {
+        // note that offset is in inches
+        double inches = blocks * 24;
+        inches += offsetInches;
+
+        encoderMovements(telemetry, inches, power, direction);
+    }
+
 
 
 
