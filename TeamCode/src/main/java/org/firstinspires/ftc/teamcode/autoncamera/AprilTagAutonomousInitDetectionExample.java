@@ -210,6 +210,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         } */
         waitForStart();
         // left, fwd, right but half, then score on mid pole
+        /*
         robot.servo1.setPosition(100);
         robot.moveDirectionBlocksMAX(telemetry,1,"left",4.5, 0.6);
         waitForEncoderComplete();
@@ -239,6 +240,8 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         waitForEncoderComplete();
         telemetry.addData("Status", "Viper Slide finished");
 
+
+         */
 
         //robot.encoderMovements(encoderDist, 1);
         if (position == 1) {
