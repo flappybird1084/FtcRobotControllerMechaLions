@@ -103,6 +103,36 @@ public class TeleOpTest  extends OpMode {
             robot.rightBack.setPower(rightStick * 0.4);
 
         }
+        // gamepad 2 is currently a debug tester!
+        else if (gamepad2.a) {
+            telemetry.addData("VS: ", "initialized");
+            telemetry.update();
+            robot.viperSlideEncoderMovements(telemetry, 20,0.5,"forward");
+            telemetry.addData("VS: ", "method called");
+            telemetry.update();
+            while(robot.ViperSlide.isBusy()){
+                telemetry.addData("VS: ", "running");
+                telemetry.update();
+            }
+            telemetry.addData("VS: ", "done");
+            telemetry.update();
+
+        }
+
+        else if (gamepad2.b) {
+            telemetry.addData("VSB: ", "initialized");
+            telemetry.update();
+            robot.viperSlideEncoderMovements(telemetry, 20,0.5,"backward");
+            telemetry.addData("VSB: ", "method called");
+            telemetry.update();
+            while(robot.ViperSlide.isBusy()){
+                telemetry.addData("VSB: ", "running");
+                telemetry.update();
+            }
+            telemetry.addData("VSB: ", "done");
+            telemetry.update();
+
+        }
 
 
 
