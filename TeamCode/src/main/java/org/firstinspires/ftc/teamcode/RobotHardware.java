@@ -305,8 +305,8 @@ public class RobotHardware {
         double inches = blocks * 24;
         inches += offsetInches;
 
-        encoderMovements(telemetry, inches, 0.5, direction);
-        // change 0.5m power to whatever, for now this is for the comp
+        encoderMovements(telemetry, inches, power, direction);
+
     }
 
 
