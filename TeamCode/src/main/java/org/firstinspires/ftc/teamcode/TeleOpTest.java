@@ -80,7 +80,7 @@ public class TeleOpTest  extends OpMode {
         }
 
         else if(gamepad2.dpad_up) {
-            robot.ViperSlide.setPower(-0.5);
+            robot.ViperSlide.setPower(0.5);
         }
 
         else if(gamepad2.dpad_down) {
@@ -111,6 +111,8 @@ public class TeleOpTest  extends OpMode {
             robot.rightBack.setPower(rightStick * 0.4);
 
         }
+
+        /*
         // gamepad 2 is currently a debug tester!
         else if (gamepad2.a) {
             telemetry.addData("VS: ", "initialized");
@@ -141,6 +143,8 @@ public class TeleOpTest  extends OpMode {
             telemetry.update();
 
         }
+
+         */
 
 
 
@@ -179,7 +183,7 @@ public class TeleOpTest  extends OpMode {
             robot.leftBack.setPower(leftStick * 0.4);
             robot.rightFront.setPower(rightStick * 0.4);
             robot.rightBack.setPower(rightStick * 0.4);
-            robot.ViperSlide.setPower(0);
+            robot.ViperSlide.setPower(-gamepad2.left_stick_y);
         }
         double servoPos = robot.servo1.getPosition();
 
