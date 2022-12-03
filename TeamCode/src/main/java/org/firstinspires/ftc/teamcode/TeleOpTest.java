@@ -17,7 +17,7 @@ public class TeleOpTest  extends OpMode {
     private double servo100pos;
     private boolean viperUp = false;
     private boolean viperDown = false;
-    private String viperState = "stopped";
+
 
 
     //@Override whenever you create a method
@@ -36,7 +36,6 @@ public class TeleOpTest  extends OpMode {
         // got the max position
         robot.servo1.setPosition(servo0pos);
 
-        Thread ViperState = new Thread();
     }
 
     @Override
@@ -71,7 +70,7 @@ public class TeleOpTest  extends OpMode {
             robot.ViperSlide.setPower(0);
         }
 
-
+/*
 
         else if(gamepad1.dpad_up) {
             viperUp = true;
@@ -82,7 +81,7 @@ public class TeleOpTest  extends OpMode {
             viperDown = true;
             viperUp = false;
         }
-
+*/
         else if(gamepad2.dpad_up) {
             robot.ViperSlide.setPower(0.5);
         }
@@ -96,7 +95,7 @@ public class TeleOpTest  extends OpMode {
             viperUp = false;
         }
         // move slide up if no prev. movement
-
+/*
         else if(viperUp) {
             robot.ViperSlide.setPower(0.5);
             robot.leftFront.setPower(leftStick * 0.4);
@@ -115,18 +114,10 @@ public class TeleOpTest  extends OpMode {
             robot.rightBack.setPower(rightStick * 0.4);
 
         }
+*/
 
 
-        else if(gamepad2.a){
-            viperState = "pos a";
-        }
-
-        else if(gamepad2.b){
-            viperState = "pos b";
-        }
-
-
-
+/*
         // gamepad 2 is currently a debug tester!
         else if (gamepad2.a) {
             telemetry.addData("VS: ", "initialized");
@@ -159,7 +150,7 @@ public class TeleOpTest  extends OpMode {
         }
 
 
-
+*/
 
 
 
@@ -204,13 +195,13 @@ public class TeleOpTest  extends OpMode {
         }
         double servoPos = robot.servo1.getPosition();
 
-        if(gamepad1.a) {
+        if(gamepad2.a) {
 
             robot.servo1.setPosition(servo100pos);
             //retracted
         }
 
-        else if (gamepad1.b) {
+        else if (gamepad2.b) {
             robot.servo1.setPosition(servo0pos);
             //extended
         }
