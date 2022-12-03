@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 //Type of Program (Auto or TeleOp)
 @TeleOp (name = "TeleOpTest", group = "test")
 
-public class TeleOpTest  extends OpMode {
+public class TeleOpScam  extends OpMode {
     //Create HardwareMap object
     RobotHardware robot = new RobotHardware();
 
@@ -37,6 +37,7 @@ public class TeleOpTest  extends OpMode {
         robot.servo1.setPosition(servo0pos);
 
         Thread ViperState = new Thread();
+
     }
 
     @Override
@@ -47,7 +48,44 @@ public class TeleOpTest  extends OpMode {
     public void start(){
     }
 
+    private class ViperState extends Thread {
+        public ViperState()
+        {
+            this.setName("ViperThread");
 
+            //Logging.log("%s", this.getName());
+        }
+
+        public void run() {
+            if (gamepad2.a) {
+                telemetry.addData("VS: ", "initialized");
+                telemetry.update();
+                robot.viperSlideEncoderMovements(telemetry, 20, 0.5, "forward");
+                telemetry.addData("VS: ", "method called");
+                telemetry.update();
+                while (robot.ViperSlide.isBusy()) {
+                    telemetry.addData("VS: ", "running");
+                    telemetry.update();
+                }
+                telemetry.addData("VS: ", "done");
+                telemetry.update();
+
+            } else if (gamepad2.b) {
+                telemetry.addData("VSB: ", "initialized");
+                telemetry.update();
+                robot.viperSlideEncoderMovements(telemetry, 20, 0.5, "backward");
+                telemetry.addData("VSB: ", "method called");
+                telemetry.update();
+                while (robot.ViperSlide.isBusy()) {
+                    telemetry.addData("VSB: ", "running");
+                    telemetry.update();
+                }
+                telemetry.addData("VSB: ", "done");
+                telemetry.update();
+
+            }
+        }
+    }
 
     @Override
     public void loop() {
@@ -116,7 +154,7 @@ public class TeleOpTest  extends OpMode {
 
         }
 
-
+/*
         else if(gamepad2.a){
             viperState = "pos a";
         }
@@ -161,7 +199,7 @@ public class TeleOpTest  extends OpMode {
 
 
 
-
+*/
 
 
 /*
