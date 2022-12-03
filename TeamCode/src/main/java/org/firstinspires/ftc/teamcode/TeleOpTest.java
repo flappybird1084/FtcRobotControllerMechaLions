@@ -112,7 +112,7 @@ public class TeleOpTest  extends OpMode {
 
         }
 
-        /*
+
         // gamepad 2 is currently a debug tester!
         else if (gamepad2.a) {
             telemetry.addData("VS: ", "initialized");
@@ -144,7 +144,7 @@ public class TeleOpTest  extends OpMode {
 
         }
 
-         */
+
 
 
 
