@@ -71,7 +71,7 @@ public class TeleOpTest  extends OpMode {
             robot.ViperSlide.setPower(0);
         }
 
-        else if(gamepad1.left_stick_button){
+        else if(gamepad1.x){
             if(speedScaling == 0.4){
                 speedScaling = 1;
             }
