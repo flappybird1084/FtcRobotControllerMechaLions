@@ -36,6 +36,17 @@ public class TeleOpTest  extends OpMode {
         servo100pos = robot.servo1.getPosition();
         // got the max position
         robot.servo1.setPosition(servo0pos);
+        robot.leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
 
     }
 
@@ -56,22 +67,22 @@ public class TeleOpTest  extends OpMode {
 
         if(gamepad1.right_bumper) {
             // Move Right
-            robot.leftFront.setPower(speedScaling);
-            robot.leftBack.setPower(-speedScaling);
-            robot.rightFront.setPower(speedScaling);
-            robot.rightBack.setPower(-speedScaling);
+            robot.leftFront.setPower(0.4);
+            robot.leftBack.setPower(-0.4);
+            robot.rightFront.setPower(0.4);
+            robot.rightBack.setPower(-0.4);
             robot.ViperSlide.setPower(0);
         }
         else if(gamepad1.left_bumper) {
             // Move Left
-            robot.leftFront.setPower(-speedScaling);
-            robot.leftBack.setPower(speedScaling);
-            robot.rightFront.setPower(-speedScaling);
-            robot.rightBack.setPower(speedScaling);
+            robot.leftFront.setPower(-0.4);
+            robot.leftBack.setPower(0.4);
+            robot.rightFront.setPower(-0.4);
+            robot.rightBack.setPower(0.4);
             robot.ViperSlide.setPower(0);
         }
 
-        else if(gamepad1.x){
+        if(gamepad1.x){
             if(speedScaling == 0.4){
                 speedScaling = 1;
             }
