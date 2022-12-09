@@ -17,6 +17,7 @@ public class TeleOpTest  extends OpMode {
     private double servo100pos;
     private boolean viperUp = false;
     private boolean viperDown = false;
+    private double speedScaling = 0.4;
 
 
 
@@ -55,18 +56,18 @@ public class TeleOpTest  extends OpMode {
 
         if(gamepad1.right_bumper) {
             // Move Right
-            robot.leftFront.setPower(0.4);
-            robot.leftBack.setPower(-0.4);
-            robot.rightFront.setPower(-0.4);
-            robot.rightBack.setPower(0.4);
+            robot.leftFront.setPower(speedScaling);
+            robot.leftBack.setPower(-speedScaling);
+            robot.rightFront.setPower(speedScaling);
+            robot.rightBack.setPower(-speedScaling);
             robot.ViperSlide.setPower(0);
         }
         else if(gamepad1.left_bumper) {
             // Move Left
-            robot.leftFront.setPower(-0.4);
-            robot.leftBack.setPower(0.4);
-            robot.rightFront.setPower(0.4);
-            robot.rightBack.setPower(-0.4);
+            robot.leftFront.setPower(-speedScaling);
+            robot.leftBack.setPower(speedScaling);
+            robot.rightFront.setPower(-speedScaling);
+            robot.rightBack.setPower(speedScaling);
             robot.ViperSlide.setPower(0);
         }
 
@@ -186,10 +187,10 @@ public class TeleOpTest  extends OpMode {
 
          */
         else {
-            robot.leftFront.setPower(leftStick * 0.4);
-            robot.leftBack.setPower(leftStick * 0.4);
-            robot.rightFront.setPower(rightStick * 0.4);
-            robot.rightBack.setPower(rightStick * 0.4);
+            robot.leftFront.setPower(leftStick * speedScaling);
+            robot.leftBack.setPower(leftStick * speedScaling);
+            robot.rightFront.setPower(rightStick * speedScaling);
+            robot.rightBack.setPower(rightStick * speedScaling);
             robot.ViperSlide.setPower(-gamepad2.left_stick_y);
             robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
