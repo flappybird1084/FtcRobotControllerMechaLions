@@ -17,6 +17,7 @@ public class TeleOpTest  extends OpMode {
     private double servo100pos;
     private boolean viperUp = false;
     private boolean viperDown = false;
+    private boolean speedScalingbool = false;
     private double speedScaling = 0.4;
 
 
@@ -95,6 +96,10 @@ public class TeleOpTest  extends OpMode {
             viperDown = false;
             viperUp = false;
         }
+
+
+
+
         // move slide up if no prev. movement
 /*
         else if(viperUp) {
@@ -186,13 +191,17 @@ public class TeleOpTest  extends OpMode {
         }
 
          */
+
+
         else {
+
             robot.leftFront.setPower(leftStick * speedScaling);
             robot.leftBack.setPower(leftStick * speedScaling);
             robot.rightFront.setPower(rightStick * speedScaling);
             robot.rightBack.setPower(rightStick * speedScaling);
             robot.ViperSlide.setPower(-gamepad2.left_stick_y);
             robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
         }
         double servoPos = robot.servo1.getPosition();
 
