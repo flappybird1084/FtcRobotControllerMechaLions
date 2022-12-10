@@ -61,7 +61,6 @@ public class TeleOpTest  extends OpMode {
             robot.leftBack.setPower(-speedScaling);
             robot.rightFront.setPower(speedScaling);
             robot.rightBack.setPower(-speedScaling);
-            robot.ViperSlide.setPower(0);
         }
         else if(gamepad1.left_bumper) {
             // Move Left
@@ -69,7 +68,6 @@ public class TeleOpTest  extends OpMode {
             robot.leftBack.setPower(speedScaling);
             robot.rightFront.setPower(-speedScaling);
             robot.rightBack.setPower(speedScaling);
-            robot.ViperSlide.setPower(0);
         }
 
 /*
@@ -93,10 +91,12 @@ public class TeleOpTest  extends OpMode {
         }
 
         else if (gamepad1.dpad_left) {
-            viperDown = false;
-            viperUp = false;
+            robot.ViperSlide.setPower(0); // not in use anymore, rebind if you want
         }
 
+        robot.ViperSlide.setPower(-gamepad2.left_stick_y);
+        robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
 
 
 
@@ -199,9 +199,7 @@ public class TeleOpTest  extends OpMode {
             robot.leftBack.setPower(leftStick * speedScaling);
             robot.rightFront.setPower(rightStick * speedScaling);
             robot.rightBack.setPower(rightStick * speedScaling);
-            robot.ViperSlide.setPower(-gamepad2.left_stick_y);
-            robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
+
         }
         double servoPos = robot.servo1.getPosition();
 
