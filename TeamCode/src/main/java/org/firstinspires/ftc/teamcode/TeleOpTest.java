@@ -15,9 +15,6 @@ public class TeleOpTest  extends OpMode {
     private double servo0pos;
     //got the min position
     private double servo100pos;
-    private boolean viperUp = false;
-    private boolean viperDown = false;
-    private boolean speedScalingbool = false;
     private double speedScaling = 0.4;
 
 

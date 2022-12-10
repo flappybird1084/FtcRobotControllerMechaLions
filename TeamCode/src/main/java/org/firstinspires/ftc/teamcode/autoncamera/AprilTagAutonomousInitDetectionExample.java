@@ -23,7 +23,6 @@ package org.firstinspires.ftc.teamcode.autoncamera;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -32,7 +31,6 @@ import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.ArrayList;
 
@@ -245,11 +243,11 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         //robot.encoderMovements(encoderDist, 1);
         if (position == 1) {
             telemetry.addData("Direction: ", "left");
-            robot.moveDirectionBlocks(telemetry, 1, "forward", 2);
+            robot.moveDirectionBlocks(telemetry, 1, "backward", 2);
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1, "right", 0);
+            robot.moveDirectionBlocks(telemetry, 1, "left", 0);
             telemetry.addData("Step: ", "Step #2");
             telemetry.update();
             waitForEncoderComplete();
@@ -258,15 +256,15 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         }
         else if (position == 2) {
             telemetry.addData("Direction: ", "middle");
-            robot.moveDirectionBlocks(telemetry, 1, "backward",2);
+            robot.moveDirectionBlocks(telemetry, 1, "forward",2);
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 2, "right",0);
+            robot.moveDirectionBlocks(telemetry, 2, "left",0);
             telemetry.addData("Step: ", "Step #2 and 3");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1, "forward",3);
+            robot.moveDirectionBlocks(telemetry, 1, "backward",3);
             telemetry.addData("Step: ", "Step #4 w/offset");
             telemetry.update();
             waitForEncoderComplete();
@@ -275,8 +273,8 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
 
         }
         else if (position == 3) {
-            telemetry.addData("Direction: ", "backward");
-            robot.moveDirectionBlocks(telemetry, 1, "right",2);
+            telemetry.addData("Direction: ", "right");
+            robot.moveDirectionBlocks(telemetry, 1, "forward",2);
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
@@ -287,7 +285,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
         }
-
+//otters are bad seals are better
 
     }
 }
