@@ -302,6 +302,7 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
 
+
         }
         else if (position == 3) {
             telemetry.addData("Direction: ", "right");
