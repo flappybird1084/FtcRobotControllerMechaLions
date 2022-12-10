@@ -35,7 +35,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Autonomous(name = "AprilTagAutonomousInitDetectionExample", group = "Auton")
-public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
+public class AprilTagLeftAlliance extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
     RobotHardware robot = new RobotHardware();
@@ -241,7 +241,37 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
          */
 
         //robot.encoderMovements(encoderDist, 1);
+
+        robot.servo1.setPosition(100);
+        robot.moveDirectionBlocks(telemetry, 0.5, "left", 1);
+        waitForEncoderComplete();
+
+        robot.viperSlideEncoderMovements(telemetry, 18, 0.4, "forward");
+        waitForEncoderComplete();
+
+        robot.moveDirectionBlocks(telemetry,0,"forward", 3);
+        waitForEncoderComplete();
+
+        robot.servo1.setPosition(0);
+        sleep(1000);
+        robot.servo1.setPosition(100);
+
+        robot.moveDirectionBlocks(telemetry,0,"backward", 3);
+        waitForEncoderComplete();
+
+        robot.viperSlideEncoderMovements(telemetry, 18, 0.4, "backward");
+        waitForEncoderComplete();
+
+        robot.moveDirectionBlocks(telemetry, 0.5, "right", 1);
+        waitForEncoderComplete();
+
+
         if (position == 1) {
+            /*
+            robot.moveDirectionBlocks(telemetry, 1, "forward", 2);
+            robot.moveDirectionBlocks(telemetry, 1, "backward", 2 );
+            */
+
             telemetry.addData("Direction: ", "left");
             robot.moveDirectionBlocks(telemetry, 1, "backward", 2);
             telemetry.addData("Step: ", "Step #1 w/offset");
