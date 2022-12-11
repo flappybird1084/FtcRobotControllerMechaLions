@@ -52,7 +52,7 @@ public class TeleOpTest  extends OpMode {
         double rightStick = gamepad1.right_stick_y;
         double leftStick = gamepad1.left_stick_y;
 
-        robot.ViperSlide.setPower(gamepad2.left_stick_y);
+        robot.ViperSlide.setPower(-gamepad2.left_stick_y);
         robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
 
