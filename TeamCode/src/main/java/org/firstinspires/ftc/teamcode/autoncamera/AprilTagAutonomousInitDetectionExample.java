@@ -244,50 +244,54 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
          */
 
         //robot.encoderMovements(encoderDist, 1);
+        //each position depends on which apriltag the robot reads.
         if (position == 1) {
             telemetry.addData("Direction: ", "left");
-            robot.moveDirectionBlocksMAX(telemetry, 1, "left", 2,1);
+            robot.moveDirectionBlocksMAX(telemetry, 1, "backward", 2,0.1);
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 1, "forward", 0,1);
+            robot.moveDirectionBlocksMAX(telemetry, 1, "left", 0,0.1);
             telemetry.addData("Step: ", "Step #2");
             telemetry.update();
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
         }
+
+        // First of all, this telemetry is in terms of the user's perspective.
+        // It moves forward, then strafes left, then finishes. Parking in pos 1.
+
+
         else if (position == 2) {
             telemetry.addData("Direction: ", "middle");
-            robot.moveDirectionBlocksMAX(telemetry, 1, "right",2,1);
+            robot.moveDirectionBlocksMAX(telemetry, 1, "left",2,0.1);
             telemetry.addData("Step: ", "Step #1 w/offset");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 2, "forward",0,1);
-            telemetry.addData("Step: ", "Step #2 and 3");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 1, "left",3,1);
-            telemetry.addData("Step: ", "Step #4 w/offset");
             telemetry.update();
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
 
         }
+
+        // This robot moves backwards, then strafes left, then moves forward, then finishes.
+
+
         else if (position == 3) {
             telemetry.addData("Direction: ", "right");
-            robot.moveDirectionBlocksMAX(telemetry, 1, "right",2,1);
+            robot.moveDirectionBlocksMAX(telemetry, 1, "forward",2,0.1);
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 1, "forward",0,1);
+            robot.moveDirectionBlocksMAX(telemetry, 1, "left",0,0.1);
             telemetry.addData("Step: ", "Step #2");
             telemetry.update();
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
         }
+
+        // The robot moves backwards, then strafes left, then finishes.
 
 
     }

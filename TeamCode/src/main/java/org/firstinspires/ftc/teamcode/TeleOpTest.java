@@ -49,8 +49,8 @@ public class TeleOpTest  extends OpMode {
 
     @Override
     public void loop() {
-        double rightStick = gamepad1.right_stick_y;
-        double leftStick = gamepad1.left_stick_y;
+        double rightStick = -gamepad1.right_stick_y;
+        double leftStick = -gamepad1.left_stick_y;
 
         robot.ViperSlide.setPower(-gamepad2.left_stick_y);
         robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -58,17 +58,17 @@ public class TeleOpTest  extends OpMode {
 
         if(gamepad1.right_bumper) {
             // Move Right
-            robot.leftFront.setPower(-speedScaling);
-            robot.leftBack.setPower(speedScaling);
-            robot.rightFront.setPower(speedScaling);
-            robot.rightBack.setPower(-speedScaling);
-        }
-        else if(gamepad1.left_bumper) {
-            // Move Left
             robot.leftFront.setPower(speedScaling);
             robot.leftBack.setPower(-speedScaling);
             robot.rightFront.setPower(-speedScaling);
             robot.rightBack.setPower(speedScaling);
+        }
+        else if(gamepad1.left_bumper) {
+            // Move Left
+            robot.leftFront.setPower(-speedScaling);
+            robot.leftBack.setPower(speedScaling);
+            robot.rightFront.setPower(speedScaling);
+            robot.rightBack.setPower(-speedScaling);
         }
 
 /*
