@@ -57,22 +57,20 @@ public class TeleOpTest  extends OpMode {
         speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
 
         if(gamepad1.right_bumper) {
-            // Move Right
+            // Strafe Right
             robot.leftFront.setPower(speedScaling);
             robot.leftBack.setPower(-speedScaling);
-            robot.rightFront.setPower(-speedScaling);
-            robot.rightBack.setPower(speedScaling);
-        }
-        else if(gamepad1.left_bumper) {
-            // Move Left
-            robot.leftFront.setPower(-speedScaling);
-            robot.leftBack.setPower(speedScaling);
             robot.rightFront.setPower(speedScaling);
             robot.rightBack.setPower(-speedScaling);
         }
-
+        else if(gamepad1.left_bumper) {
+            // Strafe Left
+            robot.leftFront.setPower(-speedScaling);
+            robot.leftBack.setPower(speedScaling);
+            robot.rightFront.setPower(-speedScaling);
+            robot.rightBack.setPower(speedScaling);
+        }
 /*
-
         else if(gamepad1.dpad_up) {
             viperUp = true;
             viperDown = false;
@@ -94,116 +92,16 @@ public class TeleOpTest  extends OpMode {
         else if (gamepad1.dpad_left) {
             robot.ViperSlide.setPower(0); // not in use anymore, rebind if you want
         }
-
-
-
-
-
-        // move slide up if no prev. movement
-/*
-        else if(viperUp) {
-            robot.ViperSlide.setPower(0.5);
-            robot.leftFront.setPower(leftStick * 0.4);
-            robot.leftBack.setPower(leftStick * 0.4);
-            robot.rightFront.setPower(rightStick * 0.4);
-            robot.rightBack.setPower(rightStick * 0.4);
-
-        }
-
-        else if (viperDown) {
-            robot.ViperSlide.setPower(-0.35);
-
-            robot.leftFront.setPower(leftStick * 0.4);
-            robot.leftBack.setPower(leftStick * 0.4);
-            robot.rightFront.setPower(rightStick * 0.4);
-            robot.rightBack.setPower(rightStick * 0.4);
-
-        }
-*/
-
-
-/*
-        // gamepad 2 is currently a debug tester!
-        else if (gamepad2.a) {
-            telemetry.addData("VS: ", "initialized");
-            telemetry.update();
-            robot.viperSlideEncoderMovements(telemetry, 20,0.5,"forward");
-            telemetry.addData("VS: ", "method called");
-            telemetry.update();
-            while(robot.ViperSlide.isBusy()){
-                telemetry.addData("VS: ", "running");
-                telemetry.update();
-            }
-            telemetry.addData("VS: ", "done");
-            telemetry.update();
-
-        }
-
-        else if (gamepad2.b) {
-            telemetry.addData("VSB: ", "initialized");
-            telemetry.update();
-            robot.viperSlideEncoderMovements(telemetry, 20,0.5,"backward");
-            telemetry.addData("VSB: ", "method called");
-            telemetry.update();
-            while(robot.ViperSlide.isBusy()){
-                telemetry.addData("VSB: ", "running");
-                telemetry.update();
-            }
-            telemetry.addData("VSB: ", "done");
-            telemetry.update();
-
-        }
-
-
-*/
-
-
-
-
-/*
-        // debug code because half the motors were unaliving
-        else if(gamepad1.dpad_left) {
-            robot.leftFront.setPower(1);
-        }
-
-        else if(gamepad1.dpad_right) {
-            robot.rightFront.setPower(1);
-        }
-
-        else if(gamepad1.b) {
-            robot.leftBack.setPower(1);
-        }
-
-        else if(gamepad1.x) {
-            robot.rightBack.setPower(1);
-        }
-
-*/
-        /*
-        rians possible future code
-
-        else if(gamepad1.left_stick_x < 0.1 && gamepad1.left_stick_x > 0.1) {
-            robot.leftFront.setPower(leftStick);
-            robot.leftBack.setPower(leftStick);
-            robot.rightFront.setPower(leftStick);
-            robot.rightBack.setPower(leftStick);
-        }
-
-         */
-
-
         else {
-
+            // move according to the stick values, will allow the robot to move forward, backward, or turn
             robot.leftFront.setPower(leftStick * speedScaling);
             robot.leftBack.setPower(leftStick * speedScaling);
-            robot.rightFront.setPower(-rightStick * speedScaling);
-            robot.rightBack.setPower(-rightStick * speedScaling);
-
+            robot.rightFront.setPower(rightStick * speedScaling);
+            robot.rightBack.setPower(rightStick * speedScaling);
         }
         double servoPos = robot.servo1.getPosition();
 
         if(gamepad2.a) {
-
             robot.servo1.setPosition(servo100pos);
             //retracted
         }
@@ -212,7 +110,6 @@ public class TeleOpTest  extends OpMode {
             robot.servo1.setPosition(servo0pos);
             //extended
         }
-
 
         telemetry.addData("LeftFront Power", robot.leftFront.getPower());
         telemetry.addData("LeftBack Power", robot.leftBack.getPower());
