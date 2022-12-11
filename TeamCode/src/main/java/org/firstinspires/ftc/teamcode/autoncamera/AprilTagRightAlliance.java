@@ -34,7 +34,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "AprilTagAutonomousInitDetectionExample", group = "Auton")
+@Autonomous(name = "AprilTagRightAlliance", group = "Auton")
 public class AprilTagRightAlliance extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;

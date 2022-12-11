@@ -34,8 +34,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "AprilTagLeftAlliance", group = "Auton")
-public class AprilTagLeftAlliance extends LinearOpMode {
+@Autonomous(name = "AprilTagAutonomousInitDetectionExample", group = "Auton")
+public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
     RobotHardware robot = new RobotHardware();
@@ -85,15 +85,16 @@ public class AprilTagLeftAlliance extends LinearOpMode {
         // onto the next step, use (isBusy() || isBusy()) in the loop test.
         while (opModeIsActive() && (runtime.seconds() < timeoutS) && robot.isAnyBusy()) {
             // Display it for the driver.
-            //telemetry.addData("Path1",  "Running to %7d :%7d", encoderDist,  encoderDist);
-            //telemetry.addData("Path2",  "Running at %7d :%7d",
-            //        robot.leftFront.getCurrentPosition(),
-            //        robot.rightFront.getCurrentPosition());
-            //telemetry.update();
+            telemetry.addData("Path1",  "Running to %7d :%7d", encoderDist,  encoderDist);
+            telemetry.addData("Path2",  "Running at %7d :%7d",
+                    robot.leftFront.getCurrentPosition(),
+                    robot.rightFront.getCurrentPosition());
+            telemetry.update();
+
         }
         telemetry.addData("Step: ", "Done");
         telemetry.update();
-        sleep(500);
+        sleep(50000);
         //robot.zero();
     }
 
@@ -201,7 +202,9 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             telemetry.addData("Direction: ", "middle");
             position = 2;
         }
-
+        else {
+            position = 4; // temp
+        }
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending
         while (opModeIsActive()) {
             sleep(20);
@@ -241,61 +244,35 @@ public class AprilTagLeftAlliance extends LinearOpMode {
          */
 
         //robot.encoderMovements(encoderDist, 1);
-
-        robot.servo1.setPosition(100);
-        robot.moveDirectionBlocks(telemetry, 0.5, "left", 1);
-        waitForEncoderComplete();
-
-        robot.viperSlideEncoderMovements(telemetry, 18, 0.4, "forward");
-        waitForEncoderComplete();
-
-        robot.moveDirectionBlocks(telemetry,0,"forward", 3);
-        waitForEncoderComplete();
-
-        robot.servo1.setPosition(0);
-        sleep(1000);
-        robot.servo1.setPosition(100);
-
-        robot.moveDirectionBlocks(telemetry,0,"backward", 3);
-        waitForEncoderComplete();
-
-        robot.viperSlideEncoderMovements(telemetry, 18, 0.4, "backward");
-        waitForEncoderComplete();
-
-        robot.moveDirectionBlocks(telemetry, 0.5, "right", 1);
-        waitForEncoderComplete();
-
-
         if (position == 1) {
-            /*
-            robot.moveDirectionBlocks(telemetry, 1, "forward", 2);
-            robot.moveDirectionBlocks(telemetry, 1, "backward", 2 );
-            */
-
-
             telemetry.addData("Direction: ", "left");
-            robot.moveDirectionBlocks(telemetry, 1, "backward", 2);
             telemetry.addData("Step: ", "Step #1 w/offset");
+            robot.moveDirectionBlocks(telemetry, 1, "backward", 2);
             telemetry.update();
+
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1, "left", 0);
+            telemetry.addData("Step 1: ", "Finished");
+            telemetry.update();
+
             telemetry.addData("Step: ", "Step #2");
+            robot.moveDirectionBlocks(telemetry, 1, "left", 0);
             telemetry.update();
+
             waitForEncoderComplete();
-            telemetry.addData("Step: ", "Finished");
+            telemetry.addData("Step2: ", "Finished");
             telemetry.update();
         }
-        else if (position == 2) {
+        else if (position == 2 ) {
             telemetry.addData("Direction: ", "middle");
-            robot.moveDirectionBlocks(telemetry, 1, "forward",2);
+            robot.moveDirectionBlocksMAX(telemetry, 1, "forward",2, 0.1);
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 2, "left",0);
+            robot.moveDirectionBlocksMAX(telemetry, 2, "left",0, 0.1);
             telemetry.addData("Step: ", "Step #2 and 3");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1, "backward",3);
+            robot.moveDirectionBlocksMAX(telemetry, 1, "left",3, 0.1);
             telemetry.addData("Step: ", "Step #4 w/offset");
             telemetry.update();
             waitForEncoderComplete();
@@ -316,7 +293,14 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
         }
-//otters are bad seals are better
+
+
+        else if (position == 4) {
+            robot.moveDirectionBlocks(telemetry,1,"forward");
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 1, "right");
+            waitForEncoderComplete();
+        }
 
     }
 }
