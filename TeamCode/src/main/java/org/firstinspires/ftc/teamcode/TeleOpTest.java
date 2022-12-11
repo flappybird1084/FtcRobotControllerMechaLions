@@ -46,7 +46,6 @@ public class TeleOpTest  extends OpMode {
     }
 
 
-
     @Override
     public void loop() {
         double rightStick = -gamepad1.right_stick_y;
