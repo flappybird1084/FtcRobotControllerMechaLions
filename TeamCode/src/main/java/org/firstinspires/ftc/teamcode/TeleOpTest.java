@@ -17,8 +17,6 @@ public class TeleOpTest  extends OpMode {
     private double servo100pos;
     private double speedScaling = 0.4;
 
-
-
     //@Override whenever you create a method
     @Override
     //What happens when you initialize program
@@ -34,7 +32,6 @@ public class TeleOpTest  extends OpMode {
         servo100pos = robot.servo1.getPosition();
         // got the max position
         robot.servo1.setPosition(servo0pos);
-
     }
 
     @Override

@@ -138,7 +138,6 @@ public class RobotHardware {
         leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -188,10 +187,8 @@ public class RobotHardware {
         // distance in inches
         // direction can be forward, backward, left, or right
 
-
         double rotationsNeeded = distance / CIRCUMFERENCE;
         int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
-
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -255,8 +252,6 @@ public class RobotHardware {
     public void viperSlideEncoderMovements(Telemetry telemetry, double distance, double power, String direction) {
         // distance in inches
         // direction can be forward or backward
-
-
         double rotationsNeeded = distance / VS_CIRCUMFERENCE;
         int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
 
@@ -272,17 +267,13 @@ public class RobotHardware {
             telemetry.addData("Moving ", "Backwards"); telemetry.update();
             viperSlideTarget *= -1;
         }
-
         else{
             telemetry.addData("Moving ", "Forward"); telemetry.update();
         }
 
         ViperSlide.setPower(power);
         ViperSlide.setTargetPosition(viperSlideTarget);
-
         ViperSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
 
