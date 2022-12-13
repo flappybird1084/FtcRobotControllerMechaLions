@@ -54,15 +54,15 @@ public class TeleOpTest  extends OpMode {
 
         if(gamepad1.right_bumper) {
             // Strafe Right
-            robot.leftFront.setPower(speedScaling);
-            robot.leftBack.setPower(-speedScaling);
+            robot.leftFront.setPower(-speedScaling);
+            robot.leftBack.setPower(speedScaling);
             robot.rightFront.setPower(speedScaling);
             robot.rightBack.setPower(-speedScaling);
         }
         else if(gamepad1.left_bumper) {
             // Strafe Left
-            robot.leftFront.setPower(-speedScaling);
-            robot.leftBack.setPower(speedScaling);
+            robot.leftFront.setPower(speedScaling);
+            robot.leftBack.setPower(-speedScaling);
             robot.rightFront.setPower(-speedScaling);
             robot.rightBack.setPower(speedScaling);
         }
