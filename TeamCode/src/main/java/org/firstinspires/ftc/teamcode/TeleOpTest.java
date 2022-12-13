@@ -90,8 +90,8 @@ public class TeleOpTest  extends OpMode {
         }
         else {
             // move according to the stick values, will allow the robot to move forward, backward, or turn
-            robot.leftFront.setPower(leftStick * speedScaling);
-            robot.leftBack.setPower(leftStick * speedScaling);
+            robot.leftFront.setPower(-leftStick * speedScaling);
+            robot.leftBack.setPower(-leftStick * speedScaling);
             robot.rightFront.setPower(rightStick * speedScaling);
             robot.rightBack.setPower(rightStick * speedScaling);
         }
