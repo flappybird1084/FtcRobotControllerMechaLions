@@ -94,7 +94,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         }
         telemetry.addData("Step: ", "Done");
         telemetry.update();
-        sleep(10000);
+        //sleep(10000);
         //robot.zero();
     }
 
@@ -206,18 +206,21 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             sleep(20);
         } */
         waitForStart();
-
+        robot.moveDirectionBlocks(telemetry,0,"left", 2);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry,0,"backward", 2);
+        waitForEncoderComplete();
         //robot.encoderMovements(encoderDist, 1);
         //each position depends on which apriltag the robot reads.
         if (position == 1) {
             // First of all, this telemetry is in terms of the user's perspective.
             // It moves forward, then strafes left, then finishes. Parking in pos 1.
             telemetry.addData("Direction: ", "left");
-            robot.moveDirectionBlocksMAX(telemetry, 1, "backward", 2,0.1);
+            robot.moveDirectionBlocks(telemetry, 1, "backward");
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 1, "left", 0,0.1);
+            robot.moveDirectionBlocks(telemetry, 1, "left", 2);
             telemetry.addData("Step: ", "Step #2");
             telemetry.update();
             waitForEncoderComplete();
@@ -229,7 +232,11 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             telemetry.addData("Direction: ", "middle");
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
-            robot.moveDirectionBlocksMAX(telemetry, 1, "left",2,0.1);
+            robot.moveDirectionBlocks(telemetry, 2, "left",2);
+            waitForEncoderComplete();
+            telemetry.addData("Step: "," step 2");
+            telemetry.update();
+            robot.moveDirectionBlocks(telemetry,1,"right");
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
@@ -237,11 +244,11 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         else if (position == 3) {
             // The robot moves backwards, then strafes left, then finishes.
             telemetry.addData("Direction: ", "right");
-            robot.moveDirectionBlocksMAX(telemetry, 1, "forward",2,0.1);
+            robot.moveDirectionBlocks(telemetry, 1, "forward");
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 1, "left",0,0.1);
+            robot.moveDirectionBlocks(telemetry, 1, "left", 2);
             telemetry.addData("Step: ", "Step #2");
             telemetry.update();
             waitForEncoderComplete();
