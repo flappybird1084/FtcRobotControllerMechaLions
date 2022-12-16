@@ -48,6 +48,20 @@ public class TeleOpTest  extends OpMode {
     @Override
     public void loop() {
         robot.TeleopLoop(gamepad1,gamepad2, servo0pos,servo100pos,telemetry);
+        if(gamepad1.a){
+            robot.viperSlideEncoderMovements(telemetry,12, 0.4, "forward");
+            while (robot.ViperSlide.isBusy()){
+                robot.TeleopLoop(gamepad1,gamepad2,servo0pos,servo100pos,telemetry);
+            }
+        }
+
+        else if (gamepad1.b){
+            robot.viperSlideEncoderMovements(telemetry,12,0.4,"backward");
+            while (robot.ViperSlide.isBusy()){
+                robot.TeleopLoop(gamepad1,gamepad2,servo0pos,servo100pos,telemetry);
+            }
+        }
+        robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         /*
         double rightStick = -gamepad1.right_stick_y;
         double leftStick = -gamepad1.left_stick_y;
