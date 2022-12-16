@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -277,6 +278,74 @@ public class RobotHardware {
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
 
+    public void TeleopLoop(Gamepad gamepad1, Gamepad gamepad2, double servo0pos, double servo100pos, Telemetry telemetry){
+        double speedScaling;
+        double rightStick = -gamepad1.right_stick_y;
+        double leftStick = -gamepad1.left_stick_y;
+
+        ViperSlide.setPower(-gamepad2.left_stick_y);
+        ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
+
+        if(gamepad1.right_bumper) {
+            // Strafe Right
+            leftFront.setPower(speedScaling);
+            leftBack.setPower(-speedScaling);
+            rightFront.setPower(-speedScaling);
+            rightBack.setPower(speedScaling);
+        }
+        else if(gamepad1.left_bumper) {
+            // Strafe Left
+            leftFront.setPower(-speedScaling);
+            leftBack.setPower(speedScaling);
+            rightFront.setPower(speedScaling);
+            rightBack.setPower(-speedScaling);
+        }
+/*
+        else if(gamepad1.dpad_up) {
+            viperUp = true;
+            viperDown = false;
+        }
+
+        else if(gamepad1.dpad_down) {
+            viperDown = true;
+            viperUp = false;
+        }
+*/
+        else if(gamepad2.dpad_up) {
+            ViperSlide.setPower(0.5);
+        }
+
+        else if(gamepad2.dpad_down) {
+            ViperSlide.setPower(-0.5);
+        }
+
+        else if (gamepad1.dpad_left) {
+            ViperSlide.setPower(0); // not in use anymore, rebind if you want
+        }
+        else {
+            // move according to the stick values, will allow the robot to move forward, backward, or turn
+            leftFront.setPower(leftStick * speedScaling);
+            leftBack.setPower(leftStick * speedScaling);
+            rightFront.setPower(rightStick * speedScaling);
+            rightBack.setPower(rightStick * speedScaling);
+        }
+        double servoPos = servo1.getPosition();
+
+        if(gamepad2.a) {
+            servo1.setPosition(servo100pos);
+            //retracted
+        }
+
+        else if (gamepad2.b) {
+            servo1.setPosition(servo0pos);
+            //extended
+        }
+
+        telemetry.addData("LeftFront Power", leftFront.getPower());
+        telemetry.addData("LeftBack Power", leftBack.getPower());
+        telemetry.update();
+    }
     public void moveDirectionBlocks (Telemetry telemetry, double blocks, String direction) {
         double inches = blocks * 24;
 

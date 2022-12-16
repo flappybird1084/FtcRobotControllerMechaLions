@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.autoncamera.AprilTagAutonomousInitDetectionExample;
+
 //Type of Program (Auto or TeleOp)
 @TeleOp (name = "TeleOpTest", group = "test")
 
@@ -45,6 +47,8 @@ public class TeleOpTest  extends OpMode {
 
     @Override
     public void loop() {
+        robot.TeleopLoop(gamepad1,gamepad2, servo0pos,servo100pos,telemetry);
+        /*
         double rightStick = -gamepad1.right_stick_y;
         double leftStick = -gamepad1.left_stick_y;
 
@@ -66,17 +70,7 @@ public class TeleOpTest  extends OpMode {
             robot.rightFront.setPower(speedScaling);
             robot.rightBack.setPower(-speedScaling);
         }
-/*
-        else if(gamepad1.dpad_up) {
-            viperUp = true;
-            viperDown = false;
-        }
 
-        else if(gamepad1.dpad_down) {
-            viperDown = true;
-            viperUp = false;
-        }
-*/
         else if(gamepad2.dpad_up) {
             robot.ViperSlide.setPower(0.5);
         }
@@ -110,6 +104,8 @@ public class TeleOpTest  extends OpMode {
         telemetry.addData("LeftFront Power", robot.leftFront.getPower());
         telemetry.addData("LeftBack Power", robot.leftBack.getPower());
         telemetry.update();
+
+         */
     }
 
     @Override
