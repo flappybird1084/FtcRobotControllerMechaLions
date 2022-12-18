@@ -207,9 +207,9 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             sleep(20);
         } */
         waitForStart();
-        robot.moveDirectionBlocks(telemetry,0,"left", 2);
+        robot.moveDirectionBlocks(telemetry, 0, "left", 2);
         waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry,0,"backward", 2);
+        robot.moveDirectionBlocks(telemetry, 0, "backward", 2);
         waitForEncoderComplete();
         //robot.encoderMovements(encoderDist, 1);
         //each position depends on which apriltag the robot reads.
@@ -227,22 +227,20 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
-        }
-        else if (position == 2) {
+        } else if (position == 2) {
             // This robot moves backwards, then strafes left, then moves forward, then finishes.
             telemetry.addData("Direction: ", "middle");
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
-            robot.moveDirectionBlocks(telemetry, 2, "left",4);
+            robot.moveDirectionBlocks(telemetry, 2, "left", 4);
             waitForEncoderComplete();
-            telemetry.addData("Step: "," step 2");
+            telemetry.addData("Step: ", " step 2");
             telemetry.update();
-            robot.moveDirectionBlocks(telemetry,1,"right");
+            robot.moveDirectionBlocks(telemetry, 1, "right");
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
-        }
-        else if (position == 3) {
+        } else if (position == 3) {
             // The robot moves backwards, then strafes left, then finishes.
             telemetry.addData("Direction: ", "right");
             robot.moveDirectionBlocks(telemetry, 1, "forward");
@@ -258,7 +256,6 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         }
 
         //System.gc();
-        sleep(1000);
-        System.exit(1);
     }
 }
+
