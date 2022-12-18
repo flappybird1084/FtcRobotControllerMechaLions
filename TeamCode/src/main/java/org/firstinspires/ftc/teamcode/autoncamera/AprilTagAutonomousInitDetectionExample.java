@@ -257,7 +257,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             telemetry.update();
         }
 
-        System.gc();
+        //System.gc();
         sleep(1000);
         System.exit(1);
     }
