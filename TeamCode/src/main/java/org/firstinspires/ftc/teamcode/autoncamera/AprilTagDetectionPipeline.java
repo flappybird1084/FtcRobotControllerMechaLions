@@ -286,6 +286,8 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
         Calib3d.solvePnP(points3d, points2d, cameraMatrix, new MatOfDouble(), pose.rvec, pose.tvec, false);
 
         return pose;
+
+
     }
 
     /*
@@ -301,6 +303,7 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
         {
             rvec = new Mat();
             tvec = new Mat();
+
         }
 
         public Pose(Mat rvec, Mat tvec)
