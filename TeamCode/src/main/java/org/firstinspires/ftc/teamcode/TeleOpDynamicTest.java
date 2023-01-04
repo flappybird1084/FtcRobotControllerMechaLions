@@ -96,6 +96,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
+        robot.init(hardwareMap);
         runtime.reset();
 
         // run until the end of the match (driver presses STOP)
@@ -137,13 +138,13 @@ public class TeleOpDynamicTest extends LinearOpMode {
             //      the setDirection() calls above.
             // Once the correct motors move in the correct direction re-comment this code.
 
-
+/*
             leftFrontPower  = 1; //gamepad1.x ? 1.0 : 0.0;  // X gamepad
             leftBackPower   = 1; //gamepad1.a ? 1.0 : 0.0;  // A gamepad
             rightFrontPower = 1; //gamepad1.y ? 1.0 : 0.0;  // Y gamepad
             rightBackPower  = 1; //gamepad1.b ? 1.0 : 0.0;  // B gamepad
 
-
+*/
             // Send calculated power to wheels
             robot.leftFront.setPower(leftFrontPower);
             robot.rightFront.setPower(rightFrontPower);
