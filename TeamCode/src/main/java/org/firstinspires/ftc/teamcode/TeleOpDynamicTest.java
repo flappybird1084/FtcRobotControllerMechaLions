@@ -68,6 +68,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class TeleOpDynamicTest extends LinearOpMode {
     RobotHardware robot = new RobotHardware();
     private ElapsedTime runtime = new ElapsedTime();
+    double additionalYaw = 0;
 
     // Declare OpMode members for each of the 4 motors.
 
@@ -107,7 +108,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
-            double additionalYaw = 0;
+
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -124,11 +125,11 @@ public class TeleOpDynamicTest extends LinearOpMode {
             max = Math.max(max, Math.abs(rightBackPower));
 
             if (gamepad1.left_bumper){
-                additionalYaw-=0.05;
+                additionalYaw-=0.1;
             }
 
             if (gamepad1.right_bumper){
-                additionalYaw+=0.05;
+                additionalYaw+=0.1;
             }
 
             if (max > 1.0) {
@@ -172,6 +173,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+            telemetry.addData("Additional Yaw: ", additionalYaw+avgMotorPower);
             telemetry.update();
         }
     }}
