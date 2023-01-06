@@ -1,6 +1,6 @@
 //autonomous mode, not op mode
 //
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.unusedprograms;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -9,7 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "EncoderTest2", group = "Auton")
+import org.firstinspires.ftc.teamcode.RobotHardware;
+
+//@Autonomous(name = "EncoderTest2", group = "Auton")
 public class MyFIRSTJavaOpMode extends LinearOpMode {
     RobotHardware robot;
     HardwareMap hwMap;

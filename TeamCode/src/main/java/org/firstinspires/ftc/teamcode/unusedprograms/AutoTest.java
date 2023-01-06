@@ -1,9 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.unusedprograms;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "AutoTest", group = "Auton")
+import org.firstinspires.ftc.teamcode.RobotHardware;
+
+//@Autonomous(name = "AutoTest", group = "Auton")
 
 public class AutoTest extends LinearOpMode {
     RobotHardware robot = new RobotHardware();

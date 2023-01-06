@@ -107,6 +107,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
+            double additionalYaw = 0;
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -114,6 +115,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = axial + lateral - yaw;
+            double avgMotorPower = (leftBackPower+leftFrontPower+rightBackPower+rightFrontPower)/4;
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
@@ -121,12 +123,27 @@ public class TeleOpDynamicTest extends LinearOpMode {
             max = Math.max(max, Math.abs(leftBackPower));
             max = Math.max(max, Math.abs(rightBackPower));
 
+            if (gamepad1.left_bumper){
+                additionalYaw-=0.05;
+            }
+
+            if (gamepad1.right_bumper){
+                additionalYaw+=0.05;
+            }
+
             if (max > 1.0) {
                 leftFrontPower  /= max;
                 rightFrontPower /= max;
                 leftBackPower   /= max;
                 rightBackPower  /= max;
             }
+
+            //adding additional yaw
+            leftBackPower += additionalYaw*avgMotorPower;
+            leftFrontPower += additionalYaw*avgMotorPower;
+            rightBackPower += additionalYaw*avgMotorPower;
+            rightFrontPower += additionalYaw*avgMotorPower;
+
 
             // This is test code:
             //
