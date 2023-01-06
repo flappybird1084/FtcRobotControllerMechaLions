@@ -69,6 +69,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
     RobotHardware robot = new RobotHardware();
     private ElapsedTime runtime = new ElapsedTime();
     double additionalYaw = 0;
+    double leftYawCoolDown = runtime.seconds();
+    double rightYawCoolDown = runtime.seconds();
 
     // Declare OpMode members for each of the 4 motors.
 
@@ -124,15 +126,18 @@ public class TeleOpDynamicTest extends LinearOpMode {
             max = Math.max(max, Math.abs(leftBackPower));
             max = Math.max(max, Math.abs(rightBackPower));
 
-            if (gamepad1.left_bumper){
-                additionalYaw-=0.1;
+            if (gamepad1.left_bumper && (runtime.seconds()-leftYawCoolDown)>1){
+                additionalYaw-=0.01;
+                leftYawCoolDown = runtime.seconds();
             }
 
-            if (gamepad1.right_bumper){
-                additionalYaw+=0.1;
+            if (gamepad1.right_bumper && (runtime.seconds()-rightYawCoolDown)>1){
+                additionalYaw+=0.01;
+                rightYawCoolDown = runtime.seconds();
+
             }
 
-            if (max > 1.0) {
+            if (max > 0.5) {
                 leftFrontPower  /= max;
                 rightFrontPower /= max;
                 leftBackPower   /= max;
@@ -142,8 +147,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
             //adding additional yaw
             leftBackPower += additionalYaw*avgMotorPower;
             leftFrontPower += additionalYaw*avgMotorPower;
-            rightBackPower += additionalYaw*avgMotorPower;
-            rightFrontPower += additionalYaw*avgMotorPower;
+            rightBackPower -= additionalYaw*avgMotorPower;
+            rightFrontPower -= additionalYaw*avgMotorPower;
 
 
             // This is test code:
@@ -173,7 +178,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
-            telemetry.addData("Additional Yaw: ", additionalYaw+avgMotorPower);
+            telemetry.addData("Additional Yaw: ", additionalYaw);
+            telemetry.addData("Average Motor Power: ", avgMotorPower);
             telemetry.update();
         }
     }}
