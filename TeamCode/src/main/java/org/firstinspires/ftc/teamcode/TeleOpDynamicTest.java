@@ -68,6 +68,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class TeleOpDynamicTest extends LinearOpMode {
     RobotHardware robot = new RobotHardware();
     private ElapsedTime runtime = new ElapsedTime();
+    double additionalYaw = 0;
+    double leftYawCoolDown = runtime.seconds();
+    double rightYawCoolDown = runtime.seconds();
 
     // Declare OpMode members for each of the 4 motors.
 
@@ -96,6 +99,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
+        robot.init(hardwareMap);
         runtime.reset();
 
         // run until the end of the match (driver presses STOP)
@@ -104,8 +108,9 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.left_stick_x;
-            double yaw     =  gamepad1.right_stick_x;
+            double lateral =  gamepad1.right_stick_x;
+            double yaw     =  gamepad1.left_stick_x;
+
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -113,6 +118,9 @@ public class TeleOpDynamicTest extends LinearOpMode {
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = axial + lateral - yaw;
+            double right_trig = gamepad1.right_trigger;
+            double left_trig  = gamepad1.left_trigger;
+            double avgMotorPower = (leftBackPower+leftFrontPower+rightBackPower+rightFrontPower)/4;
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
@@ -120,12 +128,46 @@ public class TeleOpDynamicTest extends LinearOpMode {
             max = Math.max(max, Math.abs(leftBackPower));
             max = Math.max(max, Math.abs(rightBackPower));
 
-            if (max > 1.0) {
+            if (gamepad1.left_bumper && (runtime.seconds()-leftYawCoolDown)>1){
+                additionalYaw-=0.01;
+                leftYawCoolDown = runtime.seconds();
+            }
+
+            if (gamepad1.right_bumper && (runtime.seconds()-rightYawCoolDown)>1){
+                additionalYaw+=0.01;
+                rightYawCoolDown = runtime.seconds();
+
+            }
+
+            if(gamepad1.right_trigger > 0){
+                leftFrontPower = right_trig;
+                leftBackPower = -right_trig;
+                rightFrontPower = right_trig;
+                rightBackPower = -right_trig;
+            }
+
+            if(gamepad1.left_trigger > 0){
+                leftFrontPower = -left_trig;
+                leftBackPower = left_trig;
+                rightFrontPower = -left_trig;
+                rightBackPower = left_trig;
+            }
+
+
+
+            if (max > 0.5) {
                 leftFrontPower  /= max;
                 rightFrontPower /= max;
                 leftBackPower   /= max;
                 rightBackPower  /= max;
             }
+
+            //adding additional yaw
+            leftBackPower += additionalYaw*avgMotorPower;
+            leftFrontPower += additionalYaw*avgMotorPower;
+            rightBackPower -= additionalYaw*avgMotorPower;
+            rightFrontPower -= additionalYaw*avgMotorPower;
+
 
             // This is test code:
             //
@@ -137,13 +179,13 @@ public class TeleOpDynamicTest extends LinearOpMode {
             //      the setDirection() calls above.
             // Once the correct motors move in the correct direction re-comment this code.
 
-
+/*
             leftFrontPower  = 1; //gamepad1.x ? 1.0 : 0.0;  // X gamepad
             leftBackPower   = 1; //gamepad1.a ? 1.0 : 0.0;  // A gamepad
             rightFrontPower = 1; //gamepad1.y ? 1.0 : 0.0;  // Y gamepad
             rightBackPower  = 1; //gamepad1.b ? 1.0 : 0.0;  // B gamepad
 
-
+*/
             // Send calculated power to wheels
             robot.leftFront.setPower(leftFrontPower);
             robot.rightFront.setPower(rightFrontPower);
@@ -154,6 +196,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+            telemetry.addData("Additional Yaw: ", additionalYaw);
+            telemetry.addData("Average Motor Power: ", avgMotorPower);
             telemetry.update();
         }
     }}

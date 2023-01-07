@@ -207,6 +207,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             sleep(20);
         } */
         waitForStart();
+        camera.stopStreaming();
         robot.moveDirectionBlocks(telemetry, 0, "left", 2);
         waitForEncoderComplete();
         robot.moveDirectionBlocks(telemetry, 0, "backward", 2);

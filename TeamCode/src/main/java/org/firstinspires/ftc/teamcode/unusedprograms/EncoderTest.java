@@ -1,10 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.unusedprograms;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
- 
-@Autonomous(name = "EncoderTest", group = "Auton")
+
+import org.firstinspires.ftc.teamcode.RobotHardware;
+
+//@Autonomous(name = "EncoderTest", group = "Auton")
 
 public class EncoderTest extends OpMode {
     RobotHardware robot = new RobotHardware();

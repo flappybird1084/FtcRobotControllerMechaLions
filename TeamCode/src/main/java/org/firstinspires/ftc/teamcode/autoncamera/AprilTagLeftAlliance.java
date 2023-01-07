@@ -207,63 +207,12 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             sleep(20);
         } */
         waitForStart();
-        // left, fwd, right but half, then score on mid pole
-        /*
-        robot.servo1.setPosition(100);
-        robot.moveDirectionBlocks(telemetry,1,"left",4.5, 0.6);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry,1,"forward",1, 1);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry,0.5,"right",1.5, 1);
-        waitForEncoderComplete();
-        //robot.viperSlideEncoderMovements(telemetry,25,0.25, "forward");
-        robot.ViperSlide.setPower(0.5);
-        sleep(3500);
-        robot.ViperSlide.setPower(0);
-        sleep(1000);
-        robot.moveDirectionBlocks(telemetry, 0, "forward", 4);
-        waitForEncoderComplete();
         robot.servo1.setPosition(0);
-        sleep(1000);
-        sleep(4000);
-        robot.ViperSlide.setPower(0);
-        robot.moveDirectionBlocks(telemetry,0, "backward",4);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 0.5,"left",0,1);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 1, "backward", 3);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry,1,"right", 2,0.75);
-        waitForEncoderComplete();
-        telemetry.addData("Status", "Viper Slide finished");
 
 
-         */
 
         //robot.encoderMovements(encoderDist, 1);
 
-        robot.servo1.setPosition(100);
-        robot.moveDirectionBlocks(telemetry, 0.5, "left", 1);
-        waitForEncoderComplete();
-
-        robot.viperSlideEncoderMovements(telemetry, 18, 0.4, "forward");
-        waitForEncoderComplete();
-
-        robot.moveDirectionBlocks(telemetry,0,"forward", 3);
-        waitForEncoderComplete();
-
-        robot.servo1.setPosition(0);
-        sleep(1000);
-        robot.servo1.setPosition(100);
-
-        robot.moveDirectionBlocks(telemetry,0,"backward", 3);
-        waitForEncoderComplete();
-
-        robot.viperSlideEncoderMovements(telemetry, 18, 0.4, "backward");
-        waitForEncoderComplete();
-
-        robot.moveDirectionBlocks(telemetry, 0.5, "right", 1);
-        waitForEncoderComplete();
 
 
         if (position == 1) {
@@ -278,9 +227,23 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1, "left", 0);
+            robot.moveDirectionBlocks(telemetry, 1.5, "left", 1);
             telemetry.addData("Step: ", "Step #2");
             telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 20, 0.5,"forward");
+            telemetry.addData("Viper Slide: ", "Started");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(100);
+            robot.moveDirectionBlocks(telemetry,0,"forward", 2);
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0);
+            telemetry.addData("Servo: ", "Finished");
+            telemetry.update();
+            robot.moveDirectionBlocks(telemetry, 0,"backward", 2);
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 1,"right");
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
