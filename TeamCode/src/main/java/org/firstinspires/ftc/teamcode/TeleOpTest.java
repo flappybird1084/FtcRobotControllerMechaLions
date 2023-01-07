@@ -46,7 +46,6 @@ public class TeleOpTest  extends OpMode {
     }
 
 
-
     @Override
     public void loop() {
         double rightStick = gamepad1.right_stick_y;
@@ -56,7 +55,8 @@ public class TeleOpTest  extends OpMode {
         robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //andrew wants to decrease this, might make 3/5 to like 1/2.
         speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
-
+        //would be better to increase speedscaling
+        //strafe program
         if(gamepad1.right_bumper) {
             // Move Right
             robot.leftFront.setPower(-speedScaling);

@@ -217,7 +217,6 @@ public class AprilTagLeftAlliance extends LinearOpMode {
 
         //robot.encoderMovements(encoderDist, 1);
 
-
         //might make functions for this would make it a lot simpler
         if (position == 1) {
             /*
@@ -233,19 +232,24 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             telemetry.addData("Step: ", "Step #2");
             telemetry.update();
             waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 20, 0.5,"forward");
+            robot.viperSlideEncoderMovements(telemetry, 20, 07,"forward");
             telemetry.addData("Viper Slide: ", "Started");
             telemetry.update();
             waitForEncoderComplete();
             robot.servo1.setPosition(100);
+            //opening servo
             robot.moveDirectionBlocks(telemetry,0,"forward", 2);
+            telemetry.addData("moved back", "completed");
+            telemetry.update();
             waitForEncoderComplete();
             robot.servo1.setPosition(0);
+            //closing servo
             telemetry.addData("Servo: ", "Finished");
             telemetry.update();
             robot.moveDirectionBlocks(telemetry, 0,"backward", 2);
             waitForEncoderComplete();
             robot.moveDirectionBlocks(telemetry, 1,"right");
+            telemetry.addData("step", "parked");
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
@@ -267,6 +271,7 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
             //cone placing
+            //make the cone placing go faster
             robot.moveDirectionBlocks(telemetry, 0.5,"left", 0.5);
             telemetry.addData("Step:", "moved");
             telemetry.update();
