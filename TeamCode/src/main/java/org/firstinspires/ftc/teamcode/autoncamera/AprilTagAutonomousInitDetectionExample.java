@@ -23,7 +23,6 @@ package org.firstinspires.ftc.teamcode.autoncamera;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -32,7 +31,6 @@ import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.ArrayList;
 
@@ -214,6 +212,76 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
         waitForEncoderComplete();
         //robot.encoderMovements(encoderDist, 1);
         //each position depends on which apriltag the robot reads.
+        /*
+        public void pos1() {
+            telemetry.addData("Direction: ", "left");
+            robot.moveDirectionBlocks(telemetry, 1, "backward");
+            telemetry.addData("Step: ", "Step #1 w/offset");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 1, "left", 2);
+            telemetry.addData("Step: ", "Step #2");
+            telemetry.update();
+            waitForEncoderComplete();
+            telemetry.addData("Step: ", "Finished");
+            telemetry.update();
+        }
+        public void pos2() {
+            telemetry.addData("Direction: ", "middle");
+            telemetry.addData("Step: ", "Step #1 w/offset");
+            telemetry.update();
+            robot.moveDirectionBlocks(telemetry, 2, "left", 4);
+            waitForEncoderComplete();
+            telemetry.addData("Step: ", " step 2");
+            telemetry.update();
+            robot.moveDirectionBlocks(telemetry, 1, "right");
+            waitForEncoderComplete();
+            telemetry.addData("Step: ", "Finished");
+            telemetry.update();
+        }
+        public void pos3() {
+            telemetry.addData("Direction: ", "right");
+            robot.moveDirectionBlocks(telemetry, 1, "forward");
+            telemetry.addData("Step: ", "Step #1 w/offset");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 1, "left", 2);
+            telemetry.addData("Step: ", "Step #2");
+            telemetry.update();
+            waitForEncoderComplete();
+            telemetry.addData("Step: ", "Finished");
+            telemetry.update();
+            //new code, will add for position 1 and 2
+            robot.viperSlideEncoderMovements(telemetry, 25, 0.5, "forward");
+            telemetry.addData("Step:", "Bringing up");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 0.5, "backward", 1);
+            telemetry.addData("Step:", "Placing cone");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 2, 0.75, "left");
+            telemetry.addData("Step:", "Moved forward");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0.0);
+            telemetry.addData("Step:", "deposited cone, hopefully");
+            telemetry.update();
+            robot.encoderMovements(telemetry, 2, 0.75, "right");
+            telemetry.addData("Step:", "back");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 0.5, "forward", 1);
+            telemetry.addData("Step:", "back");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 25, 0.5, "backward");
+            telemetry.addData("Step:", "Bringing down");
+            telemetry.update();
+            waitForEncoderComplete();
+        }
+        */
+
         if (position == 1) {
             // First of all, this telemetry is in terms of the user's perspective.
             // It moves forward, then strafes left, then finishes. Parking in pos 1.
@@ -254,6 +322,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
+
         }
 
         //System.gc();

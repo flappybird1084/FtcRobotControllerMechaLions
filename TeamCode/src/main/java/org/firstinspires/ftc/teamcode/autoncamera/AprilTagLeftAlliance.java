@@ -220,8 +220,6 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             robot.moveDirectionBlocks(telemetry, 1, "forward", 2);
             robot.moveDirectionBlocks(telemetry, 1, "backward", 2 );
             */
-
-
             telemetry.addData("Direction: ", "left");
             robot.moveDirectionBlocks(telemetry, 1, "backward", 2);
             telemetry.addData("Step: ", "Step #1 w/offset");
