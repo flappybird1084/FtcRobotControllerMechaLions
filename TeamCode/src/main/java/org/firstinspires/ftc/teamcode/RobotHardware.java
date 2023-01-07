@@ -63,6 +63,7 @@ public class RobotHardware {
     //private LinearOpMode myOpMode = null;   // gain access to methods in the calling OpMode.
 
     // Define Motor and Servo objects  (Make them private so they can't be accessed externally)
+
     public DcMotor leftFront = null;
     public DcMotor rightFront = null;
     public DcMotor leftBack = null;
@@ -76,12 +77,16 @@ public class RobotHardware {
     public Servo servo2 = null;
 
     // Define Drive constants.  Make them public so they CAN be used by the calling OpMode
+    /*
+    // Not used
     public static final double MID_SERVO = 0.5;
     public static final double HAND_SPEED = 0.02;  // sets rate to move servo
     public static final double ARM_UP_POWER = 0.45;
     public static final double ARM_DOWN_POWER = -0.45;
     public static final double ARM_CLOSE = 0.0;
     public static final double ARM_OPEN = 1.0;
+
+     */
     public static final double TICK_COUNT = 537.7; // strafer chassis kit v5, same motor as the viper slide
     public static final double CIRCUMFERENCE = 3.14 * 3.78; // this is in inches
     public static final double VS_DIA = 4.41; // sku: 5203-2402-0019
@@ -153,6 +158,11 @@ public class RobotHardware {
 //        myOpMode.telemetry.update();
     }
 
+    /**
+     * This function sets all of the powers on the motors to 0
+     * setPower takes 0 as the value, in order to reset the power.
+     * @param
+     */
     public void zero() {
         leftFront.setPower(0);
         leftBack.setPower(0);
@@ -160,6 +170,11 @@ public class RobotHardware {
         rightBack.setPower(0);
     }
 
+    /**
+     * This function sets all of the powers on the motors to 1, which is max power.
+     * setPower takes 1 as the value, in order to max out the power.
+     * @param
+     */
     public void all_full_power() {
         leftFront.setPower(1);
         leftBack.setPower(1);
@@ -167,6 +182,11 @@ public class RobotHardware {
         rightBack.setPower(1);
     }
 
+    /**
+     * This function checks whether all of the motors are busy.
+     * returns true or false depending on the case: whether the code and the motors are running or not.
+     * @return
+     */
     public boolean isAllBusy() {
         if (leftBack.isBusy() && leftFront.isBusy() && rightBack.isBusy() && rightFront.isBusy()) {
             return true;
@@ -174,6 +194,11 @@ public class RobotHardware {
         return false;
     }
 
+    /**
+     * Ths function check whether any, multiple or all of the motors, or the ViperSlide is busy
+     * returns true or false depending on the case: whether the code and the motors are running or not.
+     * @return
+     */
     public boolean isAnyBusy() {
         if (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy() || ViperSlide.isBusy()) {
             return true;
@@ -181,6 +206,17 @@ public class RobotHardware {
         return false;
     }
 
+    /**
+     * This function causes the robot to move forward for a certain distance, at a certain power, in a certain direction
+     * The distance is specified as a double
+     * The power is also specified as a double with a value from 0-1
+     * The direction can be either "forward", "backward", "left", or "right"
+     * The program uses encoders to allow the robot to move forward for a certain distance, at a certain speed, based on the user's parameters
+     * @param telemetry
+     * @param distance
+     * @param power
+     * @param direction
+     */
     public void encoderMovements(Telemetry telemetry, double distance, double power, String direction) {
         // broken because power is only taken as a positive value and we should've made target position negative.
         // fixed it now by replacing leftfrontpower with leftfronttarget and so on
@@ -240,6 +276,10 @@ public class RobotHardware {
         rightFront.setTargetPosition(rightFrontTarget);
         rightBack.setTargetPosition(rightBackTarget);
 
+        telemetry.addData("leftFrontTarget ", leftFrontTarget); telemetry.update();
+        telemetry.addData("leftBackTarget ", leftBackTarget); telemetry.update();
+        telemetry.addData("rightFrontTarget ", rightFrontTarget); telemetry.update();
+        telemetry.addData("rightBackTarget ", rightBackTarget); telemetry.update();
 
         leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -249,6 +289,16 @@ public class RobotHardware {
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
 
+    /**
+     * This function causes the Viper Slide to move for a set amount of distance, at a certain power, and at a specific direction.
+     * The distance is specified a double
+     * The power is also specified as a double with a value from 0-1
+     * The direction can either be "forward", or "backward", and moves the Viper Slide up and down, respectively.
+     * @param telemetry
+     * @param distance
+     * @param power
+     * @param direction
+     */
     public void viperSlideEncoderMovements(Telemetry telemetry, double distance, double power, String direction) {
         // distance in inches
         // direction can be forward or backward
@@ -277,6 +327,16 @@ public class RobotHardware {
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
 
+    /**
+     * This function programs the controller movements to link up with the motor movements in order to move the robot accordingly.
+     * This function has the objects GamePad 1 and GamePad 2 for the controllers
+     * This function has servo0pos and servo100pos defined as doubles, in order to open or close an object. In our case it is a claw.
+     * @param gamepad1
+     * @param gamepad2
+     * @param servo0pos
+     * @param servo100pos
+     * @param telemetry
+     */
     public void TeleopLoop(Gamepad gamepad1, Gamepad gamepad2, double servo0pos, double servo100pos, Telemetry telemetry){
         double speedScaling;
         double rightStick = -gamepad1.right_stick_y;
@@ -345,12 +405,30 @@ public class RobotHardware {
         telemetry.addData("LeftBack Power", leftBack.getPower());
         telemetry.update();
     }
+
+
+    /**
+     * This program utilizes the encoderMovements program to allow the robot to move a specified
+     * number of mat blocks, or the squares in the mat.
+     * Power is default 0.5
+     * Direction is specified as the same for encoderMovements, "forward", "backward", "left", and "right"
+     * @param telemetry
+     * @param blocks
+     * @param direction
+     */
     public void moveDirectionBlocks (Telemetry telemetry, double blocks, String direction) {
         double inches = blocks * 24;
 
         encoderMovements(telemetry, inches, 0.5, direction);
     }
 
+    /**
+     * Same as previous program, but offset inches cause the robot to move extra, just in case it missed its target
+     * @param telemetry
+     * @param blocks
+     * @param direction
+     * @param offsetInches
+     */
     public void moveDirectionBlocks (Telemetry telemetry, double blocks, String direction, double offsetInches) {
         // note that offset is in inches
         double inches = blocks * 24;
@@ -359,6 +437,15 @@ public class RobotHardware {
         encoderMovements(telemetry, inches, 0.5, direction);
     }
 
+    /**
+     * Same as moveDirectionBlocks, but power isn't defaulted, and takes in a parameter from the user.
+     * Direction, offsetInches, telemetry, and blocks are the same as before
+     * @param telemetry
+     * @param blocks
+     * @param direction
+     * @param offsetInches
+     * @param power
+     */
     public void moveDirectionBlocksMAX (Telemetry telemetry, double blocks, String direction, double offsetInches, double power) {
         // note that offset is in inches
         double inches = blocks * 24;
