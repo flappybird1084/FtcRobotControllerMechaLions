@@ -147,7 +147,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             }
 
             if(gamepad1.left_trigger > 0){
-                leftFrontPower = -hleft_trig;
+                leftFrontPower = -left_trig;
                 leftBackPower = left_trig;
                 rightFrontPower = -left_trig;
                 rightBackPower = left_trig;
