@@ -262,7 +262,38 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
-
+            //cone placing
+            robot.moveDirectionBlocks(telemetry, 0.5,"left", 0.5);
+            telemetry.addData("Step:", "moved");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 30, 0.5, "forward");
+            telemetry.addData("Step:", "moved up");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 5, 0.5, "forward");
+            telemetry.addData("Step:", "moved to cone");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry,6, 0.5, "backward");
+            telemetry.addData("Step:", "moved down");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(100);
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 5, 0.5, "backward");
+            telemetry.addData("Step", "moved back");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0);
+            robot.viperSlideEncoderMovements(telemetry, 24, 0.5, "backward");
+            telemetry.addData("Step:", "moved down");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 1, "right", 1);
+            telemetry.addData("Step:", "parked");
+            telemetry.update();
+            waitForEncoderComplete();
 
         }
         else if (position == 3) {
@@ -271,12 +302,39 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1, "right",0);
+            robot.moveDirectionBlocks(telemetry, 1.5, "right",0);
             telemetry.addData("Step: ", "Step #2");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 40, 0.5, "forward");
+            telemetry.addData("Step:", "moved up");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 5, 0.5, "forward");
+            telemetry.addData("Step:", "moved to cone");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 6, 0.5, "backward");
+            telemetry.addData("Step:", "moved down");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(100);
+            robot.encoderMovements(telemetry, 5, 0.5, "backward");
+            telemetry.addData("moved back", "completed");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 34, 0.5, "backward");
+            telemetry.addData("moved down", "completed");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0);
+            robot.moveDirectionBlocks(telemetry, 0.5, "right", 1);
+            telemetry.addData("Step:", "parked");
             telemetry.update();
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
+
         }
 //otters are bad seals are better
 
