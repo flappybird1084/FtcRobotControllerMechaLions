@@ -112,12 +112,14 @@ public class TeleOpDynamicTest extends LinearOpMode {
             double yaw     =  gamepad1.right_stick_x;
 
 
+
+
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
-            double leftFrontPower  = axial + lateral + yaw;
-            double rightFrontPower = axial - lateral - yaw;
-            double leftBackPower   = axial - lateral + yaw;
-            double rightBackPower  = axial + lateral - yaw;
+            double leftFrontPower  = (axial + lateral + yaw);
+            double rightFrontPower = (axial - lateral - yaw);
+            double leftBackPower   = (axial - lateral + yaw);
+            double rightBackPower  = (axial + lateral - yaw);
             double right_trig = gamepad1.right_trigger;
             double left_trig  = gamepad1.left_trigger;
             double avgMotorPower = (leftBackPower+leftFrontPower+rightBackPower+rightFrontPower)/4;
@@ -127,6 +129,16 @@ public class TeleOpDynamicTest extends LinearOpMode {
             max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
             max = Math.max(max, Math.abs(leftBackPower));
             max = Math.max(max, Math.abs(rightBackPower));
+
+            double servo0pos =  robot.servo1.getPosition();
+            // min position, hopefully putting it in the loop helps.
+            robot.servo1.setPosition(servo0pos);
+            robot.servo1.setPosition(servo0pos+100);
+             double servo100pos = robot.servo1.getPosition();
+            // got the max position
+            robot.servo1.setPosition(servo0pos);
+
+
 
             if (gamepad1.left_bumper && (runtime.seconds()-leftYawCoolDown)>1){
                 additionalYaw-=0.01;
@@ -153,7 +165,24 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 rightBackPower = -left_trig;
             }
 
+            if(gamepad2.dpad_up) {
+                robot.ViperSlide.setPower(0.5);
+            }
 
+            else if(gamepad2.dpad_down) {
+                robot.ViperSlide.setPower(-0.5);
+            }
+
+            if(gamepad2.a) {
+
+                robot.servo1.setPosition(servo100pos);
+                //retracted
+            }
+
+            else if (gamepad2.b) {
+                robot.servo1.setPosition(servo0pos);
+                //extended
+            }
 
             if (max > 0.5) {
                 leftFrontPower  /= max;
