@@ -192,14 +192,18 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             //left trajectory
             telemetry.addData("Direction: ", "left");
             position = 1;
+            //recommend to make a function
+            //position1();
         } else if (tagOfInterest.id == RIGHT) {
             //right trajectory
             telemetry.addData("Direction: ", "right");
             position = 3;
+            //position3();
         } else if (tagOfInterest.id == MIDDLE) {
             // middle trajectory
             telemetry.addData("Direction: ", "middle");
             position = 2;
+            //position2();
         }
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending
@@ -214,7 +218,7 @@ public class AprilTagLeftAlliance extends LinearOpMode {
         //robot.encoderMovements(encoderDist, 1);
 
 
-
+        //might make functions for this would make it a lot simpler
         if (position == 1) {
             /*
             robot.moveDirectionBlocks(telemetry, 1, "forward", 2);
@@ -267,7 +271,7 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             telemetry.addData("Step:", "moved");
             telemetry.update();
             waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 30, 0.5, "forward");
+            robot.viperSlideEncoderMovements(telemetry, 30, 0.7, "forward");
             telemetry.addData("Step:", "moved up");
             telemetry.update();
             waitForEncoderComplete();
