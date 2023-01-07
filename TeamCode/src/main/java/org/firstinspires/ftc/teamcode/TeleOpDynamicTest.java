@@ -71,7 +71,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
     double additionalYaw = 0;
     double leftYawCoolDown = runtime.seconds();
     double rightYawCoolDown = runtime.seconds();
-
+    double speedScaling;
     // Declare OpMode members for each of the 4 motors.
 
 
@@ -105,7 +105,15 @@ public class TeleOpDynamicTest extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             double max;
-
+            robot.ViperSlide.setPower(gamepad2.left_stick_y);
+            robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            //andrew wants to decrease this, might make 3/5 to like 1/2.
+            if(gamepad1.right_stick_y > gamepad2.right_stick_y) {
+                speedScaling = (Math.abs(gamepad1.right_stick_y) * 3 / 5) + 0.4;
+            }
+            else{
+                speedScaling = (Math.abs(gamepad2.right_stick_y) * 3 / 5) + 0.4;
+            }
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x;
@@ -216,10 +224,10 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
 */
             // Send calculated power to wheels
-            robot.leftFront.setPower(leftFrontPower);
-            robot.rightFront.setPower(rightFrontPower);
-            robot.leftBack.setPower(leftBackPower);
-            robot.rightBack.setPower(rightBackPower);
+            robot.leftFront.setPower(leftFrontPower*speedScaling);
+            robot.rightFront.setPower(rightFrontPower*speedScaling);
+            robot.leftBack.setPower(leftBackPower*speedScaling);
+            robot.rightBack.setPower(rightBackPower*speedScaling);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
