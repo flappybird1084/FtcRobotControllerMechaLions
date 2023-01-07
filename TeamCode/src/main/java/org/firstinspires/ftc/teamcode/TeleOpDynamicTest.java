@@ -108,8 +108,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.right_stick_x;
-            double yaw     =  gamepad1.left_stick_x;
+            double lateral =  gamepad1.left_stick_x;
+            double yaw     =  gamepad1.right_stick_x;
 
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
@@ -142,15 +142,15 @@ public class TeleOpDynamicTest extends LinearOpMode {
             if(gamepad1.right_trigger > 0){
                 leftFrontPower = right_trig;
                 leftBackPower = -right_trig;
-                rightFrontPower = right_trig;
-                rightBackPower = -right_trig;
+                rightFrontPower = -right_trig;
+                rightBackPower = right_trig;
             }
 
             if(gamepad1.left_trigger > 0){
                 leftFrontPower = -left_trig;
                 leftBackPower = left_trig;
-                rightFrontPower = -left_trig;
-                rightBackPower = left_trig;
+                rightFrontPower = left_trig;
+                rightBackPower = -left_trig;
             }
 
 
