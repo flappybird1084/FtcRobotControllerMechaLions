@@ -71,7 +71,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
     double additionalYaw = 0;
     double leftYawCoolDown = runtime.seconds();
     double rightYawCoolDown = runtime.seconds();
-    double speedScaling;
+
     // Declare OpMode members for each of the 4 motors.
 
 
@@ -108,12 +108,11 @@ public class TeleOpDynamicTest extends LinearOpMode {
             robot.ViperSlide.setPower(gamepad2.left_stick_y);
             robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             //andrew wants to decrease this, might make 3/5 to like 1/2.
-            if(gamepad1.right_stick_y > gamepad2.right_stick_y) {
-                speedScaling = (Math.abs(gamepad1.right_stick_y) * 3 / 5) + 0.4;
-            }
-            else{
-                speedScaling = (Math.abs(gamepad2.right_stick_y) * 3 / 5) + 0.4;
-            }
+
+            double speedScaling = (Math.abs(gamepad1.right_stick_y)*3/5) + 0.4;
+            // TODO: Made this for gamepad 2 instead, this is just for rian's training
+
+
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x;
