@@ -281,11 +281,11 @@ public class AprilTagRightAlliance extends LinearOpMode {
             robot.moveDirectionBlocks(telemetry, 1.5, "right");
         }
         else if (position == 2) {
-            robot.moveDirectionBlocks(telemetry, 2, "left",1);
+            robot.moveDirectionBlocks(telemetry, 2, "left",0.5);
             telemetry.addData("Step: ", "Step #2 and 3");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 0.5, "right",1);
+            robot.moveDirectionBlocks(telemetry, 0.4, "right",1);
             telemetry.addData("Step: ", "Step #4 w/offset");
             telemetry.update();
             waitForEncoderComplete();

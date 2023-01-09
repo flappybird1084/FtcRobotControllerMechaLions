@@ -238,6 +238,34 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
+            //cone placing
+            robot.viperSlideEncoderMovements(telemetry, 25, 0.5, "forward");
+            telemetry.addData("Step:", "Bringing up");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 0.5, "backward", 1);
+            telemetry.addData("Step:", "Placing cone");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 2, 0.75, "left");
+            telemetry.addData("Step:", "Moved forward");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0.0);
+            telemetry.addData("Step:", "deposited cone, hopefully");
+            telemetry.update();
+            robot.encoderMovements(telemetry, 2, 0.75, "right");
+            telemetry.addData("Step:", "back");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 0.5, "forward", 1);
+            telemetry.addData("Step:", "back");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 25, 0.5, "backward");
+            telemetry.addData("Step:", "Bringing down");
+            telemetry.update();
+            waitForEncoderComplete();
         }
         public void pos3() {
             telemetry.addData("Direction: ", "right");
@@ -296,6 +324,35 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
+            //cone placing
+            robot.moveDirectionBlocks(telemetry, 0.5, "right", 1);
+            telemetry.addData("Step:", "Arrived");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 18, 0.5, "forward");
+            telemetry.addData("Step:", "Bringing up");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 2, 0.75, "left");
+            telemetry.addData("Step:", "Moved forward");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0.0);
+            telemetry.addData("Step:", "deposited cone, hopefully");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 2, 0.75, "right");
+            telemetry.addData("Step:", "back");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 18, -0.5, "forward");
+            telemetry.addData("Step:", "Bringing down");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 0.5, "right", 1);
+            telemetry.addData("Step:", "Parked");
+            telemetry.update();
+            waitForEncoderComplete();
         } else if (position == 2) {
             // This robot moves backwards, then strafes left, then moves forward, then finishes.
             telemetry.addData("Direction: ", "middle");
@@ -309,6 +366,35 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode {
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
+            //cone placing
+            robot.moveDirectionBlocks(telemetry, 0.5, "left", 1);
+            telemetry.addData("Step:", "Arrived");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 18, 0.5, "forward");
+            telemetry.addData("Step:", "Bringing up");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 2, 0.75, "left");
+            telemetry.addData("Step:", "Moved forward");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0.0);
+            telemetry.addData("Step:", "deposited cone, hopefully");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 2, 0.75, "right");
+            telemetry.addData("Step:", "back");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 18, -0.5, "forward");
+            telemetry.addData("Step:", "Bringing down");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 0.5, "right", 1);
+            telemetry.addData("Step:", "Parked");
+            telemetry.update();
+            waitForEncoderComplete();
         } else if (position == 3) {
             // The robot moves backwards, then strafes left, then finishes.
             telemetry.addData("Direction: ", "right");
