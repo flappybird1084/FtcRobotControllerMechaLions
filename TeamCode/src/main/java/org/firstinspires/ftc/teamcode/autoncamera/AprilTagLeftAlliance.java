@@ -271,6 +271,8 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             telemetry.update();
             waitForEncoderComplete();
             robot.servo1.setPosition(100);
+            telemetry.addData("Step:", "opened servo");
+            telemetry.update();
             robot.encoderMovements(telemetry, 5, 0.5, "backward");
             telemetry.addData("Step", "moved back");
             telemetry.update();
@@ -286,7 +288,6 @@ public class AprilTagLeftAlliance extends LinearOpMode {
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
-
 
         }
         else if (position == 3) {

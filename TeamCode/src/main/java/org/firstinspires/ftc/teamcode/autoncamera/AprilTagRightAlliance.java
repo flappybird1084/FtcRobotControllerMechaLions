@@ -300,6 +300,8 @@ public class AprilTagRightAlliance extends LinearOpMode {
             telemetry.update();
             waitForEncoderComplete();
             robot.servo1.setPosition(0);
+            telemetry.addData("Step:", "closed servo");
+            telemetry.update();
             robot.encoderMovements(telemetry, 5, 0.5, "backward");
             telemetry.addData("Step:", "moving back");
             telemetry.update();
@@ -340,6 +342,8 @@ public class AprilTagRightAlliance extends LinearOpMode {
             robot.viperSlideEncoderMovements(telemetry, 6, 0.5, "backward");
             waitForEncoderComplete();
             robot.servo1.setPosition(100);
+            telemetry.addData("Step", "opened servo");
+            telemetry.update();
             robot.encoderMovements(telemetry, 5, 0.5, "backward");
             telemetry.addData("Step:", "moved backward");
             telemetry.update();
