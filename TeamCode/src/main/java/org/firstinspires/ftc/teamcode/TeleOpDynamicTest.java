@@ -105,8 +105,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             double max;
-            robot.ViperSlide.setPower(gamepad2.left_stick_y);
-            robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            // robot.ViperSlide.setPower(gamepad2.left_stick_y);
+            // robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             //andrew wants to decrease this, might make 3/5 to like 1/2.
 
             double speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
@@ -172,13 +172,6 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 rightBackPower = -left_trig;
             }
 
-            if(gamepad2.dpad_up) {
-                robot.ViperSlide.setPower(0.5);
-            }
-
-            else if(gamepad2.dpad_down) {
-                robot.ViperSlide.setPower(-0.5);
-            }
 
             if(gamepad2.a) {
 
