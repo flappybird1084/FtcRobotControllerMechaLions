@@ -109,7 +109,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             //andrew wants to decrease this, might make 3/5 to like 1/2.
 
-            double speedScaling = (Math.abs(gamepad1.right_stick_y)*3/5) + 0.4;
+            double speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
             // TODO: Made this for gamepad 2 instead, this is just for rian's training
 
 
