@@ -243,14 +243,12 @@ public class AprilTagRightAlliance extends LinearOpMode {
         //robot.encoderMovements(encoderDist, 1);
         if (position == 1) {
 
-            robot.moveDirectionBlocks(telemetry, 1, "forward", 2);
             robot.moveDirectionBlocks(telemetry, 1, "backward", 2 );
             telemetry.addData("Direction: ", "left");
-            robot.moveDirectionBlocks(telemetry, 1, "backward", 2);
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1.5, "left", 1);
+            robot.moveDirectionBlocks(telemetry, 1.4, "left", 1);
             telemetry.addData("Step: ", "Step #2");
             telemetry.update();
             waitForEncoderComplete();
@@ -278,7 +276,7 @@ public class AprilTagRightAlliance extends LinearOpMode {
             telemetry.addData("moved backward", "completed step");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1.5, "right");
+            robot.moveDirectionBlocks(telemetry, 0.4, "right");
         }
         else if (position == 2) {
             robot.moveDirectionBlocks(telemetry, 2, "left",0.5);
@@ -306,7 +304,7 @@ public class AprilTagRightAlliance extends LinearOpMode {
             telemetry.addData("Step:", "moving back");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1, "right", 1);
+            robot.moveDirectionBlocks(telemetry, 0.6, "right", 1);
             telemetry.addData("Step:", "parked");
             telemetry.update();
             waitForEncoderComplete();
