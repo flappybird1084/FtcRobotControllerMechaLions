@@ -404,7 +404,10 @@ public class RobotHardware {
         telemetry.addData("LeftFront Power", leftFront.getPower());
         telemetry.addData("LeftBack Power", leftBack.getPower());
         telemetry.update();
+
+
     }
+
 
 
     /**
@@ -454,6 +457,7 @@ public class RobotHardware {
         encoderMovements(telemetry, inches, power, direction);
 
     }
+
 
 
 
