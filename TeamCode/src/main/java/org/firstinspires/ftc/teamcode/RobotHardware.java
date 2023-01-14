@@ -30,6 +30,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -130,7 +131,7 @@ public class RobotHardware {
         leftBack.setDirection(DcMotor.Direction.REVERSE);
         rightFront.setDirection(DcMotor.Direction.FORWARD);
         rightBack.setDirection(DcMotor.Direction.FORWARD);
-        ViperSlide.setDirection(DcMotor.Direction.REVERSE);
+        ViperSlide.setDirection(DcMotor.Direction.FORWARD);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -299,7 +300,7 @@ public class RobotHardware {
      * @param power
      * @param direction
      */
-    public void viperSlideEncoderMovements(Telemetry telemetry, double distance, double power, String direction) {
+    public int viperSlideEncoderMovements(Telemetry telemetry, double distance, double power, String direction) {
         // distance in inches
         // direction can be forward or backward
         double rotationsNeeded = distance / VS_CIRCUMFERENCE;
@@ -316,14 +317,17 @@ public class RobotHardware {
         if (direction.equals("backward")) {
             telemetry.addData("Moving ", "Backwards"); telemetry.update();
             viperSlideTarget *= -1;
+            power *= -1;
         }
         else{
             telemetry.addData("Moving ", "Forward"); telemetry.update();
+            //viperSlideTarget *= -1;
         }
 
         ViperSlide.setPower(power);
         ViperSlide.setTargetPosition(viperSlideTarget);
         ViperSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        return viperSlideTarget;
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
 
