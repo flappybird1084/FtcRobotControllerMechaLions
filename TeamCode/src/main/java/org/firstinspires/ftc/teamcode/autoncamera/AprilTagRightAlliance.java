@@ -239,10 +239,10 @@ public class AprilTagRightAlliance extends LinearOpMode {
 
 
          */
-
+        robot.servo1.setPosition(100);
         //robot.encoderMovements(encoderDist, 1);
         if (position == 1) {
-
+            robot.servo1.setPosition(0);
             robot.moveDirectionBlocks(telemetry, 1, "backward", 2 );
             telemetry.addData("Direction: ", "left");
             telemetry.addData("Step: ", "Step #1 w/offset");
@@ -279,6 +279,7 @@ public class AprilTagRightAlliance extends LinearOpMode {
             robot.moveDirectionBlocks(telemetry, 0.4, "right");
         }
         else if (position == 2) {
+            robot.servo1.setPosition(0);
             robot.moveDirectionBlocks(telemetry, 2, "left",0.5);
             telemetry.addData("Step: ", "Step #2 and 3");
             telemetry.update();
@@ -312,6 +313,7 @@ public class AprilTagRightAlliance extends LinearOpMode {
             waitForEncoderComplete();
         }
         else if (position == 3) {
+            robot.servo1.setPosition(0);
             telemetry.addData("Direction: ", "right");
             robot.moveDirectionBlocks(telemetry, 1, "forward",2);
             telemetry.addData("Step: ", "Step #1 w/offset");
