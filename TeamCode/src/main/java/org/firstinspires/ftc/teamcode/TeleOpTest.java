@@ -63,13 +63,15 @@ public class TeleOpTest  extends OpMode {
             robot.leftBack.setPower(speedScaling);
             robot.rightFront.setPower(speedScaling);
             robot.rightBack.setPower(-speedScaling);
+            //apparently teleop test is inverted
+            //would probably switch the positive and the negative
         }
         else if(gamepad1.left_bumper) {
             // Move Left
-            robot.leftFront.setPower(speedScaling);
-            robot.leftBack.setPower(-speedScaling);
-            robot.rightFront.setPower(-speedScaling);
-            robot.rightBack.setPower(speedScaling);
+            robot.leftFront.setPower(-speedScaling);
+            robot.leftBack.setPower(speedScaling);
+            robot.rightFront.setPower(speedScaling);
+            robot.rightBack.setPower(-speedScaling);
         }
 
 /*
@@ -85,11 +87,11 @@ public class TeleOpTest  extends OpMode {
         }
 */
         else if(gamepad2.dpad_up) {
-            robot.ViperSlide.setPower(0.5);
+            robot.ViperSlide.setPower(-0.5);
         }
 
         else if(gamepad2.dpad_down) {
-            robot.ViperSlide.setPower(-0.5);
+            robot.ViperSlide.setPower(0.5);
         }
 
         else if (gamepad1.dpad_left) {
