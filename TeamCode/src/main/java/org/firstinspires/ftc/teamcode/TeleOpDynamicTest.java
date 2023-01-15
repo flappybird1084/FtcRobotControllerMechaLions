@@ -180,7 +180,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
                     VSPosition = "low";
                 }
             }
-
+//
             else if(gamepad2.dpad_right){
                 if(!robot.ViperSlide.isBusy()) {
                     target =robot.viperSlideEncoderMovements(telemetry, 25, 0.5, "forward");
