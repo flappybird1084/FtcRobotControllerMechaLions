@@ -175,7 +175,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
             if(gamepad1.a){
                 if(!robot.ViperSlide.isBusy()) {
-                    target =robot.viperSlideEncoderMovements(telemetry, 100, 0.5, "forward");
+                    target = robot.viperSlideEncoderMovements(telemetry, 100, 0.5, "forward");
                 }
             }
             else if(gamepad1.b){
