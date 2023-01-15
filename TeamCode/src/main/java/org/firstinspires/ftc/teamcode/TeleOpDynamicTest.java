@@ -125,6 +125,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             double right_trig = gamepad1.right_trigger;
             double left_trig  = gamepad1.left_trigger;
             double avgMotorPower = (leftBackPower+leftFrontPower+rightBackPower+rightFrontPower)/4;
+            String VSPosition = "down";
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
@@ -173,15 +174,40 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 //extended
             }
 
-            if(gamepad1.a){
+            if(gamepad2.dpad_left){
                 if(!robot.ViperSlide.isBusy()) {
-                    target =robot.viperSlideEncoderMovements(telemetry, 100, 0.5, "forward");
+                    target =robot.viperSlideEncoderMovements(telemetry, 15, 0.5, "forward");
+                    VSPosition = "low";
                 }
             }
-            else if(gamepad1.b){
+
+            else if(gamepad2.dpad_right){
                 if(!robot.ViperSlide.isBusy()) {
-                    target = robot.viperSlideEncoderMovements(telemetry, 100, 0.5, "backward");
+                    target =robot.viperSlideEncoderMovements(telemetry, 25, 0.5, "forward");
+                    VSPosition = "med";
                 }
+            }
+
+            else if(gamepad2.dpad_up){
+                if(!robot.ViperSlide.isBusy()) {
+                    target =robot.viperSlideEncoderMovements(telemetry, 35, 0.5, "forward");
+                    VSPosition = "high";
+                }
+            }
+
+            else if(gamepad2.dpad_down){
+                if(!robot.ViperSlide.isBusy()) {
+                    target = robot.viperSlideEncoderMovements(telemetry, 35, 0.5, "backward");
+                    VSPosition = "down";
+                }
+            }
+
+            if (gamepad2.x){
+                robot.ViperSlide.setPower(0);
+            }
+
+            if(Math.abs(gamepad2.left_stick_y) > 0){
+                robot.ViperSlide.setPower(gamepad2.left_stick_y);
             }
             if (robot.ViperSlide.isBusy()){
                 telemetry.addData("ViperSlide",  "Moving to %7d; At %7d", target,
