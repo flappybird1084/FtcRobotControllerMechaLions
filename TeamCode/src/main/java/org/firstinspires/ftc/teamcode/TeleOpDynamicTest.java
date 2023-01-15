@@ -101,25 +101,20 @@ public class TeleOpDynamicTest extends LinearOpMode {
         waitForStart();
         robot.init(hardwareMap);
         runtime.reset();
+        int target = 0;
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             double max;
             // robot.ViperSlide.setPower(gamepad2.left_stick_y);
-            // robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            //robot.ViperSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //andrew wants to decrease this, might make 3/5 to like 1/2.
-
             double speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
-            // TODO: Made this for gamepad 2 instead, this is just for rian's training
-
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
-
-
-
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -145,8 +140,6 @@ public class TeleOpDynamicTest extends LinearOpMode {
             // got the max position
             robot.servo1.setPosition(servo0pos);
 
-
-
             if (gamepad1.left_bumper && (runtime.seconds()-leftYawCoolDown)>1){
                 additionalYaw-=0.01;
                 leftYawCoolDown = runtime.seconds();
@@ -155,7 +148,6 @@ public class TeleOpDynamicTest extends LinearOpMode {
             if (gamepad1.right_bumper && (runtime.seconds()-rightYawCoolDown)>1){
                 additionalYaw+=0.01;
                 rightYawCoolDown = runtime.seconds();
-
             }
 
             if(gamepad1.right_trigger > 0){
@@ -172,16 +164,28 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 rightBackPower = -left_trig;
             }
 
-
             if(gamepad2.a) {
-
                 robot.servo1.setPosition(servo100pos);
                 //retracted
             }
-
             else if (gamepad2.b) {
                 robot.servo1.setPosition(servo0pos);
                 //extended
+            }
+
+            if(gamepad1.a){
+                if(!robot.ViperSlide.isBusy()) {
+                    target =robot.viperSlideEncoderMovements(telemetry, 100, 0.5, "forward");
+                }
+            }
+            else if(gamepad1.b){
+                if(!robot.ViperSlide.isBusy()) {
+                    target = robot.viperSlideEncoderMovements(telemetry, 100, 0.5, "backward");
+                }
+            }
+            if (robot.ViperSlide.isBusy()){
+                telemetry.addData("ViperSlide",  "Moving to %7d; At %7d", target,
+                        robot.ViperSlide.getCurrentPosition());
             }
 
             if (max > 0.5) {
@@ -228,5 +232,6 @@ public class TeleOpDynamicTest extends LinearOpMode {
             telemetry.addData("Additional Yaw: ", additionalYaw);
             telemetry.addData("Average Motor Power: ", avgMotorPower);
             telemetry.update();
+
         }
     }}
