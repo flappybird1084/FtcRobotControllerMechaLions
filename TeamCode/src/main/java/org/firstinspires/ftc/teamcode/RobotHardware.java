@@ -131,7 +131,7 @@ public class RobotHardware {
         leftBack.setDirection(DcMotor.Direction.REVERSE);
         rightFront.setDirection(DcMotor.Direction.FORWARD);
         rightBack.setDirection(DcMotor.Direction.FORWARD);
-        ViperSlide.setDirection(DcMotor.Direction.FORWARD);
+        ViperSlide.setDirection(DcMotor.Direction.REVERSE);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -303,7 +303,7 @@ public class RobotHardware {
     public int viperSlideEncoderMovements(Telemetry telemetry, double distance, double power, String direction) {
         // distance in inches
         // direction can be forward or backward
-        double rotationsNeeded = distance / VS_CIRCUMFERENCE;
+        double rotationsNeeded = distance / VS_CIRCUMFERENCE*3;
         int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
 
         ViperSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -317,11 +317,12 @@ public class RobotHardware {
         if (direction.equals("backward")) {
             telemetry.addData("Moving ", "Backwards"); telemetry.update();
             viperSlideTarget *= -1;
-            power *= -1;
+            //power *= -1;
         }
         else{
             telemetry.addData("Moving ", "Forward"); telemetry.update();
             //viperSlideTarget *= -1;
+            //power*= -1;
         }
 
         ViperSlide.setPower(power);
