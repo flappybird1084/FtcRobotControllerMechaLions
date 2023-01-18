@@ -71,6 +71,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
     double additionalYaw = 0;
     double leftYawCoolDown = runtime.seconds();
     double rightYawCoolDown = runtime.seconds();
+    double ViperSlideEncoderCoolDown = runtime.seconds();
 
     // Declare OpMode members for each of the 4 motors.
 
@@ -109,7 +110,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             // robot.ViperSlide.setPower(gamepad2.left_stick_y);
             //robot.ViperSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //andrew wants to decrease this, might make 3/5 to like 1/2.
-            double speedScaling = (Math.abs(gamepad2.right_stick_y)*3/5) + 0.4;
+            double speedScaling = (Math.abs(gamepad2.right_stick_y)*2/5) + 0.6;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
@@ -166,11 +167,12 @@ public class TeleOpDynamicTest extends LinearOpMode {
             }
 
             if(gamepad2.a) {
-                robot.servo1.setPosition(servo100pos);
+                robot.servo1.setPosition(100);
                 //retracted
+
             }
             else if (gamepad2.b) {
-                robot.servo1.setPosition(servo0pos);
+                robot.servo1.setPosition(0);
                 //extended
             }
 
@@ -183,14 +185,14 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
             else if(gamepad2.dpad_right){
                 if(!robot.ViperSlide.isBusy()) {
-                    target =robot.viperSlideEncoderMovements(telemetry, 25, 0.5, "forward");
+                    target = robot.viperSlideEncoderMovements(telemetry, 25, 0.5, "forward");
                     VSPosition = "med";
                 }
             }
 
             else if(gamepad2.dpad_up){
                 if(!robot.ViperSlide.isBusy()) {
-                    target =robot.viperSlideEncoderMovements(telemetry, 35, 0.5, "forward");
+                    target = robot.viperSlideEncoderMovements(telemetry, 35, 0.5, "forward");
                     VSPosition = "high";
                 }
             }
@@ -202,13 +204,21 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 }
             }
 
-            if (gamepad2.x){
-                robot.ViperSlide.setPower(0);
+            if(Math.abs(gamepad2.left_stick_y) > 0){
+                robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                robot.ViperSlide.setPower(-gamepad2.left_stick_y);
+                ViperSlideEncoderCoolDown = runtime.seconds();
             }
 
-            if(Math.abs(gamepad2.left_stick_y) > 0){
-                robot.ViperSlide.setPower(gamepad2.left_stick_y);
+            if((runtime.seconds() - ViperSlideEncoderCoolDown < 0.05)&&(runtime.seconds() - ViperSlideEncoderCoolDown > 0.02)){
+                robot.ViperSlide.setPower(0); // cooldown because if you let go
+                // of the stick too sharply, the gamepad control would freeze
+                // and the slide would keep moving
+
+                // now, a small time after the slide hasn't been triggered, the power
+                // is set to zero.
             }
+
             if (robot.ViperSlide.isBusy()){
                 telemetry.addData("ViperSlide",  "Moving to %7d; At %7d", target,
                         robot.ViperSlide.getCurrentPosition());
