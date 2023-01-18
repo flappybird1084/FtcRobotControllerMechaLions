@@ -37,6 +37,7 @@ import java.util.ArrayList;
 @Autonomous(name = "AprilTagRighAllianceMorePoints", group = "Auton")
 public class AprilTagRighAllianceMorePoints extends LinearOpMode {
     OpenCvCamera camera;
+    //Extra line
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
     RobotHardware robot = new RobotHardware();
     private ElapsedTime runtime = new ElapsedTime();
