@@ -317,6 +317,7 @@ public class AprilTagLeftAllianceMorePoints extends LinearOpMode {
             telemetry.update();
 
         }
+        //
         else if (position == 3) {
 
             robot.servo1.setPosition(100);
