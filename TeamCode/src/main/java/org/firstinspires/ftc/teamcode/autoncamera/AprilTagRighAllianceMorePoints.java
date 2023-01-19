@@ -279,7 +279,7 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             waitForEncoderComplete();
         }
         else if (position == 2) {
-            //robot.servo1.setPosition(100);
+            robot.servo1.setPosition(100);
             sleep(1000);
             robot.viperSlideEncoderMovements(telemetry, 6,0.5, "forward");
             waitForEncoderComplete();
@@ -332,7 +332,7 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             robot.servo1.setPosition(100);
             sleep(1000);
             telemetry.addData("Direction: ", "right");
-            robot.moveDirectionBlocks(telemetry, 1, "forward",2);
+            robot.moveDirectionBlocks(telemetry, 0.8, "forward",2);
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
@@ -342,7 +342,7 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
-            robot.moveDirectionBlocks(telemetry, 2, "backward", 1);
+            robot.moveDirectionBlocksMAX(telemetry, 2, "backward", 1,0.6);
             telemetry.addData("Step:", "moved");
             telemetry.update();
             waitForEncoderComplete();
@@ -354,15 +354,15 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             telemetry.addData("Step:", "moved to pole");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 0, "forward", 3.5);
+            robot.moveDirectionBlocks(telemetry, 0, "forward", 3.7);
             telemetry.addData("Step:", "moved forward");
             telemetry.update();
-            waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 6.5, 0.5, "backward");
             waitForEncoderComplete();
             robot.servo1.setPosition(0);
             telemetry.addData("Step", "opened servo");
             telemetry.update();
+            robot.viperSlideEncoderMovements(telemetry, 6.5, 0.5, "backward");
+            waitForEncoderComplete();
             robot.moveDirectionBlocks(telemetry, 0, "backward", 3.5);
             telemetry.addData("Step:", "moved backward");
             telemetry.update();
@@ -375,11 +375,14 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             telemetry.addData("Step", "completed");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 3, "forward", 1.5);
+            robot.moveDirectionBlocks(telemetry, 1, "forward", 1.5);
             telemetry.addData("Step:", "parked");
             telemetry.update();
             waitForEncoderComplete();
             robot.viperSlideEncoderMovements(telemetry, 24, 0.5, "backward");
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry,0.9,"forward", 0);
+            waitForEncoderComplete();
         }
 //otters are bad seals are better
 
