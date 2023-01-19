@@ -243,7 +243,7 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
          */
         //robot.encoderMovements(encoderDist, 1);
         if (position == 1) {
-            robot.servo1.setPosition(100);
+            robot.servo1.setPosition(95);
             sleep(1000);
             robot.moveDirectionBlocksMAX(telemetry, 1.03, "backward", 0, 0.5);
             telemetry.addData("Direction: ", "left");
@@ -268,7 +268,7 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             telemetry.addData("Step:", "raised viperslide");
             telemetry.update();
             waitForEncoderComplete();
-            robot.servo1.setPosition(0);
+            robot.servo1.setPosition(5);
             telemetry.addData("opened servo", "dropping");
             telemetry.update();
             sleep(1000);
@@ -280,7 +280,7 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             waitForEncoderComplete();
         }
         else if (position == 2) {
-            robot.servo1.setPosition(100);
+            robot.servo1.setPosition(95);
             sleep(1000);
             robot.viperSlideEncoderMovements(telemetry, 6,0.5, "forward");
             waitForEncoderComplete();
@@ -304,16 +304,16 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             telemetry.addData("Step:", "Completed");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 0, "forward" , 4);
+            robot.moveDirectionBlocks(telemetry, 0, "forward" , 2.5);
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
             waitForEncoderComplete();
-            robot.servo1.setPosition(0);
+            robot.servo1.setPosition(100);
             robot.viperSlideEncoderMovements(telemetry, 5, 0.5, "backward");
             telemetry.addData("Step:", "Bringing down");
             telemetry.update();
             waitForEncoderComplete();
-            robot.servo1.setPosition(100);
+            robot.servo1.setPosition(95);
             telemetry.addData("Step:", "closed servo");
             telemetry.update();
             robot.moveDirectionBlocks(telemetry, 0, "backward", 4);
@@ -330,7 +330,7 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             waitForEncoderComplete();
         }
         else if (position == 3) {
-            robot.servo1.setPosition(100);
+            robot.servo1.setPosition(95);
             sleep(1000);
             telemetry.addData("Direction: ", "right");
             robot.moveDirectionBlocks(telemetry, 0.8, "forward",2);
@@ -359,7 +359,7 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             telemetry.addData("Step:", "moved forward");
             telemetry.update();
             waitForEncoderComplete();
-            robot.servo1.setPosition(0);
+            robot.servo1.setPosition(5);
             telemetry.addData("Step", "opened servo");
             telemetry.update();
             robot.viperSlideEncoderMovements(telemetry, 6.5, 0.5, "backward");
@@ -368,7 +368,7 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             telemetry.addData("Step:", "moved backward");
             telemetry.update();
             waitForEncoderComplete();
-            robot.servo1.setPosition(100);
+            robot.servo1.setPosition(95);
             telemetry.addData("Step:", "closed servo");
             telemetry.update();
             waitForEncoderComplete();
