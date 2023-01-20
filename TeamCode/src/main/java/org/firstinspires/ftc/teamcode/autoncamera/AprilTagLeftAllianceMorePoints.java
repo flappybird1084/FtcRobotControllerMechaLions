@@ -245,10 +245,12 @@ public class AprilTagLeftAllianceMorePoints extends LinearOpMode {
             waitForEncoderComplete();
             robot.viperSlideEncoderMovements(telemetry, 6, 0.5, "backward");
             waitForEncoderComplete();
-            robot.servo1.setPosition(95);
+            sleep(1000);
+            robot.servo1.setPosition(5);
+            sleep(1000);
             robot.encoderMovements(telemetry, 2.5, 0.3, "backward");
             telemetry.addData("Step: ", "Finished");
-            robot.servo1.setPosition(5);
+            robot.servo1.setPosition(95);
             robot.viperSlideEncoderMovements(telemetry, 24, 0.5, "backward");
             telemetry.addData("Step:", "Completed");
             telemetry.update();
@@ -293,7 +295,9 @@ public class AprilTagLeftAllianceMorePoints extends LinearOpMode {
             telemetry.addData("Step:", "moved down");
             telemetry.update();
             waitForEncoderComplete();
-            robot.servo1.setPosition(95);
+            sleep(1000);
+            robot.servo1.setPosition(5);
+            sleep(1000);
             telemetry.addData("Step:", "opened servo");
             telemetry.update();
             robot.encoderMovements(telemetry, 5, 0.2, "backward");
@@ -304,7 +308,7 @@ public class AprilTagLeftAllianceMorePoints extends LinearOpMode {
             telemetry.addData("Step:", "moved down");
             telemetry.update();
             waitForEncoderComplete();
-            robot.servo1.setPosition(5);
+            robot.servo1.setPosition(95);
             robot.moveDirectionBlocks(telemetry, 0.6, "right");
             telemetry.addData("Step: ", "completed");
             telemetry.update();
@@ -343,8 +347,10 @@ public class AprilTagLeftAllianceMorePoints extends LinearOpMode {
             robot.viperSlideEncoderMovements(telemetry, 6, 0.4, "backward");
             telemetry.addData("Step:", "moved down");
             telemetry.update();
+            sleep(1000);
+            robot.servo1.setPosition(5);
+            sleep(1000);
             waitForEncoderComplete();
-            robot.servo1.setPosition(95);
             robot.encoderMovements(telemetry, 4.5, 0.3, "backward");
             telemetry.addData("moved back", "completed");
             telemetry.update();
@@ -353,7 +359,7 @@ public class AprilTagLeftAllianceMorePoints extends LinearOpMode {
             telemetry.addData("moved down", "completed");
             telemetry.update();
             waitForEncoderComplete();
-            robot.servo1.setPosition(5);
+            robot.servo1.setPosition(95);
             robot.moveDirectionBlocks(telemetry, 0.65, "right", 1);
             telemetry.addData("Step:", "parked");
             telemetry.update();
