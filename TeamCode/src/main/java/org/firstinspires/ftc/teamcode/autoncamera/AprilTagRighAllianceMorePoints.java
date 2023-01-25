@@ -359,13 +359,14 @@ public class AprilTagRighAllianceMorePoints extends LinearOpMode {
             telemetry.addData("Step:", "moved forward");
             telemetry.update();
             waitForEncoderComplete();
-            sleep(1000);
-            robot.servo1.setPosition(0);
-            sleep(1000);
-            telemetry.addData("Step", "opened servo");
-            telemetry.update();
             robot.viperSlideEncoderMovements(telemetry, 6.5, 0.5, "backward");
             waitForEncoderComplete();
+            sleep(500);
+            //
+            robot.servo1.setPosition(0);
+            sleep(500);
+            telemetry.addData("Step", "opened servo");
+            telemetry.update();
             robot.moveDirectionBlocks(telemetry, 0, "backward", 3.5);
             telemetry.addData("Step:", "moved backward");
             telemetry.update();
