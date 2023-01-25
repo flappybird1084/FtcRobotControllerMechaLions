@@ -138,7 +138,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             // min position, hopefully putting it in the loop helps.
             robot.servo1.setPosition(servo0pos);
             robot.servo1.setPosition(servo0pos+100);
-             double servo100pos = robot.servo1.getPosition();
+            double servo100pos = robot.servo1.getPosition();
             // got the max position
             robot.servo1.setPosition(servo0pos);
 
@@ -178,35 +178,35 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
             if(gamepad2.dpad_left){
                 if(!robot.ViperSlide.isBusy()) {
-                    target =robot.viperSlideEncoderMovements(telemetry, 15, 0.5, "forward");
+                    target =robot.viperSlideEncoderMovements(telemetry, 15, 0.9, "forward");
                     VSPosition = "low";
                 }
             }
 
             else if(gamepad2.dpad_right){
                 if(!robot.ViperSlide.isBusy()) {
-                    target = robot.viperSlideEncoderMovements(telemetry, 25, 0.5, "forward");
+                    target = robot.viperSlideEncoderMovements(telemetry, 25, 0.9, "forward");
                     VSPosition = "med";
                 }
             }
 
             else if(gamepad2.dpad_up){
                 if(!robot.ViperSlide.isBusy()) {
-                    target = robot.viperSlideEncoderMovements(telemetry, 35, 0.5, "forward");
+                    target = robot.viperSlideEncoderMovements(telemetry, 35, 0.9, "forward");
                     VSPosition = "high";
                 }
             }
 
             else if(gamepad2.dpad_down){
                 if(!robot.ViperSlide.isBusy()) {
-                    target = robot.viperSlideEncoderMovements(telemetry, 35, 0.5, "backward");
+                    target = robot.viperSlideEncoderMovements(telemetry, 35, 0.9, "backward");
                     VSPosition = "down";
                 }
             }
 
             if(Math.abs(gamepad2.left_stick_y) > 0){
                 robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                robot.ViperSlide.setPower(-gamepad2.left_stick_y);
+                robot.ViperSlide.setPower(-0.5*gamepad2.left_stick_y);
                 ViperSlideEncoderCoolDown = runtime.seconds();
             }
 
