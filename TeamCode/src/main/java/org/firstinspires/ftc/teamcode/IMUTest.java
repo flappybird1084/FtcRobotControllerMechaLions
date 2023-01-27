@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BHI260IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -14,9 +15,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 @Autonomous(name = "rotation test", group = "Auton")
 public class IMUTest extends LinearOpMode {
+
+    // TODO: We've replaced the type of IMU the Control Hub uses from a BHI260AP to a BNO055
+    // This is because the code I have here is optimized for a BNO055, but it is less advanced...
+
     RobotHardware robot = new RobotHardware();
     DcMotor                 leftMotor, rightMotor;
-    BNO055IMU               imu;
+    BHI260IMU               imu;
     Orientation             lastAngles = new Orientation();
     double                  globalAngle, power = .30, correction;
     boolean                 aButton, bButton, touched;
@@ -30,7 +35,7 @@ public class IMUTest extends LinearOpMode {
         parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         parameters.loggingEnabled      = false;
 
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        imu = hardwareMap.get(BHI260IMU.class, "imu");
 
         imu.initialize(parameters);
 
