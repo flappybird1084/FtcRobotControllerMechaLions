@@ -14,6 +14,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 @Autonomous(name = "rotation test", group = "Auton")
 public class IMUTest extends LinearOpMode {
+
+    // TODO: We've replaced the type of IMU the Control Hub uses from a BHI260AP to a BNO055
+    // This is because the code I have here is optimized for a BNO055, but it is less advanced...
+
     RobotHardware robot = new RobotHardware();
     DcMotor                 leftMotor, rightMotor;
     BNO055IMU               imu;
