@@ -274,15 +274,15 @@ public class ATEfficientLeftAuton extends LinearOpMode {
              */
             //robot.servo1.setPosition(100);
             sleep(750);
-            robot.moveDirectionBlocks(telemetry, 1,"forward");
+            robot.moveDirectionBlocks(telemetry, 1,"forward",-2);
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 2, "left");
+            robot.moveDirectionBlocks(telemetry, 1.5, "left", 8);
             waitForEncoderComplete();
             // this gets us near the high pole
 
             //robot.viperSlideEncoderMovements(telemetry, 40, 0.75, "forward");
             waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 0, "forward", 3);
+            robot.moveDirectionBlocks(telemetry, 0, "forward", 4.5);
             waitForEncoderComplete();
             // hovering over the pole with slide extended
 
@@ -299,11 +299,11 @@ public class ATEfficientLeftAuton extends LinearOpMode {
             waitForEncoderComplete();
             // in position 3 now
 
-            robot.moveDirectionBlocks(telemetry, 2.5, "backward");
+            robot.moveDirectionBlocks(telemetry, 1, "backward",8);
             waitForEncoderComplete();
             // pushed cone far away
 
-            robot.moveDirectionBlocks(telemetry, 0.5, "forward");
+            robot.moveDirectionBlocks(telemetry, 0, "forward",8);
             waitForEncoderComplete();
             // final alignment
 
