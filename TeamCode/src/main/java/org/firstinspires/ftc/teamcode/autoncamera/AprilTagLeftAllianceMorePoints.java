@@ -211,6 +211,7 @@ public class AprilTagLeftAllianceMorePoints extends LinearOpMode {
             sleep(20);
         } */
         waitForStart();
+        camera.stopStreaming();
 
 
 

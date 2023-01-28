@@ -208,6 +208,7 @@ public class AprilTagRightAllianceMorePoints extends LinearOpMode {
             sleep(20);
         } */
         waitForStart();
+        camera.stopStreaming();
         // left, fwd, right but half, then score on mid pole
         /*
         robot.servo1.setPosition(100);

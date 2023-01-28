@@ -34,10 +34,9 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "AprilTagRightAllianceSecond", group = "Auton")
-public class AprilTagRightAllianceSecond extends LinearOpMode {
+@Autonomous(name = "ATEfficientLeftAuton", group = "Auton")
+public class ATEfficientLeftAuton extends LinearOpMode {
     OpenCvCamera camera;
-    //Extra line
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
     RobotHardware robot = new RobotHardware();
     private ElapsedTime runtime = new ElapsedTime();
@@ -193,14 +192,18 @@ public class AprilTagRightAllianceSecond extends LinearOpMode {
             //left trajectory
             telemetry.addData("Direction: ", "left");
             position = 1;
+            //recommend to make a function
+            //position1();
         } else if (tagOfInterest.id == RIGHT) {
             //right trajectory
             telemetry.addData("Direction: ", "right");
             position = 3;
+            //position3();
         } else if (tagOfInterest.id == MIDDLE) {
             // middle trajectory
             telemetry.addData("Direction: ", "middle");
             position = 2;
+            //position2();
         }
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending
@@ -208,205 +211,148 @@ public class AprilTagRightAllianceSecond extends LinearOpMode {
             sleep(20);
         } */
         waitForStart();
-        camera.stopStreaming();
-        // left, fwd, right but half, then score on mid pole
-        /*
-        robot.servo1.setPosition(100);
-        robot.moveDirectionBlocks(telemetry,1,"left",4.5, 0.6);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry,1,"forward",1, 1);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry,0.5,"right",1.5, 1);
-        waitForEncoderComplete();
-        //robot.viperSlideEncoderMovements(telemetry,25,0.25, "forward");
-        robot.ViperSlide.setPower(0.5);
-        sleep(3500);
-        robot.ViperSlide.setPower(0);
-        sleep(1000);
-        robot.moveDirectionBlocks(telemetry, 0, "forward", 4);
-        waitForEncoderComplete();
-        robot.servo1.setPosition(0);
-        sleep(1000);
-        sleep(4000);
-        robot.ViperSlide.setPower(0);
-        robot.moveDirectionBlocks(telemetry,0, "backward",4);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 0.5,"left",0,1);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 1, "backward", 3);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry,1,"right", 2,0.75);
-        waitForEncoderComplete();
-        telemetry.addData("Status", "Viper Slide finished");
 
-//
-//
-         */
+
+
         //robot.encoderMovements(encoderDist, 1);
+
+        //might make functions for this would make it a lot simpler
         if (position == 1) {
+            /**
+             * scores on the medium pole in front
+             */
+
+            /*
+            robot.moveDirectionBlocks(telemetry, 1, "forward", 2);
+            robot.moveDirectionBlocks(telemetry, 1, "backward", 2 );
+            */
+
             robot.servo1.setPosition(100);
             sleep(1000);
-            robot.moveDirectionBlocksMAX(telemetry, 1.03, "backward", 0, 0.5);
             telemetry.addData("Direction: ", "left");
+            robot.moveDirectionBlocks(telemetry, 2.3, "left", 2);
             telemetry.addData("Step: ", "Step #1 w/offset");
             telemetry.update();
             waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 1.855, "left", 0, 0.5);
+            robot.moveDirectionBlocks(telemetry, 0.4, "right", 3.3);
             telemetry.addData("Step: ", "Step #2");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 30, 0.7,"forward");
+            telemetry.addData("Viper Slide: ", "Started");
+            telemetry.update();
+            waitForEncoderComplete();
+            //opening servo
+            robot.encoderMovements(telemetry, 2.5, 0.3, "forward");
+            telemetry.addData("Step:", "moved back");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 6, 0.5, "backward");
+            waitForEncoderComplete();
+            sleep(1000);
+            robot.servo1.setPosition(0);
+            sleep(1000);
+            robot.encoderMovements(telemetry, 2.5, 0.3, "backward");
+            telemetry.addData("Step: ", "Finished");
+            robot.servo1.setPosition(100);
+            robot.viperSlideEncoderMovements(telemetry, 24, 0.5, "backward");
+            telemetry.addData("Step:", "Completed");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 0.6, "right", 1);
+            telemetry.addData("Step:", "Completed");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 1, "backward", 1);
+            telemetry.addData("Step:", "parked");
+            telemetry.update();
+            waitForEncoderComplete();
+        }
+        else if (position == 2) {
+            /**
+             * scores on the high pole
+             */
+            //robot.servo1.setPosition(100);
+            sleep(750);
+            robot.moveDirectionBlocks(telemetry, 1,"forward");
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 2, "left");
+            waitForEncoderComplete();
+            // this gets us near the high pole
+
+            //robot.viperSlideEncoderMovements(telemetry, 40, 0.75, "forward");
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 0, "forward", 3);
+            waitForEncoderComplete();
+            // hovering over the pole with slide extended
+
+            //robot.viperSlideEncoderMovements(telemetry, 6, 0.5, "backward");
+            waitForEncoderComplete();
+            //robot.servo1.setPosition(0);
+            sleep(500);
+            // slide lowered, then cone dropped
+
+            robot.moveDirectionBlocks(telemetry, 0, "backward", 3);
+            //robot.viperSlideEncoderMovements(telemetry, 33.75, 0.75, "backward");
+            waitForEncoderComplete(); //TODO:  multitasking?
+            robot.moveDirectionBlocks(telemetry, 0.5, "right");
+            waitForEncoderComplete();
+            // in position 3 now
+
+            robot.moveDirectionBlocks(telemetry, 2.5, "backward");
+            waitForEncoderComplete();
+            // pushed cone far away
+
+            robot.moveDirectionBlocks(telemetry, 0.5, "forward");
+            waitForEncoderComplete();
+            // final alignment
+
+        }
+
+        else if (position == 3) {
+
+            robot.servo1.setPosition(95);
+            sleep(1000);
+            telemetry.addData("Direction: ", "right");
+            robot.moveDirectionBlocks(telemetry, 0.9, "forward",0.5);
+            telemetry.addData("Step: ", "Step #1 w/offset");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.moveDirectionBlocks(telemetry, 1.85, "left",0.3);
+            telemetry.addData("Step: ", "Step #2");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 38, 0.4, "forward");
+            telemetry.addData("Step:", "moved up");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 4.2, 0.3, "forward");
+            telemetry.addData("Step:", "moved to cone");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 6, 0.4, "backward");
+            telemetry.addData("Step:", "moved down");
+            telemetry.update();
+            sleep(1000);
+            robot.servo1.setPosition(0);
+            sleep(1000);
+            waitForEncoderComplete();
+            robot.encoderMovements(telemetry, 4.5, 0.3, "backward");
+            telemetry.addData("moved back", "completed");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 32, 0.4, "backward");
+            telemetry.addData("moved down", "completed");
+            telemetry.update();
+            waitForEncoderComplete();
+            robot.servo1.setPosition(95);
+            robot.moveDirectionBlocks(telemetry, 0.65, "right", 1);
+            telemetry.addData("Step:", "parked");
             telemetry.update();
             waitForEncoderComplete();
             telemetry.addData("Step: ", "Finished");
             telemetry.update();
-            robot.viperSlideEncoderMovements(telemetry, 29, 0.8, "forward");
-            telemetry.addData("Step:", "raised viperslide");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 0, "forward", 3,0.3);
-            telemetry.addData("Step: ", "moved forward");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 6.5, 0.5, "backward");
-            telemetry.addData("Step:", "raised viperslide");
-            telemetry.update();
-            waitForEncoderComplete();
-            sleep(1000);
-            robot.servo1.setPosition(0);
-            sleep(1000);
-            telemetry.addData("opened servo", "dropping");
-            telemetry.update();
-            sleep(1000);
-            robot.moveDirectionBlocksMAX(telemetry, 0, "backward", 3,0.3);
-            waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 6, 0.5, "backward");
-            waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 0.6, "right",0,0.8);
-            waitForEncoderComplete();
-        }
-        else if (position == 2) {
-            robot.servo1.setPosition(100);
-            sleep(1000);
-            robot.viperSlideEncoderMovements(telemetry, 6,0.5, "forward");
-            waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 2, "left",0);
-            telemetry.addData("Step: ", "Step #2 and 3");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 0.53, "backward", 1);
-            telemetry.addData("Step:", "Completed");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 23, 0.5, "forward");
-            telemetry.addData("Step:", "brought up");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.leftFront.setPower(0.5);
-            robot.leftBack.setPower(0.5);
-            robot.rightFront.setPower(-0.5);
-            robot.rightBack.setPower(-0.5);
-            sleep(500);
-            robot.viperSlideEncoderMovements(telemetry, 6.5, 0.5, "backward");
-            telemetry.addData("Step:", "Bringing down");
-            telemetry.update();
-            waitForEncoderComplete();
-            sleep(1000);
-            robot.servo1.setPosition(0);
-            sleep(1000);
-            robot.servo1.setPosition(95);
-            telemetry.addData("Step:", "closed servo");
-            telemetry.update();
-            robot.moveDirectionBlocks(telemetry, 0.53, "backward" , 1);
-            telemetry.addData("Step:", "Completed");
-            telemetry.update();
-            robot.leftFront.setPower(-0.5);
-            robot.leftBack.setPower(-0.5);
-            robot.rightBack.setPower(0.5);
-            robot.rightFront.setPower(0.5);
-            sleep(750);
-            robot.moveDirectionBlocks(telemetry, 0, "backward", 2.5);
-            waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 0.43, "right", 1);
-            telemetry.addData("Step:", "completed");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 1, "forward", 1);
-            telemetry.addData("Step:", "parked");
-            telemetry.update();
-            waitForEncoderComplete();
-        }
-        else if (position == 3) {
-            /**
-             * /turning test for left
-             robot.leftFront.setPower(-0.5);
-             robot.leftBack.setPower(-0.5);
-             robot.rightBack.setPower(0.5);
-             robot.rightFront.setPower(0.5);
-             sleep(750);
-             //turning test for right
-             robot.leftFront.setPower(0.5);
-             robot.leftBack.setPower(0.5);
-             robot.rightFront.setPower(-0.5);
-             robot.rightBack.setPower(-0.5);
-             sleep(500);*/
-            //actual autonomous thing
-            robot.servo1.setPosition(100);
-            sleep(1000);
-            telemetry.addData("Direction: ", "right");
-            robot.moveDirectionBlocks(telemetry, 0.8, "forward",2);
-            telemetry.addData("Step: ", "Step #1 w/offset");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.leftFront.setPower(-0.5);
-            robot.leftBack.setPower(-0.5);
-            robot.rightBack.setPower(0.5);
-            robot.rightFront.setPower(0.5);
-            sleep(750);
-            robot.moveDirectionBlocks(telemetry, 1.3, "forward",0);
-            waitForEncoderComplete();
-            robot.leftFront.setPower(-0.5);
-            robot.leftBack.setPower(-0.5);
-            robot.rightBack.setPower(0.5);
-            robot.rightFront.setPower(0.5);
-            sleep(750);
-            robot.moveDirectionBlocksMAX(telemetry, 2, "forward", 1,0.6);
-            telemetry.addData("Step:", "moved");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 40, 0.5, "forward");
-            telemetry.addData("moving up", "completed");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 0.5, "right", 1);
-            telemetry.addData("Step:", "moved to pole");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 0, "forward", 3.7);
-            telemetry.addData("Step:", "moved forward");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 7.5, 0.5, "backward");
-            waitForEncoderComplete();
-            sleep(500);
-            //
-            robot.servo1.setPosition(0);
-            sleep(500);
-            telemetry.addData("Step", "opened servo");
-            telemetry.update();
-            robot.moveDirectionBlocks(telemetry, 0, "backward", 3.5);
-            telemetry.addData("Step:", "moved backward");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.servo1.setPosition(100);
-            telemetry.addData("Step:", "closed servo");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocks(telemetry, 0.5, "left", 1);
-            telemetry.addData("Step", "completed");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 2, "backward", 1.5, 1);
-            telemetry.addData("Step:", "parked");
-            telemetry.update();
-            waitForEncoderComplete();
+
         }
 //otters are bad seals are better
 
