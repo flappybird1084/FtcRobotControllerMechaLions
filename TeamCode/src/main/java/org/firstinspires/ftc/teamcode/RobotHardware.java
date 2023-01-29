@@ -216,6 +216,13 @@ public class RobotHardware {
         rightFront.setMode(runmode);
     }
 
+    public void turnBot(double degrees, Telemetry telemetry, double power, Gamepad gamepad1){
+        encoderMovementsIndividual(telemetry, degrees/90*23, new double[]{power,power,power,power},new double[]{1,1,-1,-1} );
+        if (!(isDriveTrainBusy() || gamepad1.left_stick_y == 0 || gamepad1.left_stick_x == 0)){
+            setAllRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
+    }
+
     public boolean isDriveTrainBusy(){
         return (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy());
     }
@@ -546,24 +553,6 @@ public class RobotHardware {
 
     }
 
-    /**
-     * turns the robot the specific amt of degrees
-     * negative degrees turns it counterclockwise
-     * @param degrees
-     * @param power
-     * @return the amt of time you have to sleep
-     */
-    public int turnBot(double degrees, double power){
-        if(degrees < 0){
-            power*= -1;
-        }
-        leftFront.setPower(power);
-        leftBack.setPower(power);
-        rightFront.setPower(-power);
-        rightBack.setPower(-power);
-        return (int) Math.abs(degrees/90*750);
-
-    }
 
 
 
