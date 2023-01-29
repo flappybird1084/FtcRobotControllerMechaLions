@@ -291,6 +291,17 @@ public class RobotHardware {
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
 
+    /**
+     * moves individual motors
+     * power is a positive number showing how much power goes to each motor
+     * direction is a number from -1 to 1 showing how much each motor should turn
+     * distance and tele are the same
+     * power and direction are provided in double arrays length 4
+     * @param telemetry
+     * @param distance
+     * @param power
+     * @param direction
+     */
     public void encoderMovementsIndividual(Telemetry telemetry, double distance, double[] power, double[] direction) {
         // broken because power is only taken as a positive value and we should've made target position negative.
         // fixed it now by replacing leftfrontpower with leftfronttarget and so on
