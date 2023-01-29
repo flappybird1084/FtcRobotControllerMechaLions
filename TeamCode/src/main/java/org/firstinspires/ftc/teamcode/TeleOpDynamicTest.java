@@ -217,6 +217,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
                 // now, a small time after the slide hasn't been triggered, the power
                 // is set to zero.
+
+                // TODO: check if removing the first part of the if statement does anything
             }
 
             if (robot.ViperSlide.isBusy()){
