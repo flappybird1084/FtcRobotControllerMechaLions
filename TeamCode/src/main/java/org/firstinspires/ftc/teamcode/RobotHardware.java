@@ -463,6 +463,25 @@ public class RobotHardware {
 
     }
 
+    /**
+     * turns the robot the specific amt of degrees
+     * negative degrees turns it counterclockwise
+     * @param degrees
+     * @param power
+     * @return the amt of time you have to sleep
+     */
+    public double turnBot(double degrees, double power){
+        if(degrees < 0){
+            power*= -1;
+        }
+        leftFront.setPower(power);
+        leftBack.setPower(power);
+        rightFront.setPower(-power);
+        rightBack.setPower(-power);
+        return Math.abs(degrees/90*750);
+
+    }
+
 
 
 
