@@ -272,6 +272,7 @@ public class RobotHardware {
         rightFront.setPower(power);
         rightBack.setPower(power);
 
+
         leftFront.setTargetPosition(leftFrontTarget);
         leftBack.setTargetPosition(leftBackTarget);
         rightFront.setTargetPosition(rightFrontTarget);
@@ -289,6 +290,64 @@ public class RobotHardware {
 
         //zero(); //Don't do this here as it prevents motors from running to completion.
     }
+
+    public void encoderMovementsIndividual(Telemetry telemetry, double distance, double[] power, double[] direction) {
+        // broken because power is only taken as a positive value and we should've made target position negative.
+        // fixed it now by replacing leftfrontpower with leftfronttarget and so on
+        // distance in inches
+        // direction can be forward, backward, left, or right
+
+        double rotationsNeeded = distance / CIRCUMFERENCE;
+        int encoderDrivingTarget = (int) (rotationsNeeded * TICK_COUNT);
+
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        for(int i = 0;i < power.length; i++){
+            power[i] = Math.abs(power[i]);
+        }
+        int leftFrontTarget = encoderDrivingTarget;
+        int rightFrontTarget = encoderDrivingTarget;
+        int leftBackTarget = encoderDrivingTarget;
+        int rightBackTarget = encoderDrivingTarget;
+
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        leftFrontTarget *= direction[0];
+        leftBackTarget *= direction[1];
+        rightFrontTarget *= direction[2];
+        rightBackTarget *= direction[3];
+
+
+        leftFront.setPower(power[0]);
+        leftBack.setPower(power[1]);
+        rightFront.setPower(power[2]);
+        rightBack.setPower(power[3]);
+
+
+        leftFront.setTargetPosition(leftFrontTarget);
+        leftBack.setTargetPosition(leftBackTarget);
+        rightFront.setTargetPosition(rightFrontTarget);
+        rightBack.setTargetPosition(rightBackTarget);
+
+        telemetry.addData("leftFrontTarget ", leftFrontTarget); telemetry.update();
+        telemetry.addData("leftBackTarget ", leftBackTarget); telemetry.update();
+        telemetry.addData("rightFrontTarget ", rightFrontTarget); telemetry.update();
+        telemetry.addData("rightBackTarget ", rightBackTarget); telemetry.update();
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        //zero(); //Don't do this here as it prevents motors from running to completion.
+    }
+
 
     /**
      * This function causes the Viper Slide to move for a set amount of distance, at a certain power, and at a specific direction.

@@ -273,7 +273,7 @@ public class ATEfficientLeftAuton extends LinearOpMode {
              * scores on the high pole
              */
             //robot.servo1.setPosition(100);
-            sleep(robot.turnBot(90,0.5));
+
 
             sleep(750);
             robot.moveDirectionBlocks(telemetry, 1,"forward",-2);

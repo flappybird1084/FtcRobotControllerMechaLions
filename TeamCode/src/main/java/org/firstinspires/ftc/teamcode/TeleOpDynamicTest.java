@@ -204,6 +204,10 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 }
             }
 
+            if (gamepad1.x){
+                robot.encoderMovementsIndividual(telemetry, 12, new double[]{0.5, 0.5, 0.5, 0.5}, new double[]{1,1,-1,-1});
+            }
+
             if(Math.abs(gamepad2.left_stick_y) > 0){
                 robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 robot.ViperSlide.setPower(-0.5*gamepad2.left_stick_y);
