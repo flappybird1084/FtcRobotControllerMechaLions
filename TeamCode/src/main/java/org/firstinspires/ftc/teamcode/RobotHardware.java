@@ -216,11 +216,9 @@ public class RobotHardware {
         rightFront.setMode(runmode);
     }
 
-    public void turnBot(double degrees, Telemetry telemetry, double power, Gamepad gamepad1){
-        encoderMovementsIndividual(telemetry, degrees/90*23, new double[]{power,power,power,power},new double[]{1,1,-1,-1} );
-        if (!(isDriveTrainBusy() || gamepad1.left_stick_y == 0 || gamepad1.left_stick_x == 0)){
-            setAllRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
+    public void turnBot(double degrees, Telemetry telemetry, double power){
+        encoderMovementsIndividual(telemetry, degrees/90*23, new double[]{power,power,power,power},new double[]{1,1,-1,-1});
+
     }
 
     public boolean isDriveTrainBusy(){

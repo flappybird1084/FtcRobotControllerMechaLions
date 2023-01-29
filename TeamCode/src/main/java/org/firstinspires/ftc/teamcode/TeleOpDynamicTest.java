@@ -205,8 +205,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
             }
 
             if (gamepad1.x){
-                robot.encoderMovementsIndividual(telemetry, 24, new double[]{0.5, 0.5, 0.5, 0.5}, new double[]{1,1,-1,-1});
-                while (robot.isDriveTrainBusy()){
+                robot.turnBot(90, telemetry, 0.5);
+                while (robot.isDriveTrainBusy() && gamepad1.left_stick_y == 0 && gamepad1.left_stick_x == 0 && gamepad1.right_stick_x == 0){
                     sleep(50);
                 }
             }
