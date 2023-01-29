@@ -209,6 +209,13 @@ public class RobotHardware {
         return false;
     }
 
+    public void setAllRunMode(DcMotor.RunMode runmode){
+        leftBack.setMode(runmode);
+        leftFront.setMode(runmode);
+        rightBack.setMode(runmode);
+        rightFront.setMode(runmode);
+    }
+
     public boolean isDriveTrainBusy(){
         return (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy());
     }
@@ -417,6 +424,7 @@ public class RobotHardware {
      * @param servo100pos
      * @param telemetry
      */
+
     public void TeleopLoop(Gamepad gamepad1, Gamepad gamepad2, double servo0pos, double servo100pos, Telemetry telemetry){
         double speedScaling;
         double rightStick = -gamepad1.right_stick_y;
