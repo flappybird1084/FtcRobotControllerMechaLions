@@ -470,7 +470,7 @@ public class RobotHardware {
      * @param power
      * @return the amt of time you have to sleep
      */
-    public double turnBot(double degrees, double power){
+    public int turnBot(double degrees, double power){
         if(degrees < 0){
             power*= -1;
         }
@@ -478,7 +478,7 @@ public class RobotHardware {
         leftBack.setPower(power);
         rightFront.setPower(-power);
         rightBack.setPower(-power);
-        return Math.abs(degrees/90*750);
+        return (int) Math.abs(degrees/90*750);
 
     }
 
