@@ -201,12 +201,11 @@ public class RobotHardware {
      * @return
      */
     public boolean isAnyBusy() {
-        if (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy() || ViperSlide.isBusy()) {
-            return true;
-        }
-        return false;
-    }
+        return (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy() || ViperSlide.isBusy());
 
+    public boolean isDriveTrainBusy(){
+        return (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy());
+    }
     /**
      * This function causes the robot to move forward for a certain distance, at a certain power, in a certain direction
      * The distance is specified as a double

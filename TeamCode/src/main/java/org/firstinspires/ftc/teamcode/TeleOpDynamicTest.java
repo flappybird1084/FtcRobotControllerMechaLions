@@ -206,6 +206,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
             if (gamepad1.x){
                 robot.encoderMovementsIndividual(telemetry, 12, new double[]{0.5, 0.5, 0.5, 0.5}, new double[]{1,1,-1,-1});
+                while ()
             }
 
             if(Math.abs(gamepad2.left_stick_y) > 0){
