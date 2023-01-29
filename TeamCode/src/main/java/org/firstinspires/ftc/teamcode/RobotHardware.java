@@ -201,7 +201,13 @@ public class RobotHardware {
      * @return
      */
     public boolean isAnyBusy() {
-        return (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy() || ViperSlide.isBusy());
+        // TODO: When i try to optimize this function the entire program starts erroring, what?
+        // optimization: return (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy() || ViperSlide.isBusy());
+        if (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy() || ViperSlide.isBusy()) {
+            return true;
+        }
+        return false;
+    }
 
     public boolean isDriveTrainBusy(){
         return (leftBack.isBusy() || leftFront.isBusy() || rightBack.isBusy() || rightFront.isBusy());
