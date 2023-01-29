@@ -203,7 +203,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
                     VSPosition = "down";
                 }
             }
-
+/*
+sample code for turning with encoders
             if (gamepad1.x){
                 robot.turnBot(90, telemetry, 0.5);
                 while (robot.isDriveTrainBusy() && gamepad1.left_stick_y == 0 && gamepad1.left_stick_x == 0 && gamepad1.right_stick_x == 0){
@@ -211,6 +212,8 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 }
             }
             robot.setAllRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+ */
 
             if(Math.abs(gamepad2.left_stick_y) > 0){
                 robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
