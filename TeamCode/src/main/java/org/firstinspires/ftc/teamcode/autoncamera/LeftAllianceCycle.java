@@ -187,7 +187,9 @@ public class LeftAllianceCycle extends LinearOpMode {
         /* Actually do something useful */
 
 
-        // if tagofinterest.id == null
+
+
+
         if (tagOfInterest.id == LEFT) {
             //left trajectory
             telemetry.addData("Direction: ", "left");
@@ -206,10 +208,7 @@ public class LeftAllianceCycle extends LinearOpMode {
             //position2();
         }
 
-        else{
-            position = 1;
-            telemetry.addData("Direction: ", "left");
-        }
+
 
         telemetry.update();
 
@@ -222,7 +221,8 @@ public class LeftAllianceCycle extends LinearOpMode {
 
         robot.servo1.setPosition(100);
         sleep(1000);
-        robot.turnBot(-10, telemetry, 0.5);
+        //TODO: Robot strafing not perfect
+        robot.turnBot(-15, telemetry, 0.5);
         // cone grabbed
 
         robot.moveDirectionBlocksMAX(telemetry, 3, "left", 6,0.8);
@@ -231,7 +231,7 @@ public class LeftAllianceCycle extends LinearOpMode {
         waitForEncoderComplete();
         // positioned near the high pole
 
-        robot.moveDirectionBlocks(telemetry, 0, "forward", 4);
+        robot.moveDirectionBlocks(telemetry, 0, "forward", 3);
         waitForEncoderComplete();
         //robot.viperSlideEncoderMovements(telemetry, 37, 0.75, "forward");
         waitForEncoderComplete();
@@ -239,14 +239,18 @@ public class LeftAllianceCycle extends LinearOpMode {
         robot.servo1.setPosition(0);
         waitForEncoderComplete();
         robot.moveDirectionBlocks(telemetry, 0, "backward", 4);
-        robot.moveDirectionBlocks(telemetry, 0, "right", 6);
         waitForEncoderComplete();
-        // cone dropped and slide partially lowered
-
-        //robot.viperSlideEncoderMovements(telemetry, 26, 0.5, "backward");
-        robot.moveDirectionBlocks(telemetry, 1, "backward", -3);
+        robot.moveDirectionBlocks(telemetry, 0, "right", 16);
         waitForEncoderComplete();
         robot.turnBot(180, telemetry, 1);
+        waitForEncoderComplete();
+        // cone dropped and slide partially lowered and spun around
+
+        //robot.viperSlideEncoderMovements(telemetry, 26, 0.5, "backward");
+        robot.moveDirectionBlocks(telemetry, 1, "forward");
+        waitForEncoderComplete();
+        // hopefully lined up with cone stack?
+
 
 
 
