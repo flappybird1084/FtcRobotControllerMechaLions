@@ -206,6 +206,13 @@ public class LeftAllianceCycle extends LinearOpMode {
             //position2();
         }
 
+        else{
+            position = 1;
+            telemetry.addData("Direction: ", "left");
+        }
+
+        telemetry.update();
+
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending
         while (opModeIsActive()) {
             sleep(20);
@@ -215,19 +222,20 @@ public class LeftAllianceCycle extends LinearOpMode {
 
         robot.servo1.setPosition(100);
         sleep(1000);
+        robot.turnBot(-10, telemetry, 0.5);
         // cone grabbed
 
-        robot.moveDirectionBlocksMAX(telemetry, 3, "left", 3,0.8);
+        robot.moveDirectionBlocksMAX(telemetry, 3, "left", 6,0.8);
         waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 0.5,"right");
+        robot.moveDirectionBlocks(telemetry, 0,"right",6);
         waitForEncoderComplete();
         // positioned near the high pole
 
         robot.moveDirectionBlocks(telemetry, 0, "forward", 4);
         waitForEncoderComplete();
-        robot.viperSlideEncoderMovements(telemetry, 37, 0.75, "forward");
+        //robot.viperSlideEncoderMovements(telemetry, 37, 0.75, "forward");
         waitForEncoderComplete();
-        robot.viperSlideEncoderMovements(telemetry, 3, 0.35, "backward");
+        //robot.viperSlideEncoderMovements(telemetry, 3, 0.35, "backward");
         robot.servo1.setPosition(0);
         waitForEncoderComplete();
         robot.moveDirectionBlocks(telemetry, 0, "backward", 4);
@@ -235,7 +243,7 @@ public class LeftAllianceCycle extends LinearOpMode {
         waitForEncoderComplete();
         // cone dropped and slide partially lowered
 
-        robot.viperSlideEncoderMovements(telemetry, 26, 0.5, "backward");
+        //robot.viperSlideEncoderMovements(telemetry, 26, 0.5, "backward");
         robot.moveDirectionBlocks(telemetry, 1, "backward", -3);
         waitForEncoderComplete();
         robot.turnBot(180, telemetry, 1);
