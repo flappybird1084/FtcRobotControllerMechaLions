@@ -34,7 +34,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "AprilTagRightAllianceMorePoints", group = "Auton")
+@Autonomous(name = "RightAllianceCycle", group = "Auton")
 public class RightAllianceCycle extends LinearOpMode {
     OpenCvCamera camera;
     //Extra line
@@ -246,41 +246,34 @@ public class RightAllianceCycle extends LinearOpMode {
         if (position == 1) {
             robot.servo1.setPosition(100);
             sleep(1000);
-            robot.moveDirectionBlocksMAX(telemetry, 1.03, "backward", 0, 0.5);
-            telemetry.addData("Direction: ", "left");
-            telemetry.addData("Step: ", "Step #1 w/offset");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 1.855, "left", 0, 0.5);
-            telemetry.addData("Step: ", "Step #2");
-            telemetry.update();
-            waitForEncoderComplete();
-            telemetry.addData("Step: ", "Finished");
-            telemetry.update();
-            robot.viperSlideEncoderMovements(telemetry, 29, 0.8, "forward");
-            telemetry.addData("Step:", "raised viperslide");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 0, "forward", 3,0.3);
-            telemetry.addData("Step: ", "moved forward");
-            telemetry.update();
-            waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 6.5, 0.5, "backward");
-            telemetry.addData("Step:", "raised viperslide");
-            telemetry.update();
-            waitForEncoderComplete();
-            sleep(1000);
+            robot.moveDirectionBlocksMAX(telemetry, 3, "left", 3, 0.8);
+            robot.moveDirectionBlocks(telemetry, 0.5, "right", 0);
+            robot.viperSlideEncoderMovements(telemetry, 37, 0.8, "forward");
+            //moved the robot close to the pole
+            robot.turnBot(90, telemetry, 0.8);
+            robot.turnBot(90, telemetry, 0.8);
+            //turning around to face the pole
+            robot.encoderMovements(telemetry, 3, 0.5, "forward");
+            robot.viperSlideEncoderMovements(telemetry, 7, 0.8, "backward");
             robot.servo1.setPosition(0);
-            sleep(1000);
-            telemetry.addData("opened servo", "dropping");
-            telemetry.update();
-            sleep(1000);
-            robot.moveDirectionBlocksMAX(telemetry, 0, "backward", 3,0.3);
+            robot.encoderMovements(telemetry, 3, 0.5, "backward");
+            robot.moveDirectionBlocksMAX(telemetry, 0.5, "right", 0, 0.8);
+            robot.turnBot(90, telemetry, 0.75);
+            robot.turnBot(90, telemetry, 0.75);
+            robot.moveDirectionBlocksMAX(telemetry, 0.6, "forward", 0, 0.75);
+            robot.viperSlideEncoderMovements(telemetry, 17, 0.7, "backward");
             waitForEncoderComplete();
-            robot.viperSlideEncoderMovements(telemetry, 6, 0.5, "backward");
+            robot.moveDirectionBlocksMAX(telemetry, 0.6, "backward", 0, 0.75);
+            robot.servo1.setPosition(100);
+            robot.viperSlideEncoderMovements(telemetry, 37, 0.7, "forward");
             waitForEncoderComplete();
-            robot.moveDirectionBlocksMAX(telemetry, 0.6, "right",0,0.8);
-            waitForEncoderComplete();
+            robot.turnBot(90, telemetry, 0.7);
+            robot.moveDirectionBlocksMAX(telemetry, 0.5, "forward", 0, 0.75);
+            robot.turnBot(90,telemetry, 0.7);
+            robot.encoderMovements(telemetry, 3, 0.5, "forward");
+            robot.viperSlideEncoderMovements(telemetry, 7, 0.7, "backward");
+            robot.servo1.setPosition(0);
+
         }
         else if (position == 2) {
             robot.servo1.setPosition(100);

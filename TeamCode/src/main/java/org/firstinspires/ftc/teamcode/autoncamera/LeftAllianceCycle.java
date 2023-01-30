@@ -214,7 +214,6 @@ public class LeftAllianceCycle extends LinearOpMode {
         camera.stopStreaming();
 
 
-
         //robot.encoderMovements(encoderDist, 1);
 
         //might make functions for this would make it a lot simpler
