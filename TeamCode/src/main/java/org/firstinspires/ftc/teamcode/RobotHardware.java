@@ -567,13 +567,21 @@ public class RobotHardware {
 
     }
 
+    /**
+     * strafes the bot. please see teleop dynamic
+     * @param axial
+     * @param lateral
+     * @param yaw
+     * @param distance
+     * @param telemetry
+     */
     public void strafe(double axial, double lateral, double yaw, double distance, Telemetry telemetry){
         axial = -axial;
         double leftFrontPower  = (axial + lateral + yaw);
         double rightFrontPower = (axial - lateral - yaw);
         double leftBackPower   = (axial - lateral + yaw);
         double rightBackPower  = (axial + lateral - yaw);
-        encoderMovementsIndividual(telemetry, distance, new double[]{leftFrontPower, leftBackPower, rightFrontPower, rightBackPower}, new double[]{1,1,1,1});
+        encoderMovementsIndividual(telemetry, distance, new double[]{1,1,1,1},new double[]{leftFrontPower, leftBackPower, rightFrontPower, rightBackPower});
     }
 
 
