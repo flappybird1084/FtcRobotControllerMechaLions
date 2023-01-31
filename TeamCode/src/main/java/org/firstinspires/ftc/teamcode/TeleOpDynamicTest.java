@@ -203,17 +203,17 @@ public class TeleOpDynamicTest extends LinearOpMode {
                     VSPosition = "down";
                 }
             }
-/*
-sample code for turning with encoders
+
+
             if (gamepad1.x){
-                robot.turnBot(90, telemetry, 0.5);
+                robot.strafe(0,1,-1, 12, telemetry);
                 while (robot.isDriveTrainBusy() && gamepad1.left_stick_y == 0 && gamepad1.left_stick_x == 0 && gamepad1.right_stick_x == 0){
                     sleep(50);
                 }
             }
             robot.setAllRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
- */
+
 
             if(Math.abs(gamepad2.left_stick_y) > 0){
                 robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -237,12 +237,15 @@ sample code for turning with encoders
                         robot.ViperSlide.getCurrentPosition());
             }
 
+            /*
             if (max > 0.5) {
                 leftFrontPower  /= max;
                 rightFrontPower /= max;
                 leftBackPower   /= max;
                 rightBackPower  /= max;
             }
+
+             */
 
             //adding additional yaw
             leftBackPower += additionalYaw*avgMotorPower;
@@ -280,6 +283,9 @@ sample code for turning with encoders
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
             telemetry.addData("Additional Yaw: ", additionalYaw);
             telemetry.addData("Average Motor Power: ", avgMotorPower);
+            telemetry.addData("Axial: ", axial);
+            telemetry.addData("Lateral: ", lateral);
+            telemetry.addData("Yaw: ",yaw);
             telemetry.update();
 
         }
