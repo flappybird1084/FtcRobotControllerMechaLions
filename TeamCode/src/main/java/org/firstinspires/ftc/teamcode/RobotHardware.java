@@ -584,6 +584,16 @@ public class RobotHardware {
         encoderMovementsIndividual(telemetry, distance, new double[]{1,1,1,1},new double[]{leftFrontPower, leftBackPower, rightFrontPower, rightBackPower});
     }
 
+    public double vectorToDegrees(double axial, double lateral){
+        double degrees = 0;
+        degrees = Math.atan(lateral/axial);
+        return degrees;
+    }
+
+    public void strafeToPosOnField(double x, double y, double power, double degrees){
+
+    }
+
 
 
 
