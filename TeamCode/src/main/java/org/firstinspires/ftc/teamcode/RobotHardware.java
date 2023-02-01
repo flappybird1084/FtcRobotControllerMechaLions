@@ -590,8 +590,20 @@ public class RobotHardware {
         return degrees;
     }
 
-    public void strafeToPosOnField(double x, double y, double power, double degrees){
+    public void strafeToPosOnField(double x, double y, double power, double degrees, Telemetry telemetry){
+        double hypotenuse = Math.pow((Math.pow(x,2)+Math.pow(y,2)),0.5);
+        // gets the hypotenuse, but it doesnt preserve positives/negatives
+        if(y>x){
+            x = x/y;
+            y = 1;
+        }
 
+        else{
+            x = 1;
+            y = y/x;
+        }
+
+        strafe(x,y,0,hypotenuse,telemetry);
     }
 
 
