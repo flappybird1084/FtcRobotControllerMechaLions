@@ -586,8 +586,9 @@ public class RobotHardware {
 
     public double vectorToDegrees(double axial, double lateral){
         double degrees = 0;
-        degrees = Math.atan(lateral/axial);
-        return degrees;
+        degrees = Math.atan(lateral/-axial);
+        return degrees*45;
+        //TODO: currently the gamepad reading for vectors is circular??
     }
 
     public void strafeToPosOnField(double x, double y, double power, double degrees, Telemetry telemetry){

@@ -216,6 +216,10 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 telemetry.addData("vector to degree test: ",robot.vectorToDegrees(axial,lateral));
             }
 
+            if(gamepad1.dpad_left){
+                robot.strafeToPosOnField(1,1,0.5,0,telemetry);
+            }
+
             robot.setAllRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
