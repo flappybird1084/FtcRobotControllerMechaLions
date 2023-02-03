@@ -236,7 +236,7 @@ public class LeftAllianceCycle extends LinearOpMode {
         //robot.viperSlideEncoderMovements(telemetry, 37, 0.75, "forward");
         waitForEncoderComplete();
         //robot.viperSlideEncoderMovements(telemetry, 3, 0.35, "backward");
-        robot.servo1.setPosition(0);
+        //robot.servo1.setPosition(0);
         waitForEncoderComplete();
         robot.moveDirectionBlocks(telemetry, 0, "backward", 4);
         waitForEncoderComplete();
@@ -247,12 +247,19 @@ public class LeftAllianceCycle extends LinearOpMode {
         // cone dropped and slide partially lowered and spun around
 
         //robot.viperSlideEncoderMovements(telemetry, 26, 0.5, "backward");
+        // slide's 8 inches off the ground now
         robot.moveDirectionBlocks(telemetry, 1, "forward");
         waitForEncoderComplete();
         // hopefully lined up with cone stack?
 
-
-
+        //robot.servo1.setPosition(100);
+        //robot.viperSlideEncoderMovements(telemetry, 5, 0.5, "forward");
+        // slide's 13 inches off the ground
+        robot.strafe(1, 0.5, 0,25,telemetry,0.5);
+        waitForEncoderComplete();
+        robot.turnBot(180, telemetry, 0.5);
+        waitForEncoderComplete();
+        // should be back at the pole now
 
         if (position == 1) {
 
