@@ -575,20 +575,26 @@ public class RobotHardware {
      * @param distance
      * @param telemetry
      */
-    public void strafe(double axial, double lateral, double yaw, double distance, Telemetry telemetry){
+    public void strafe(double axial, double lateral, double yaw, double distance, Telemetry telemetry, double power){
         axial = -axial;
         double leftFrontPower  = (axial + lateral + yaw);
         double rightFrontPower = (axial - lateral - yaw);
         double leftBackPower   = (axial - lateral + yaw);
         double rightBackPower  = (axial + lateral - yaw);
-        encoderMovementsIndividual(telemetry, distance, new double[]{1,1,1,1},new double[]{leftFrontPower, leftBackPower, rightFrontPower, rightBackPower});
+        encoderMovementsIndividual(telemetry, distance, new double[]{power,power,power,power},new double[]{leftFrontPower, leftBackPower, rightFrontPower, rightBackPower});
     }
 
     public double vectorToDegrees(double axial, double lateral){
         double degrees = 0;
-        degrees = Math.atan(lateral/-axial);
-        return degrees*45;
+        degrees = Math.atan2(lateral,axial);
+        if(axial == 0 && lateral == 0){
+            return 0;
+        }
+        return degrees*180/3.1415;
         //TODO: currently the gamepad reading for vectors is circular??
+        //asin for x and acos for y?
+
+
     }
 
     public void strafeToPosOnField(double x, double y, double power, double degrees, Telemetry telemetry){
@@ -604,7 +610,8 @@ public class RobotHardware {
             y = y/x;
         }
 
-        strafe(x,y,0,hypotenuse,telemetry);
+
+        strafe(x,y,0,hypotenuse,telemetry, power);
     }
 
 

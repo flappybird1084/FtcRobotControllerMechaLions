@@ -206,18 +206,21 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
 
             if (gamepad1.x){
-                robot.strafe(0,1,-1, 12, telemetry);
+                robot.strafe(0,1,-1, 12, telemetry,1);
                 while (robot.isDriveTrainBusy() && gamepad1.left_stick_y == 0 && gamepad1.left_stick_x == 0 && gamepad1.right_stick_x == 0){
                     sleep(50);
                 }
             }
 
-            if(gamepad1.dpad_up){
-                telemetry.addData("vector to degree test: ",robot.vectorToDegrees(axial,lateral));
-            }
+
+            telemetry.addData("vector to degree test: ",robot.vectorToDegrees(axial,lateral));
+
 
             if(gamepad1.dpad_left){
-                robot.strafeToPosOnField(1,1,0.5,0,telemetry);
+                robot.strafeToPosOnField(10,10,0.5,0,telemetry);
+                while (robot.isDriveTrainBusy() && gamepad1.left_stick_y == 0 && gamepad1.left_stick_x == 0 && gamepad1.right_stick_x == 0){
+                    sleep(50);
+                }
             }
 
             robot.setAllRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -244,6 +247,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             if (robot.ViperSlide.isBusy()){
                 telemetry.addData("ViperSlide",  "Moving to %7d; At %7d", target,
                         robot.ViperSlide.getCurrentPosition());
+                telemetry.update();
             }
 
             /*
