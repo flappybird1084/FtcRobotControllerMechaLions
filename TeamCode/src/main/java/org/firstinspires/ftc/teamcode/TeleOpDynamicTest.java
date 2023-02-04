@@ -229,7 +229,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
 
             if(Math.abs(gamepad2.left_stick_y) > 0){
                 robot.ViperSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                robot.ViperSlide.setPower(-0.5*gamepad2.left_stick_y);
+                robot.ViperSlide.setPower(-1*gamepad2.left_stick_y);
                 ViperSlideEncoderCoolDown = runtime.seconds();
             }
 
@@ -250,15 +250,15 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 telemetry.update();
             }
 
-            /*
-            if (max > 0.5) {
+
+            if (max > 1) {
                 leftFrontPower  /= max;
                 rightFrontPower /= max;
                 leftBackPower   /= max;
                 rightBackPower  /= max;
             }
 
-             */
+
 
             //adding additional yaw
             leftBackPower += additionalYaw*avgMotorPower;
