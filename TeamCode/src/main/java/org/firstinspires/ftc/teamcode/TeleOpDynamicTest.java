@@ -110,7 +110,10 @@ public class TeleOpDynamicTest extends LinearOpMode {
             // robot.ViperSlide.setPower(gamepad2.left_stick_y);
             //robot.ViperSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //andrew wants to decrease this, might make 3/5 to like 1/2.
-            double speedScaling = (Math.abs(gamepad2.right_stick_y)*2/5) + 0.6;
+
+            //double speedScaling = (Math.abs(gamepad2.right_stick_y)*2/5) + 0.6;
+            double speedScaling = 1;
+            // TODO: change back if necessary
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
