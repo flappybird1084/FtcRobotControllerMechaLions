@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.autoncamera;
+package org.firstinspires.ftc.teamcode.unusedprograms;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -27,6 +27,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.RobotHardware;
+import org.firstinspires.ftc.teamcode.autoncamera.AprilTagDetectionPipeline;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -34,9 +35,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "LeftAllianceCycle", group = "Auton")
-public class LeftAllianceCycle extends LinearOpMode {
+@Autonomous(name = "RightAllianceCycle", group = "Auton")
+public class RightAllianceCycle extends LinearOpMode {
     OpenCvCamera camera;
+    //Extra line
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
     RobotHardware robot = new RobotHardware();
     private ElapsedTime runtime = new ElapsedTime();
@@ -187,30 +189,20 @@ public class LeftAllianceCycle extends LinearOpMode {
         /* Actually do something useful */
 
 
-
-
-
+        // if tagofinterest.id == null
         if (tagOfInterest.id == LEFT) {
             //left trajectory
             telemetry.addData("Direction: ", "left");
             position = 1;
-            //recommend to make a function
-            //position1();
         } else if (tagOfInterest.id == RIGHT) {
             //right trajectory
             telemetry.addData("Direction: ", "right");
             position = 3;
-            //position3();
         } else if (tagOfInterest.id == MIDDLE) {
             // middle trajectory
             telemetry.addData("Direction: ", "middle");
             position = 2;
-            //position2();
         }
-
-
-
-        telemetry.update();
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending
         while (opModeIsActive()) {
@@ -218,61 +210,145 @@ public class LeftAllianceCycle extends LinearOpMode {
         } */
         waitForStart();
         camera.stopStreaming();
-
+        // left, fwd, right but half, then score on mid pole
+        /*
         robot.servo1.setPosition(100);
+        robot.moveDirectionBlocks(telemetry,1,"left",4.5, 0.6);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry,1,"forward",1, 1);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry,0.5,"right",1.5, 1);
+        waitForEncoderComplete();
+        //robot.viperSlideEncoderMovements(telemetry,25,0.25, "forward");
+        robot.ViperSlide.setPower(0.5);
+        sleep(3500);
+        robot.ViperSlide.setPower(0);
         sleep(1000);
-        //TODO: Robot strafing not perfect
-        robot.turnBot(-15, telemetry, 0.5);
-        // cone grabbed
+        robot.moveDirectionBlocks(telemetry, 0, "forward", 4);
+        waitForEncoderComplete();
+        robot.servo1.setPosition(0);
+        sleep(1000);
+        sleep(4000);
+        robot.ViperSlide.setPower(0);
+        robot.moveDirectionBlocks(telemetry,0, "backward",4);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry, 0.5,"left",0,1);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry, 1, "backward", 3);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry,1,"right", 2,0.75);
+        waitForEncoderComplete();
+        telemetry.addData("Status", "Viper Slide finished");
 
-        robot.moveDirectionBlocksMAX(telemetry, 3, "left", 6,0.8);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 0,"right",6);
-        waitForEncoderComplete();
-        // positioned near the high pole
-
-        robot.moveDirectionBlocks(telemetry, 0, "forward", 3);
-        waitForEncoderComplete();
-        //robot.viperSlideEncoderMovements(telemetry, 37, 0.75, "forward");
-        waitForEncoderComplete();
-        //robot.viperSlideEncoderMovements(telemetry, 3, 0.35, "backward");
-        //robot.servo1.setPosition(0);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 0, "backward", 4);
-        waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 0, "right", 16);
-        waitForEncoderComplete();
-        robot.turnBot(180, telemetry, 1);
-        waitForEncoderComplete();
-        // cone dropped and slide partially lowered and spun around
-
-        //robot.viperSlideEncoderMovements(telemetry, 26, 0.5, "backward");
-        // slide's 8 inches off the ground now
-        robot.moveDirectionBlocks(telemetry, 1, "forward");
-        waitForEncoderComplete();
-        // hopefully lined up with cone stack?
-
-        //robot.servo1.setPosition(100);
-        //robot.viperSlideEncoderMovements(telemetry, 5, 0.5, "forward");
-        // slide's 13 inches off the ground
-        robot.strafe(1, 0.5, 0,25,telemetry,0.5);
-        waitForEncoderComplete();
-        robot.turnBot(180, telemetry, 0.5);
-        waitForEncoderComplete();
-        // should be back at the pole now
-
+//
+//
+         */
+        //robot.encoderMovements(encoderDist, 1);
         if (position == 1) {
-
+            robot.servo1.setPosition(100);
+            sleep(1000);
+            robot.moveDirectionBlocksMAX(telemetry, 3, "left", 3, 0.8);
+            robot.moveDirectionBlocks(telemetry, 0.5, "right", 0);
+            robot.viperSlideEncoderMovements(telemetry, 37, 0.8, "forward");
+            //moved the robot close to the pole
+            robot.turnBot(90, telemetry, 0.8);
+            robot.turnBot(90, telemetry, 0.8);
+            //turning around to face the pole
+            robot.encoderMovements(telemetry, 3, 0.5, "forward");
+            robot.viperSlideEncoderMovements(telemetry, 7, 0.8, "backward");
+            robot.servo1.setPosition(0);
+            robot.encoderMovements(telemetry, 3, 0.5, "backward");
+            robot.moveDirectionBlocksMAX(telemetry, 0.5, "right", 0, 0.8);
+            robot.turnBot(90, telemetry, 0.75);
+            robot.turnBot(90, telemetry, 0.75);
+            robot.moveDirectionBlocksMAX(telemetry, 0.6, "forward", 0, 0.75);
+            robot.viperSlideEncoderMovements(telemetry, 17, 0.7, "backward");
+            waitForEncoderComplete();
+            robot.moveDirectionBlocksMAX(telemetry, 0.6, "backward", 0, 0.75);
+            robot.servo1.setPosition(100);
+            robot.viperSlideEncoderMovements(telemetry, 37, 0.7, "forward");
+            waitForEncoderComplete();
+            robot.turnBot(90, telemetry, 0.7);
+            robot.moveDirectionBlocksMAX(telemetry, 0.5, "forward", 0, 0.75);
+            robot.turnBot(90,telemetry, 0.7);
+            robot.encoderMovements(telemetry, 3, 0.5, "forward");
+            robot.viperSlideEncoderMovements(telemetry, 7, 0.7, "backward");
+            robot.servo1.setPosition(0);
 
         }
         else if (position == 2) {
-
+            robot.servo1.setPosition(100);
+            sleep(1000);
+            robot.moveDirectionBlocksMAX(telemetry, 3, "left", 3, 0.8);
+            robot.moveDirectionBlocksMAX(telemetry, 1, "backward", 0.1, 0.8);
+            waitForEncoderComplete();
+            robot.viperSlideEncoderMovements(telemetry, 37, 0.8, "forward");
+            //turning around to face the pole
+            robot.turnBot(90, telemetry, 0.8);
+            //moving forward
+            robot.moveDirectionBlocksMAX(telemetry, 1, "forward", 0, 0.8);
+            robot.encoderMovements(telemetry, 3, 0.5, "forward");
+            robot.viperSlideEncoderMovements(telemetry, 7, 0.8, "backward");
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0);
+            robot.encoderMovements(telemetry, 3, 0.5, "backward");
+            //turning right again
+            robot.turnBot(-90, telemetry, 0.8);
+            robot.moveDirectionBlocksMAX(telemetry, 1, "forward", 0, 0.8);
+            robot.turnBot(90, telemetry, 0.8);
+            robot.moveDirectionBlocksMAX(telemetry, 2, "forward", 0, 0.8);
+            robot.moveDirectionBlocksMAX(telemetry, 2, "right", 0, 0.8);
+            robot.servo1.setPosition(0);
         }
-
         else if (position == 3) {
+            /**
+             * /turning test for left
+             robot.leftFront.setPower(-0.5);
+             robot.leftBack.setPower(-0.5);
+             robot.rightBack.setPower(0.5);
+             robot.rightFront.setPower(0.5);
+             sleep(750);
+             //turning test for right
+             robot.leftFront.setPower(0.5);
+             robot.leftBack.setPower(0.5);
+             robot.rightFront.setPower(-0.5);
+             robot.rightBack.setPower(-0.5);
+             sleep(500);*/
+            //actual autonomous thing
+            robot.servo1.setPosition(100);
+            sleep(1000);
+            robot.moveDirectionBlocksMAX(telemetry, 2.5, "left", 0, 0.8);
+            robot.viperSlideEncoderMovements(telemetry, 37, 0.7, "forward");
+            waitForEncoderComplete();
+            robot.turnBot(180, telemetry, 0.7);
+            robot.encoderMovements(telemetry, 2, 0.5, "forward");
+            robot.viperSlideEncoderMovements(telemetry, 7, 0.7, "backward");
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0);
+            robot.encoderMovements(telemetry, 2, 0.5, "backward");
+            robot.moveDirectionBlocksMAX(telemetry, 0.35, "right", 0, 0.75);
+            robot.turnBot(180, telemetry, 0.7);
+            robot.viperSlideEncoderMovements(telemetry, 15, 0.7, "backward");
+            waitForEncoderComplete();
+            robot.moveDirectionBlocksMAX(telemetry, 0.8, "forward", 0, 0.7);
+            waitForEncoderComplete();
+            robot.servo1.setPosition(100);
+            robot.viperSlideEncoderMovements(telemetry, 22, 0.7, "forward");
+            waitForEncoderComplete();
+            robot.moveDirectionBlocksMAX(telemetry, 0.8, "backward", 0, 0.7);
+            robot.turnBot(180, telemetry, 0.7);
+            robot.moveDirectionBlocksMAX(telemetry, 0.35, "right", 0, 0.7);
+            robot.encoderMovements(telemetry, 2, 0.5, "forward");
+            robot.viperSlideEncoderMovements(telemetry, 7, 0.7, "backward");
+            waitForEncoderComplete();
+            robot.servo1.setPosition(0);
+            robot.encoderMovements(telemetry, 2, 0.5, "backward");
+            robot.moveDirectionBlocksMAX(telemetry, 2.5, "left", 0, 0.8);
+
+
 
         }
-
+//otters are bad seals are better
 
     }
 }
