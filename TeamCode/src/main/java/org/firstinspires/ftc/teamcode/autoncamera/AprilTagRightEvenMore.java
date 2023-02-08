@@ -196,9 +196,9 @@ public class AprilTagRightEvenMore extends LinearOpMode {
         robot.servo1.setPosition(100);
         robot.viperSlideEncoderMovements(telemetry,5,0.5,"forward");
         sleep(1000);
-        robot.moveDirectionBlocks(telemetry, 2, "left",3);
+        robot.moveDirectionBlocks(telemetry, 2, "left",6);
         waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 1, "right");
+        robot.moveDirectionBlocks(telemetry, 1, "right",-1.5);
         waitForEncoderComplete();
         robot.turnBot(180, telemetry, 0.75);
         waitForEncoderComplete();
@@ -213,10 +213,10 @@ public class AprilTagRightEvenMore extends LinearOpMode {
         robot.moveDirectionBlocks(telemetry, 0,"backward", 3);
         robot.viperSlideEncoderMovements(telemetry,35,0.75,"backward");
         waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 0.5, "left");
+        robot.moveDirectionBlocks(telemetry, 0.5, "left",3);
         waitForEncoderComplete();
-        robot.turnBot(-10, telemetry,1);
-        waitForEncoderComplete();
+
+
         /*
         if(position == 1){
 
@@ -225,11 +225,13 @@ public class AprilTagRightEvenMore extends LinearOpMode {
          */
 
         if(position == 2){
+            robot.turnBot(2.5, telemetry,0.25);
             robot.moveDirectionBlocks(telemetry, 1, "backward");
             waitForEncoderComplete();
         }
 
         if(position == 3){
+            robot.turnBot(2.5, telemetry,0.25);
             robot.moveDirectionBlocks(telemetry, 2, "backward");
             waitForEncoderComplete();
         }
