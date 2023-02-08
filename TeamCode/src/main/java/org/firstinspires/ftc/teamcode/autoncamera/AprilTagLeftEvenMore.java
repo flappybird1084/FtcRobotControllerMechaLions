@@ -238,7 +238,7 @@ public class AprilTagLeftEvenMore extends LinearOpMode {
         telemetry.addData("Step:", "moved up");
         telemetry.update();
         waitForEncoderComplete();
-        robot.encoderMovements(telemetry, 4.2, 0.3, "forward");
+        robot.encoderMovements(telemetry, 2.5, 0.3, "forward");
         telemetry.addData("Step:", "moved to cone");
         telemetry.update();
         waitForEncoderComplete();
@@ -266,7 +266,7 @@ public class AprilTagLeftEvenMore extends LinearOpMode {
         telemetry.update();
 
         if (position == 1) {
-            robot.moveDirectionBlocks(telemetry, 2, "backward",-1);
+            robot.moveDirectionBlocks(telemetry, 2, "backward",-3);
             waitForEncoderComplete();
             // moved to pos 1
         }

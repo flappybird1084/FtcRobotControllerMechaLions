@@ -194,25 +194,29 @@ public class AprilTagRightEvenMore extends LinearOpMode {
         sleep(1000);
 
         robot.servo1.setPosition(100);
+        robot.viperSlideEncoderMovements(telemetry,5,0.5,"forward");
         sleep(1000);
-        robot.moveDirectionBlocks(telemetry, 1.5, "left");
+        robot.moveDirectionBlocks(telemetry, 2, "left",3);
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry, 1, "right");
         waitForEncoderComplete();
         robot.turnBot(180, telemetry, 0.75);
         waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 0.5, "left");
-        waitForEncoderComplete();
         robot.moveDirectionBlocks(telemetry, 1, "forward");
         waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry,0.5,"right");
-        robot.viperSlideEncoderMovements(telemetry,37,0.75,"forward");
+        robot.moveDirectionBlocks(telemetry,0.5,"right",2);
+        robot.viperSlideEncoderMovements(telemetry,32,0.75,"forward");
         waitForEncoderComplete();
-        robot.moveDirectionBlocks(telemetry, 0, "forward", 5);
+        robot.moveDirectionBlocks(telemetry, 0, "forward", 3);
         waitForEncoderComplete();
         robot.servo1.setPosition(0);
-        robot.moveDirectionBlocks(telemetry, 0,"backward", 5);
+        robot.moveDirectionBlocks(telemetry, 0,"backward", 3);
         robot.viperSlideEncoderMovements(telemetry,35,0.75,"backward");
         waitForEncoderComplete();
         robot.moveDirectionBlocks(telemetry, 0.5, "left");
+        waitForEncoderComplete();
+        robot.turnBot(-10, telemetry,1);
+        waitForEncoderComplete();
         /*
         if(position == 1){
 
