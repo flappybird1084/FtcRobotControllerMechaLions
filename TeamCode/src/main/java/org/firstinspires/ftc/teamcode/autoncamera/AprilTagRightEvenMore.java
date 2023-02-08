@@ -210,8 +210,9 @@ public class AprilTagRightEvenMore extends LinearOpMode {
         robot.moveDirectionBlocks(telemetry, 0, "forward", 3);
         waitForEncoderComplete();
         robot.servo1.setPosition(0);
-        robot.moveDirectionBlocks(telemetry, 0,"backward", 3);
         robot.viperSlideEncoderMovements(telemetry,35,0.75,"backward");
+        waitForEncoderComplete();
+        robot.moveDirectionBlocks(telemetry, 0,"backward", 3);
         waitForEncoderComplete();
         robot.moveDirectionBlocks(telemetry, 0.5, "left",3);
         waitForEncoderComplete();
