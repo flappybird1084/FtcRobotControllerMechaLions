@@ -116,9 +116,14 @@ public class TeleOpDynamicTest extends LinearOpMode {
             // TODO: change back if necessary
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.left_stick_x;
-            double yaw     =  gamepad1.right_stick_x*0.5*(Math.abs(gamepad2.right_stick_y)+1);
+            double axial   = -gamepad1.left_stick_y * 0.5;  // Note: pushing stick forward gives negative value
+            double lateral =  gamepad1.left_stick_x * 0.5;
+            double yaw     =  gamepad1.right_stick_x* 0.5;
+            if(gamepad1.left_bumper){
+                axial*=2;
+                lateral*=2;
+                yaw*=2;
+            }
 
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
@@ -146,12 +151,12 @@ public class TeleOpDynamicTest extends LinearOpMode {
             // got the max position
             robot.servo1.setPosition(servo0pos);
 
-            if (gamepad1.left_bumper && (runtime.seconds()-leftYawCoolDown)>1){
+            if (gamepad1.dpad_left && (runtime.seconds()-leftYawCoolDown)>1){
                 additionalYaw-=0.01;
                 leftYawCoolDown = runtime.seconds();
             }
 
-            if (gamepad1.right_bumper && (runtime.seconds()-rightYawCoolDown)>1){
+            if (gamepad1.dpad_right && (runtime.seconds()-rightYawCoolDown)>1){
                 additionalYaw+=0.01;
                 rightYawCoolDown = runtime.seconds();
             }
