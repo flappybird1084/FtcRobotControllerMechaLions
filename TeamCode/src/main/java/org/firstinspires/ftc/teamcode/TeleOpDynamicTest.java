@@ -176,7 +176,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 rightFrontPower = left_trig;
                 rightBackPower = -left_trig;
             }
-/*
+
             if(gamepad2.a) {
                 robot.servo1.setPosition(100);
                 servoClosed = true;
@@ -190,19 +190,23 @@ public class TeleOpDynamicTest extends LinearOpMode {
             }
 
 
- */
-            if(gamepad1.a){
+ /*
+            if(gamepad2.a){
                 if(servoClosed){
                     robot.servo1.setPosition(0);
                     servoClosed = false;
+                    sleep(100);
                 }
 
 
                 else{
                     robot.servo1.setPosition(100);
                     servoClosed = true;
+                    sleep(100);
                 }
             }
+
+  */
 
             if(gamepad2.dpad_left){
                 if(!robot.ViperSlide.isBusy()) {

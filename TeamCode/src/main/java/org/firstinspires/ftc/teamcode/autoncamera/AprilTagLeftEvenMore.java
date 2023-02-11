@@ -249,7 +249,7 @@ public class AprilTagLeftEvenMore extends LinearOpMode {
         robot.servo1.setPosition(0);
         sleep(1000);
         waitForEncoderComplete();
-        robot.encoderMovements(telemetry, 4, 0.3, "backward");
+        robot.encoderMovements(telemetry, 3, 0.3, "backward");
         telemetry.addData("moved back", "completed");
         telemetry.update();
         waitForEncoderComplete();
@@ -266,11 +266,13 @@ public class AprilTagLeftEvenMore extends LinearOpMode {
         telemetry.update();
 
         if (position == 1) {
+            robot.turnBot(5,telemetry,0.25);
             robot.moveDirectionBlocks(telemetry, 2, "backward",-3);
             waitForEncoderComplete();
             // moved to pos 1
         }
         else if (position == 2) {
+            robot.turnBot(10,telemetry,0.25);
             robot.moveDirectionBlocks(telemetry, 1, "backward",-1);
             waitForEncoderComplete();
             // moved to pos 2
