@@ -72,6 +72,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
     double leftYawCoolDown = runtime.seconds();
     double rightYawCoolDown = runtime.seconds();
     double ViperSlideEncoderCoolDown = runtime.seconds();
+    boolean servoClosed = false;
 
     // Declare OpMode members for each of the 4 motors.
 
@@ -103,6 +104,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
         robot.init(hardwareMap);
         runtime.reset();
         int target = 0;
+        robot.servo1.setPosition(0);
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -174,15 +176,32 @@ public class TeleOpDynamicTest extends LinearOpMode {
                 rightFrontPower = left_trig;
                 rightBackPower = -left_trig;
             }
-
+/*
             if(gamepad2.a) {
                 robot.servo1.setPosition(100);
+                servoClosed = true;
                 //retracted
 
             }
             else if (gamepad2.b) {
                 robot.servo1.setPosition(0);
+                servoClosed = false;
                 //extended
+            }
+
+
+ */
+            if(gamepad1.a){
+                if(servoClosed){
+                    robot.servo1.setPosition(0);
+                    servoClosed = false;
+                }
+
+
+                else{
+                    robot.servo1.setPosition(100);
+                    servoClosed = true;
+                }
             }
 
             if(gamepad2.dpad_left){
