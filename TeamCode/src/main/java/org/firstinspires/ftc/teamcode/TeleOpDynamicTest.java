@@ -104,7 +104,17 @@ public class TeleOpDynamicTest extends LinearOpMode {
         robot.init(hardwareMap);
         runtime.reset();
         int target = 0;
+
+
         robot.servo1.setPosition(0);
+        double servo0pos =  robot.servo1.getPosition();
+        // min position, hopefully putting it in the loop helps.
+        //robot.servo1.setPosition(servo0pos);
+        robot.servo1.setPosition(servo0pos+100);
+        double servo100pos = robot.servo1.getPosition();
+        // got the max position
+        robot.servo1.setPosition(servo0pos);
+
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -145,13 +155,7 @@ public class TeleOpDynamicTest extends LinearOpMode {
             max = Math.max(max, Math.abs(leftBackPower));
             max = Math.max(max, Math.abs(rightBackPower));
 
-            double servo0pos =  robot.servo1.getPosition();
-            // min position, hopefully putting it in the loop helps.
-            robot.servo1.setPosition(servo0pos);
-            robot.servo1.setPosition(servo0pos+100);
-            double servo100pos = robot.servo1.getPosition();
-            // got the max position
-            robot.servo1.setPosition(servo0pos);
+
 
             if (gamepad1.dpad_left && (runtime.seconds()-leftYawCoolDown)>1){
                 additionalYaw-=0.01;
@@ -178,13 +182,13 @@ public class TeleOpDynamicTest extends LinearOpMode {
             }
 
             if(gamepad2.a) {
-                robot.servo1.setPosition(100);
+                robot.servo1.setPosition(servo100pos);
                 servoClosed = true;
                 //retracted
 
             }
             else if (gamepad2.b) {
-                robot.servo1.setPosition(0);
+                robot.servo1.setPosition(servo0pos);
                 servoClosed = false;
                 //extended
             }
